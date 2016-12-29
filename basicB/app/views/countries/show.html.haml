@@ -10,6 +10,9 @@
   %b Size:
   = @country.size
 
-= link_to 'Edit', edit_country_path(@country)
-\|
-= link_to 'Back', countries_path
+%nav.navbar.navbar-default
+  .btn.btn-default.text
+    = link_to 'Edit', edit_country_path(@country)
+  \|
+  .btn.btn-default.text
+    = link_to 'Back', countries_path

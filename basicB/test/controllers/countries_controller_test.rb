@@ -42,7 +42,18 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Country.count', -1) do
       delete country_url(@country)
     end
-
     assert_redirected_to countries_url
   end
+  
+  test "should not update country blank" do
+    country = Country.new
+    assert_not country.save, "Should not save if continent name is blank"
+  end
+  
+  # test "should not update country blank" do
+  #   country = Country.State.new
+  #   assert_not country.save, "Should not save if continent name is blank"
+  # end
+  
+
 end
