@@ -55,5 +55,21 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
   #   assert_not country.save, "Should not save if continent name is blank"
   # end
   
+  test "application title should be present" do
+    #  Need to move this in refactor if I go from more than single page
+    # assert :title
+    title = :title
+
+    # get country_url(@country)
+    # assert_match /h/ , :title
+    get countries_url
+    assert_select "title", /Basic/
+  end
+  
+  test "controller title should be present" do
+    # sub part of app title
+    get countries_url
+    assert_select "title", /Country/
+  end
 
 end
