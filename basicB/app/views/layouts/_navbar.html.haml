@@ -1,25 +1,19 @@
-/https://codepen.io/yojfementira/pen/gIica
-
 %nav.navbar.navbar-default
   .container-fluid
     .navbar-header
       %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
         %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-      %a.navbar-brand{:href => "#"} Brand
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
-        %li.active
-          %a{:href => "#"}
-            Link
-            %span.sr-only (current)
+        %li
+          = link_to "Home", root_path
+        %li
+          %a{:href => "#"} Link
         %li
           %a{:href => "#"} Link
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            Dropdown
+            User Navigation
             %span.caret
           %ul.dropdown-menu{:role => "menu"}
             %li
@@ -30,10 +24,10 @@
               %a{:href => "#"} Something else here
             %li.divider
             %li
-              %a{:href => "#"} Separated link
+              %a{:href => "#"} Switch character
             %li.divider
             %li
-              %a{:href => "#"} One more separated link
+              %a{:href => "#"} Log out
       %form.navbar-form.navbar-left{:role => "search"}
         .form-group
           %input.form-control{:placeholder => "Search", :type => "text"}/
