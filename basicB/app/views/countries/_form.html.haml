@@ -1,16 +1,16 @@
-.nested-one
-  .form-inline
-    = simple_form_for @country, html: {class: 'form-horizontal.list-group'} do |f|
-    
-      = f.error_notification
-    
-      .form-inputs
-        = f.input :name
-        = f.input :description
-        = f.input :size
-        
-      - f.simple_fields_for :states do |state|
-        = render partial: 'state_fields', :f => state
-    
-      .form-actions
-        = f.button :submit
+.form-horizontal
+  .fieldset.col-lg-8
+    .form-group.well
+      = simple_form_for @country do |f|
+        = f.error_notification
+        .countries
+          = f.input :name
+          = f.input :description
+          = f.input :size
+        .list-group-item
+          = f.simple_fields_for :states do |state|
+            = render 'state_fields', :f => state
+          .links.row
+            = link_to_add_association 'Add State', f, :states, :class => "btn btn-default"
+        .form-actions.row
+          = f.button :submit

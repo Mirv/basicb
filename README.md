@@ -1,7 +1,7 @@
 # basicb aka Basic Borders
 Basic is as basic does...
 
-...there will be war
+...there will be war...
 
 ## Status
 

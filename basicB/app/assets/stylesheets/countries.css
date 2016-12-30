@@ -1,9 +1,12 @@
-.nested-one {
-  background: #333;
+.well{
+  margin-left: 40px;
+}
+
+.nested-state {
+  /*background: #333;*/
   padding: 5px;
-  padding-left: 50px;
-  margin-bottom: 10px;
-  margin-top: 10px; }
+  margin-bottom: 5px;
+  margin-top: 5px; }
 
 .text {
   /*background: #727570c;*/
@@ -11,9 +14,7 @@
   padding-left: 5px;
   margin-left: 5px;
   margin-top: 8px; 
-  margin-bottom: 16px;
-
-}
+  margin-bottom: 16px;}
 
 /* Bootstrap mandated content push down */
 .body-pad {
@@ -25,7 +26,6 @@
   display:        flex;
   flex-grow:      1;
   flex-shrink:    1;
-  justify-content: center;
-}
+  justify-content: center; }
 
 /*# sourceMappingURL=countries.css.map */
