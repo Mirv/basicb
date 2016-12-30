@@ -10,12 +10,10 @@
   = provide(:title, "Country")
   %title
    = full_title(yield(:title))
-
-%body.container
- = render :partial => 'layouts/navbar'
-
-.body-pad
+%body
  .container
+  = render :partial => 'layouts/navbar'
+ .container.body
   = yield
-  
-= render :partial => 'layouts/navfooter'
+ .container  
+  = render :partial => 'layouts/navfooter'

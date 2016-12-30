@@ -1,10 +1,16 @@
-= simple_form_for(@country) do |f|
-  = f.error_notification
-
-  .form-inputs
-    = f.input :name
-    = f.input :description
-    = f.input :size
-
-  .form-actions
-    = f.button :submit
+.nested-fields.well
+  .form-inline.nested-region
+    = simple_form_for @country, html: {class: 'form-horizontal.list-group'} do |f|
+    
+      = f.error_notification
+    
+      .form-inputs
+        = f.input :name
+        = f.input :description
+        = f.input :size
+        
+      - f.simple_fields_for :states do |state|
+        = render partial: 'state_fields', :f => state
+    
+      .form-actions
+        = f.button :submit

@@ -1,5 +1,8 @@
 class CountriesController < ApplicationController
   before_action :set_country, only: [:show, :edit, :update, :destroy]
+#  Use this to not display back button by not rendering _navfooter in layout - needs second layout
+#  layout "product", only: [:index]
+
 
   # GET /countries
   # GET /countries.json
@@ -69,6 +72,7 @@ class CountriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def country_params
-      params.require(:country).permit(:name, :description, :size)
+      params.require(:country).permit(:name, :description, :size,
+        states_attributes: [:id, :name, :description, :country_id, :_destroy])
     end
 end

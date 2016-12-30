@@ -11,7 +11,7 @@
       %th
 
   %tbody
-    - @countries.each do |country|
+    - for country in @countries
       %tr
         %td= country.name
         %td= country.description
@@ -19,6 +19,10 @@
         %td= link_to 'Show', country
         %td= link_to 'Edit', edit_country_path(country)
         %td= link_to 'Destroy', country, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      - for state in country.states
+        %tr
+          %td= state.name
+          %td= state.description
 
 %br
 
