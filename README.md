@@ -15,6 +15,8 @@ Basic is as basic does...
 - cocoon
 - - add proper divs
 - - add proper link_to for adding fields
- - - add proper link_to for removal fields
+- - add proper link_to for removal fields
+- - continent.js file with before / after adding
+- - continent.js file with before / after removing
 - implement a 2nd layout for navfooter
 - look into a gem to pull all the buttons in body down into the navfooter
