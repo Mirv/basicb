@@ -3,14 +3,17 @@
     .form-group.well
       = simple_form_for @country do |f|
         = f.error_notification
-        .countries
-          = f.input :name
+        .countries.list-group-item
+          .text 
+            = f.input :name
           = f.input :description
-          = f.input :size
-        .list-group-item
-          = f.simple_fields_for :states do |state|
-            = render 'state_fields', :f => state
-          .links.row
-            = link_to_add_association 'Add State', f, :states, :class => "btn btn-default"
+          .text 
+            = f.input :size
+          .list-group-item.text 
+            = f.simple_fields_for :states do |state|
+              = render 'state_fields', :f => state
+            .links.row
+              .col-sm-9.col-sm-offset-0
+                = link_to_add_association 'Add State', f, :states, :class => "btn btn-default"
         .form-actions.row
           = f.button :submit

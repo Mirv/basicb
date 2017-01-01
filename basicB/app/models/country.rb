@@ -1,7 +1,10 @@
 class Country < ApplicationRecord
   has_many :states, inverse_of: :country
+  has_many :counties, through: :state
   
   validates_presence_of :name
   
   accepts_nested_attributes_for :states, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true
+  accepts_nested_attributes_for :counties, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true
 end
+

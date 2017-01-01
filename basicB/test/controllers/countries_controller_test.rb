@@ -58,7 +58,6 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
   test "application title should be present" do
     #  Need to move this in refactor if I go from more than single page
     # assert :title
-    title = :title
 
     # get country_url(@country)
     # assert_match /h/ , :title
@@ -71,5 +70,20 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     get countries_url
     assert_select "title", /Country/
   end
-
+  
+ # test "add country should dynamically insert a field via cocoon" do
+    # no idea - apparantely broken - as the install route messed by import to rails directly
+  
+    # need to get the bug issue resolve - paused
+    # html =  get edit_country_url(@country)
+    # assert_have_tag(html, 'div class="form-inline"')
+    
+    # Plan is to count pre/post get/click the form
+  #end
+  
+  # test "should not save blank state" do 
+  #   patch country_url(@country), params: { country: { description: @country.description, name: @country.name, size: @country.size } }
+  #   assert_redirected_to country_url(@country)
+  # end
+  
 end
