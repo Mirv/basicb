@@ -1,5 +1,5 @@
 class County < ApplicationRecord
-  belongs_to :state, inverse_of: :county
+  belongs_to :state
   
   validates_presence_of :name
 end

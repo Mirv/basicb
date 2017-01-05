@@ -49,11 +49,9 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     country = Country.new
     assert_not country.save, "Should not save if continent name is blank"
   end
-  
-  # test "should not update country blank" do
-  #   country = Country.State.new
-  #   assert_not country.save, "Should not save if continent name is blank"
-  # end
+
+
+### Mine post scaffold
   
   test "application title should be present" do
     #  Need to move this in refactor if I go from more than single page

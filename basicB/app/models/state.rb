@@ -1,6 +1,6 @@
 class State < ApplicationRecord
-  belongs_to :country, inverse_of: :states
-  has_many :counties, inverse_of: :states
+  belongs_to :country
+  has_many :counties
   
   validates_presence_of :name
   

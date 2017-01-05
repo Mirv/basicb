@@ -1,0 +1,9 @@
+.nested-fields.list-group-item.my-well
+  .row.text
+    = f.input :name, input_html: {:placeholder => "... County Name ..."}
+    = f.input :description
+    = link_to_remove_association f, class: 'btn btn-default btn-xs' do
+      .glyphicon.glyphicon-remove
+
+// = render 'cheeseburger.html'
+
