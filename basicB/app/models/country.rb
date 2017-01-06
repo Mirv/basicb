@@ -1,6 +1,7 @@
 class Country < ApplicationRecord
-  has_many :states
-  has_many :counties, through: :state
+  has_many  :states
+  has_many  :counties, through: :state
+  has_one   :player
   
   validates_presence_of :name
   

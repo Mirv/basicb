@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Screenname:
+  = @player.screenname
+%p
+  %b Motto:
+  = @player.motto
+%p
+  %b Country:
+  = @player.country_id
+
+= link_to 'Edit', edit_player_path(@player)
+\|
+= link_to 'Back', players_path
