@@ -8,7 +8,6 @@ Mini game for testing a Risk like strategy game
 ## Status
 
 - For implementations being worked on - see issues list - https://github.com/Mirv/basicb/issues
-- 
 - For plans - see wiki - https://github.com/Mirv/basicb/wiki
 
 ## Old
