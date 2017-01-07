@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105230346) do
+ActiveRecord::Schema.define(version: 20170107184501) do
 
   create_table "counties", force: :cascade do |t|
     t.string   "name"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170105230346) do
     t.integer  "country_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "level"
     t.index ["country_id"], name: "index_states_on_country_id"
   end
 
