@@ -1,0 +1,23 @@
+%h1 Listing neighborhoods
+
+%table{:class => "table table-striped table-hover"}
+  %thead
+    %tr
+      %th Country
+      %th Neighbor
+      %th
+      %th
+      %th
+
+  %tbody
+    - @neighborhoods.each do |neighborhood|
+      %tr
+        %td= neighborhood.target_id
+        %td= neighborhood.neighbor_id
+        %td= link_to 'Show', neighborhood
+        %td= link_to 'Edit', edit_neighborhood_path(neighborhood)
+        %td= link_to 'Destroy', neighborhood, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Neighborhood', new_neighborhood_path

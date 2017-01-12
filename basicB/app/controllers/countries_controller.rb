@@ -13,6 +13,7 @@ class CountriesController < ApplicationController
   # GET /countries/1
   # GET /countries/1.json
   def show
+
   end
 
   # GET /countries/new
@@ -71,8 +72,10 @@ class CountriesController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    # nesting counties > states > country, then countryneighbor > country too
     def country_params
-      params.require(:country).permit(:name, :description, :size,
+      params.require(:country).permit(:id, :name, :description, :size,
+        countryneighbor_attritubtes: [:id, :bordercountry_id, :country_id, :_destroy],
         states_attributes: [:id, :name, :description, :country_id, :_destroy,
         counties_attributes: [:id, :name, :description, :state_id, :_destroy]])
     end

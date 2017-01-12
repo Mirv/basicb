@@ -9,6 +9,8 @@
       %th Options ...
       %th
       %th
+      %th Add Neighbors
+      
 
   %tbody
     - for country in @countries
@@ -19,11 +21,36 @@
         %td= link_to 'Show', country
         %td= link_to 'Edit', edit_country_path(country)
         %td= link_to 'Destroy', country, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Add Neighbors', :neighborhoods 
+      %tr
+        %td
+        %td State Name
       - for state in country.states
         %tr
+          %td
+          %td 
           %td= state.name
-          %td= state.description
-
-%br
-
+          // %td= state.description
+          %td
+          %td
+          %td
+          %td
+      - for neighbor in country.neighborhoods
+        %tr
+          %td
+          %td
+            // = neighborhoods
+          %td
+            = neighbor.target_id
+          %td
+            = neighbor.neighbor_id
+          %td
+            Country / Neighbor
+            // = @countries.first.neighborhoods.first.country_id 
+            Neighbor
+        %td
+          // = neighbor.centers.include?(2)
+        %td
+        %td
+        %td
 

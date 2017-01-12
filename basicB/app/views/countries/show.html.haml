@@ -1,13 +1,18 @@
-%p#notice= notice
+// = for @neighbors do |b|
+//   = b.name
 
+// %p#notice= notice
+
+%p
+  %b Country:
+  = @country.id
 %p
   %b Name:
   = @country.name
 %p
-  %b Description:
-  = @country.description
-%p
-  %b Size:
-  = @country.size
+  %b Neighbor:
+  // = @neighborhood.neighbor_id
 
-
+// = link_to 'Edit', edit_neighborhood_path(@neighborhood)
+// \|
+// = link_to 'Back', neighborhoods_path

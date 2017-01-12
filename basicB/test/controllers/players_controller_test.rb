@@ -1,46 +1,56 @@
-require "test_helper"
+require 'test_helper'
 
-describe PlayersController do
-  let(:player) { players :one }
+class PlayersControllerTest < ActionDispatch::IntegrationTest
+  setup do
+    @player = players(:one)
+  end
 
-  it "gets index" do
+  test "should get index" do
     get players_url
-    value(response).must_be :success?
+    assert_response :success
   end
 
-  it "gets new" do
+  test "should get new" do
     get new_player_url
-    value(response).must_be :success?
+    assert_response :success
   end
 
-  it "creates player" do
-    expect {
-      post players_url, params: { player: { country_id_id: player.country_id_id, motto: player.motto, screenname: player.screenname } }
-    }.must_change "Player.count"
+# # Old test
+#   test "should create player" do
+#     assert_difference('Player.count') do
+#       post players_url, params: { player: { } }
+#     end
 
-    must_redirect_to player_path(Player.last)
+#     assert_redirected_to player_url(Player.last)
+#   end
+  
+  test "should create player" do
+    assert_difference('Player.count') do
+      post players_url, params: { player:  @player  } 
+    end
+    assert_redirected_to player_path(Player.last)
   end
 
-  it "shows player" do
-    get player_url(player)
-    value(response).must_be :success?
+  test "should show player" do
+    get player_url(@player)
+    assert_response :success
   end
 
-  it "gets edit" do
-    get edit_player_url(player)
-    value(response).must_be :success?
+  test "should get edit" do
+    get edit_player_url(@player)
+    assert_response :success
   end
 
-  it "updates player" do
-    patch player_url(player), params: { player: { country_id_id: player.country_id_id, motto: player.motto, screenname: player.screenname } }
-    must_redirect_to player_path(player)
+  test "should update player" do
+    patch player_url(@player), params: { player: {  } }
+    assert_redirected_to player_url(@player)
   end
 
-  it "destroys player" do
-    expect {
-      delete player_url(player)
-    }.must_change "Player.count", -1
+  test "should destroy player" do
+    assert_difference('Player.count', -1) do
+      delete player_url(@player)
+    end
 
-    must_redirect_to players_path
+    assert_redirected_to players_url
   end
 end

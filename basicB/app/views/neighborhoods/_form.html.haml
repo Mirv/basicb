@@ -1,0 +1,9 @@
+= simple_form_for(@neighborhood) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :country_id
+    = f.input :neighbor_id
+
+  .form-actions
+    = f.button :submit
