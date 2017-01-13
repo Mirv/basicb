@@ -16,6 +16,10 @@ class Country < ApplicationRecord
     centers.include?(other_user)
   end
   
+  def listneighbors
+    neighbors = Country.joins(:centers).where('? = ?', @country_params[:id],  first.id, 2)
+  end
+  
   
   has_many  :states
   has_many  :counties, :through => :state

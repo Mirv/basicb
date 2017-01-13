@@ -28,28 +28,23 @@
       - for state in country.states
         %tr
           %td
-          %td 
           %td= state.name
-          // %td= state.description
           %td
           %td
           %td
           %td
-      - for neighbor in country.neighborhoods
-        %tr
           %td
-          %td
-            // = neighborhoods
-          %td
-            = neighbor.target_id
-          %td
-            = neighbor.neighbor_id
-          %td
-            Country / Neighbor
-            // = @countries.first.neighborhoods.first.country_id 
-            Neighbor
+        - for neighbor in country.neighborhoods
+          %tr
+            %td
+            %td
+            %td
+              = neighbor.target_id
+            %td
+              = neighbor.neighbor_id
+            %td
+              Neighbor
         %td
-          // = neighbor.centers.include?(2)
         %td
         %td
         %td
