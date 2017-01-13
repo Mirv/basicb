@@ -69,6 +69,6 @@ class NeighborhoodsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def neighborhood_params
-      params.require(:neighborhood).permit(:target_id, :neighbor_id)
+      params.require(:neighborhood).permit(:neighbor_id, :target_id)
     end
 end

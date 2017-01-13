@@ -15,7 +15,7 @@ describe NeighborhoodsController do
 
   it "creates neighborhood" do
     expect {
-      post neighborhoods_url, params: { neighborhood: { country_id: neighborhood.country_id, neighbor_id: neighborhood.neighbor_id } }
+      post neighborhoods_url, params: { neighborhood: { neighbor_id: neighborhood.neighbor_id, target_id: neighborhood.target_id } }
     }.must_change "Neighborhood.count"
 
     must_redirect_to neighborhood_path(Neighborhood.last)
@@ -32,7 +32,7 @@ describe NeighborhoodsController do
   end
 
   it "updates neighborhood" do
-    patch neighborhood_url(neighborhood), params: { neighborhood: { country_id: neighborhood.country_id, neighbor_id: neighborhood.neighbor_id } }
+    patch neighborhood_url(neighborhood), params: { neighborhood: { neighbor_id: neighborhood.neighbor_id, target_id: neighborhood.target_id } }
     must_redirect_to neighborhood_path(neighborhood)
   end
 

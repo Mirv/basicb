@@ -1,11 +1,11 @@
 %p#notice= notice
 
 %p
-  %b Country:
-  = @neighborhood.target_id
-%p
   %b Neighbor:
   = @neighborhood.neighbor_id
+%p
+  %b Target:
+  = @neighborhood.target_id
 
 = link_to 'Edit', edit_neighborhood_path(@neighborhood)
 \|
