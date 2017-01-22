@@ -1,14 +1,8 @@
 class Country < ApplicationRecord
-  has_many :neighborhoods, class_name:  "Neighborhood",
-                                  foreign_key: "neighbor_id",
-                                  dependent:   :destroy
-  has_many :centers, through: :neighborhoods, source: :target
-  
   has_many :centers, class_name:  "Neighborhood",
                                   foreign_key: "target_id",
                                   dependent:   :destroy
   has_many :neighbors, through: :centers, source: :neighbor
-  
   
   has_many  :states
   has_many  :counties, through: :state

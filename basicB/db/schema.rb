@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170113162203) do
+ActiveRecord::Schema.define(version: 20170122023226) do
 
   create_table "counties", force: :cascade do |t|
     t.string   "name"
@@ -33,6 +33,9 @@ ActiveRecord::Schema.define(version: 20170113162203) do
     t.integer  "target_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["neighbor_id"], name: "index_neighborhoods_on_neighbor_id"
+    t.index ["target_id", "neighbor_id"], name: "index_neighborhoods_on_target_id_and_neighbor_id", unique: true
+    t.index ["target_id"], name: "index_neighborhoods_on_target_id"
   end
 
   create_table "players", force: :cascade do |t|
