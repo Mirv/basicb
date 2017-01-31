@@ -12,6 +12,7 @@
    = full_title(yield(:title))
  %body
   .container
+   = render :partial => 'layouts/devise_messages'  
    = render :partial => 'layouts/navbar'
   .container.body
    = yield

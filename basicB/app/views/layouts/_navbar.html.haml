@@ -11,13 +11,15 @@
           = link_to "Players", :players
         %li
           = link_to "Neighborhoods", :neighborhoods
+        %li
+          = link_to "Countries", :countries
         %li.dropdown
           %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
             User Navigation
             %span.caret
           %ul.dropdown-menu{:role => "menu"}
             %li
-              %a{:href => "#"} Action
+              %a{:href => "/users/edit"} Edit Profile
             %li
               %a{:href => "#"} Another action
             %li
@@ -27,11 +29,11 @@
               %a{:href => "#"} Switch character
             %li.divider
             %li
-              %a{:href => "#"} Log out
+              = link_to "Logout", destroy_user_session_path, method: :delete
       %form.navbar-form.navbar-left{:role => "search"}
         .form-group
           %input.form-control{:placeholder => "Search", :type => "text"}/
         %button.btn.btn-default{:type => "submit"} Submit
       %ul.nav.navbar-nav.navbar-right
         %li
-          %a{:href => "#"} Link
+          %a{:href => "destroy_user_session"} Link

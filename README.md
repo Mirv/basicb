@@ -17,3 +17,6 @@ Mini game for testing a Risk like strategy game
 - - - - wiki - https://github.com/Mirv/basicb/wiki
 
 
+alt+s swap terminal for text editor
+f6 to hide terminal
+

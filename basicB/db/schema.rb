@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170122023226) do
+ActiveRecord::Schema.define(version: 20170128193914) do
+
+  create_table "campaigns", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "campcounts", force: :cascade do |t|
+    t.integer  "campaign_id"
+    t.integer  "country_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id", "country_id"], name: "index_campcounts_on_campaign_id_and_country_id", unique: true
+    t.index ["campaign_id"], name: "index_campcounts_on_campaign_id"
+    t.index ["country_id"], name: "index_campcounts_on_country_id"
+  end
+
+  create_table "campplays", force: :cascade do |t|
+    t.integer  "campaign_id"
+    t.integer  "player_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id"], name: "index_campplays_on_campaign_id"
+    t.index ["player_id"], name: "index_campplays_on_player_id"
+  end
 
   create_table "counties", force: :cascade do |t|
     t.string   "name"
@@ -55,6 +81,22 @@ ActiveRecord::Schema.define(version: 20170122023226) do
     t.datetime "updated_at",  null: false
     t.integer  "level"
     t.index ["country_id"], name: "index_states_on_country_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "name"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end

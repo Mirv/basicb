@@ -1,0 +1,40 @@
+%p#notice= notice
+
+.hoster
+  I run this!
+  %br
+
+.players
+  Player List
+  - if @pplayers.count > 0
+    %table{:class => "table table-striped table-hover"}
+      %tbody
+        - @pplayers.each do |joinedp|
+          %tr
+            %td
+              = joinedp.player.screenname
+            %td
+              = link_to "Show", player_url(joinedp.player)
+            %td
+              = link_to "Edit", edit_player_url(joinedp.player.id)
+  - else
+    %p
+      No players signed yet
+
+.countries
+  Countries List
+  - if @ccountries.count > 0
+    %table{:class => "table table-striped table-hover"}
+      %tbody
+      - @ccountries.each do |joinedc|
+        %tr
+          %td
+            = joinedc.country.name
+          %td
+            = link_to "Show", country_url(joinedc.country)
+          %td
+            = link_to "Edit", edit_country_url(joinedc.country.id)
+
+
+%p
+= link_to 'Edit', edit_campaign_path(@campaign)
