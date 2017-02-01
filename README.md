@@ -20,3 +20,5 @@ Mini game for testing a Risk like strategy game
 alt+s swap terminal for text editor
 f6 to hide terminal
 
+https://mattbrictson.com/minitest-and-rails
+https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-minitest

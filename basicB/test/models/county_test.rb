@@ -1,17 +1,18 @@
 require "test_helper"
 
 class County_Test < ActiveSupport::TestCase
+  def setup
+    @county = County.create(name: "Example Item")
+  end
+
+  test 'valid county' do
+    assert @county.valid?, 'county must have name'
+  end
   
-  # test 'valid county' do
-  #   county = County.new(name: "test")
-    
-  #   assert county.valid?, 'county must have name'
-  # end
+  # Test duplicate
+  test 'invalid county' do
+    county = County.new(name: "Example Item")
+    refute county.valid?, 'county passed without a name'
+  end
 
-# describe County do
-#   let(:county) { County.new }
-
-#   it "must be valid" do
-#     value(county).must_be :valid?
-#   end
 end

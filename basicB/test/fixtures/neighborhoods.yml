@@ -1,9 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  neighbor_id: 1
-  target_id: 1
-
+  target_id: "1"
+  neighbor_id:  "1"
+  
 two:
-  neighbor_id: 1
-  target_id: 1
+  target_id: "2"
+  neighbor_id:  "2"

@@ -4,4 +4,6 @@ class Campaign < ApplicationRecord
   has_many  :players, through: :campplays
   has_many  :campcounts
   has_many  :countries, through: :campcounts
+  # validates :campaign_id, presence: true, uniqueness: true
+
 end

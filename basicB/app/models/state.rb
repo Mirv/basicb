@@ -2,7 +2,7 @@ class State < ApplicationRecord
   belongs_to  :country
   has_many    :counties
 
-  validates_presence_of :name
+  validates :name, presence: true
   
   # accepts_nested_attributes_for :neighbors
   # accepts_nested_attributes_for :borders
