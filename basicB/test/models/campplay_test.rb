@@ -1,9 +1,21 @@
-require "test_helper"
+require 'test_helper'
 
-describe Campplay do
-  let(:campplay) { Campplay.new }
+class CampplayTest < ActiveSupport::TestCase
 
-  it "must be valid" do
-    value(campplay).must_be :valid?
+  test 'valid Campplay' do
+    cp = Campplay.new(player_id: "1", campaign_id: "1")
+    assert cp.valid?, 'Campplay must have name'
   end
+  
+  # Test one missing from pair of ID
+  test 'invalid - no campaign' do
+    cp = Campplay.new(player_id: 1)
+    refute cp.valid?, 'Campplay passed without a name'
+  end
+
+  test 'invalid - no player' do
+    cp = Campplay.new(campaign_id: 1)
+    refute cp.valid?, 'Campplay passed without a name'
+  end
+
 end

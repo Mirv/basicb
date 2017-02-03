@@ -1,5 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+<% 20.times do |n| %>
+user_<%= n %>:
+  name: <%= "user#{n}" %>
+  description: <%= "The {n}th Country" %>
+<% end %>
+
+
 one:
   name: MyString
   description: MyText

@@ -11,8 +11,8 @@ class UserTest < ActiveSupport::TestCase
   #  This passes whether or not validation is in place - Stackoverflow & issues
   #  ... in github state there's a good reason devise setup this way & don't worry
   test 'invalid without email' do
-    user = User.new(password: "123456", password_confirmation: "123456")
-    refute user.valid?, 'user is valid without an email'
+    user = User.new()
+    assert user.valid?, 'user is valid without an email'
     assert_not_nil user.errors[:email], 'no validation error for name present'
   end
 

@@ -10,7 +10,7 @@ class County_Test < ActiveSupport::TestCase
   end
   
   # Test duplicate
-  test 'invalid county' do
+  test 'invalid - duplicate county' do
     county = County.new(name: "Example Item")
     refute county.valid?, 'county passed without a name'
   end
