@@ -12,3 +12,6 @@ one:
 two: 
 # column: value
   email: test2@test.com
+
+validuser:
+  email: raptor@test.com

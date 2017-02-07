@@ -32,6 +32,7 @@ group :development, :test do
   gem 'minitest-rails-capybara'
   gem 'guard', '~>2.14'
   gem 'guard-minitest'
+  gem 'rails-controller-testing'
 
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too
 end
