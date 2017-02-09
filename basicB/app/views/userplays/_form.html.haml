@@ -1,0 +1,9 @@
+= simple_form_for(@userplay) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :campaign
+    = f.association :player
+
+  .form-actions
+    = f.button :submit

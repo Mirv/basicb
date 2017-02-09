@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :userplays
   devise_for :users
   resources :campaigns
   resources :neighborhoods

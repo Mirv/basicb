@@ -2,7 +2,7 @@
 
 %h1 Listing neighborhoods
 
-%table
+%table{:class => "table table-striped table-hover"}
   %thead
     %tr
       %th Neighbor
@@ -16,9 +16,9 @@
       %tr
         %td= neighborhood.neighbor_id
         %td= neighborhood.target_id
-        %td= link_to 'Show', neighborhood
-        %td= link_to 'Edit', edit_neighborhood_path(neighborhood)
-        %td= link_to 'Destroy', neighborhood, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        %td= link_to 'Show', neighborhood, :class => "btn btn-default btn-xs" 
+        %td= link_to 'Edit', edit_neighborhood_path(neighborhood), :class => "btn btn-default btn-xs" 
+        %td= link_to 'Destroy', neighborhood, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-default btn-xs" 
 
 %br
 

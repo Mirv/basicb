@@ -1,0 +1,1 @@
+json.partial! "userplays/userplay", userplay: @userplay

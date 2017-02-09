@@ -1,0 +1,1 @@
+json.array! @userplays, partial: 'userplays/userplay', as: :userplay

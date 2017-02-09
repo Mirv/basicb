@@ -19,10 +19,11 @@
         %td= country.name
         %td= country.description
         %td= country.size
-        %td= link_to 'Show', country
-        %td= link_to 'Edit', edit_country_path(country)
-        %td= link_to 'Destroy', country, :method => :delete, :data => { :confirm => 'Are you sure?' }
-        %td= link_to 'Add Neighbors', :neighborhoods 
+        .btn-group-xs	
+          %td= link_to 'Show', country, :class => "btn btn-default btn-xs" 
+          %td= link_to 'Edit', edit_country_path(country), :class => "btn btn-default btn-xs" 
+          %td= link_to 'Destroy', country, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-default btn-xs" 
+          %td= link_to 'Add Neighbors', :neighborhoods, :class => "btn btn-default btn-xs" 
       - if country.states.count > 0
         %tr
           %td

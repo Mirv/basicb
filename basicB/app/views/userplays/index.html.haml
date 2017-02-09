@@ -1,0 +1,23 @@
+%h1 Listing userplays
+
+%table
+  %thead
+    %tr
+      %th Campaign
+      %th Player
+      %th
+      %th
+      %th
+
+  %tbody
+    - @userplays.each do |userplay|
+      %tr
+        %td= userplay.campaign
+        %td= userplay.player
+        %td= link_to 'Show', userplay
+        %td= link_to 'Edit', edit_userplay_path(userplay)
+        %td= link_to 'Destroy', userplay, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Userplay', new_userplay_path

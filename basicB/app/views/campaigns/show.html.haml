@@ -1,5 +1,9 @@
 %p#notice= notice
 
+.jumbotron.campaigndetails
+  %h1= @campaign.name
+  %p= @campaign.description
+
 .hoster
   I run this!
   %br
@@ -11,12 +15,9 @@
       %tbody
         - @pplayers.each do |joinedp|
           %tr
-            %td
-              = joinedp.player.screenname
-            %td
-              = link_to "Show", player_url(joinedp.player)
-            %td
-              = link_to "Edit", edit_player_url(joinedp.player.id)
+            %td= joinedp.player.screenname
+            %td= link_to "Show", player_url(joinedp.player)
+            %td= link_to "Edit", edit_player_url(joinedp.player.id)
   - else
     %p
       No players signed yet
@@ -28,13 +29,9 @@
       %tbody
       - @ccountries.each do |joinedc|
         %tr
-          %td
-            = joinedc.country.name
-          %td
-            = link_to "Show", country_url(joinedc.country)
-          %td
-            = link_to "Edit", edit_country_url(joinedc.country.id)
+          %td= joinedc.country.name
+          %td= link_to "Show", country_url(joinedc.country)
+          %td= link_to "Edit", edit_country_url(joinedc.country.id)
 
 
-%p
-= link_to 'Edit', edit_campaign_path(@campaign)
+%p= link_to 'Edit', edit_campaign_path(@campaign), :class => "btn xs-btn"

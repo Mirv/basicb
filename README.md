@@ -30,3 +30,15 @@ always updating... ruby 2.3.1, rails 5+, less-rails fix, before_filter into befo
 ...your stuff is never loading...https://hackhands.com/rails-nameerror-uninitialized-constant-class-solution/
 
 rvm use default ruby-2.3.1
+
+Devise helpers
+
+-To verify if a user is signed in, use the following helper:
+
+-user_signed_in?
+-For the current signed-in user, this helper is available:
+
+-current_user
+-You can access the session for this scope:
+
+-user_session

@@ -10,9 +10,24 @@
   %b Name:
   = @country.name
 %p
-  %b Neighbor:
-  // = @neighborhood.neighbor_id
 
-// = link_to 'Edit', edit_neighborhood_path(@neighborhood)
-// \|
-// = link_to 'Back', neighborhoods_path
+- if @country.neighbors.count > 0
+  %table{:class => "table table-striped table-hover"}
+    %thead
+      %tr
+        %td
+          Neighbor ID
+        %td
+          Neighbor Name
+    %tbody
+    // = @neighborhood.neighbor_id
+    - for neighbor in @country.neighbors
+      %tr
+        %td
+          = neighbor.id
+        %td
+          = neighbor.name
+        .btn-group-xs	
+          %td= link_to 'Show', neighbor, :class => "btn btn-default btn-xs" 
+          %td= link_to 'Edit', edit_country_path(neighbor), :class => "btn btn-default btn-xs" 
+          %td= link_to 'Add Neighbors', :neighborhoods, :class => "btn btn-default btn-xs" 

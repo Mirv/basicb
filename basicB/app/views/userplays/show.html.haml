@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Campaign:
+  = @userplay.campaign
+%p
+  %b Player:
+  = @userplay.player
+
+= link_to 'Edit', edit_userplay_path(@userplay)
+\|
+= link_to 'Back', userplays_path
