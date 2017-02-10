@@ -9,36 +9,9 @@ Mini game for testing a Risk like strategy game
 
 - RVM loaded 2.3.1
 - For implementations being worked on - see issues list - https://github.com/Mirv/basicb/issues
-- For plans - see 
-- 
-- projects - https://github.com/Mirv/basicb/projects
--
-- or - 
--
-- - - - wiki - https://github.com/Mirv/basicb/wiki
 
+- For plans ... 
 
-alt+s swap terminal for text editor
-f6 to hide terminal
+- projects;  https://github.com/Mirv/basicb/projects
+- wiki;  https://github.com/Mirv/basicb/wiki
 
-https://mattbrictson.com/minitest-and-rails
-https://semaphoreci.com/community/tutorials/how-to-test-rails-models-with-minitest
-railscasts.com/episodes/264-guard?view=asciicast
-
-always updating... ruby 2.3.1, rails 5+, less-rails fix, before_filter into before_action
-
-...your stuff is never loading...https://hackhands.com/rails-nameerror-uninitialized-constant-class-solution/
-
-rvm use default ruby-2.3.1
-
-Devise helpers
-
--To verify if a user is signed in, use the following helper:
-
--user_signed_in?
--For the current signed-in user, this helper is available:
-
--current_user
--You can access the session for this scope:
-
--user_session
