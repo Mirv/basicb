@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209153325) do
+ActiveRecord::Schema.define(version: 20170210150355) do
 
   create_table "campaigns", force: :cascade do |t|
     t.string   "name"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20170209153325) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["neighbor_id"], name: "index_neighborhoods_on_neighbor_id"
-    t.index ["target_id", "neighbor_id"], name: "index_neighborhoods_on_target_id_and_neighbor_id", unique: true
     t.index ["target_id"], name: "index_neighborhoods_on_target_id"
   end
 

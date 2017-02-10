@@ -6,21 +6,92 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create!(name:  "VR",
-          email: "veloci@test.com",
-          password:              "foobar",
-          password_confirmation: "foobar")
+def aCount()
+  return 10
+end
 
-# 10.times do | n |
-#   name = Faker::HarryPotter.character
-#   motto = Faker::HarryPotter.quote
-#   country_id = Faker::Number.between(1, 4)
-# end
+# Random version of aCount
+def getCount()
+  return rand(aCount)
+end
 
-# country
-# 10.times do | b |
-#   name = Faker::LordOfTheRings.location
+def find_neighbor(country)
+  neighbor_id = country.id
+  # Ensure we loop until a country isn't it's own neighbor
+  while neighbor_id == country.id do
+    neighbor_id = 1 + getCount
+  end
+  return neighbor_id
+end 
+
+
+# --- default user --- #
+email = "a@test.com"
+unless User.find_by( email: email )
+  User.create!(name:  "A V R",
+            email: email,
+            password:              "aaaaaa",
+            password_confirmation: "aaaaaa")
+end
+
+email = "veloci@test.com"
+unless User.find_by( email: email )
+  User.create!(name:  "VR",
+            email: email,
+            password:              "aaaaaa",
+            password_confirmation: "aaaaaa")
+end
+
+# --- players --- #
+10.times do | n |
+  # Provision player info
+  screenname = Faker::HarryPotter.character
+  motto = Faker::HarryPotter.quote
+  country = getCount
   
+  # Commit new player
+  Player.create(screenname: screenname, motto: motto, country_id: country)
+end
+
+
+# --- Country --- #
+10.times do | b |
+  
+  # Provision country info
+  name = Faker::LordOfTheRings.location
+  description = Faker::Hacker.adjective
+  size = getCount
+  
+  # Commit new country
+  country = Country.create!(name: name, description: description, size: size)
+
+  # Randomly select a number of neighbors to make
+  random_count = 1 + getCount
+  
+  # Init array of ids
+  neighbors = []
+  
+  # Begin turning out pairs of id's for neighborhoods
+  random_count.times do | c |
+    # Find suitable neigbhor_id
+    neighbors << find_neighbor(country)
+  end
+  
+  # Save each entry to database with main country's id as owner
+  neighbors.each do | x |
+    Neighborhood.create!({neighbor_id: x, target_id: country.id})
+  end
+  
+end
+
+public
+
+
+
+
+
+
+
 # -----------------------------------------------#  
   
   # User.create!(name:  "Example User",
