@@ -12,7 +12,7 @@ class UserTest < ActiveSupport::TestCase
   #  ... in github state there's a good reason devise setup this way & don't worry
   test 'invalid without email' do
     user = User.new()
-    assert user.valid?, 'user is valid without an email'
+    refute user.valid?, 'user is valid without an email'
     assert_not_nil user.errors[:email], 'no validation error for name present'
   end
 

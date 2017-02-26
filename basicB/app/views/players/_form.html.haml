@@ -1,10 +1,9 @@
 = simple_form_for(@player) do |f|
   = f.error_notification
-
   .form-inputs
     = f.input :screenname
     = f.input :motto
     = f.input :country_id
-
+    = f.input :user_id, :as => :hidden, :input_html => { :value => current_user }
   .form-actions
     = f.button :submit

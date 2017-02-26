@@ -1,91 +1,71 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#### Grab all .rb files in the root/db/seeds directory ####
 
-def aCount()
-  return 20
+Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
+
+#### Definitions ####
+#### Definitions ####
+#### Definitions ####
+
+def max_neighbors
+  6
 end
 
-# Random version of aCount
-def randCount()
-  return rand(aCount)
+def aCount
+  20
 end
 
-# Takes an object (hopefully country), with an ID field
-# Spits out random id number
-def find_neighbor(country)
-  neighbor_id = country.id
-  # Ensure we loop until a country isn't it's own neighbor
-  while neighbor_id == country.id do
-    neighbor_id = 1 + randCount
-  end
-  return neighbor_id
-end 
+# Number of countries & players you want - switched to var for now
+def nounCount
+  20
+end
+
+#### Adding instances to database ####
+#### Adding instances to database ####
+#### Adding instances to database ####
 
 
-# --- default users --- #
 email = "a@test.com"
 unless User.find_by( email: email )
-  User.create!(name:  "A V R",
+  User.create!(
+            name:  "A V R",
             email: email,
             password:              "aaaaaa",
             password_confirmation: "aaaaaa")
+  # Make at least 1 match with player in the first campaign
+  # User.first.players.create!(
+  #   screenname: "A's buddy", motto: "A's the way", country_id: "1")
 end
 
-email = "veloci@test.com"
-unless User.find_by( email: email )
-  User.create!(name:  "VR",
-            email: email,
-            password:              "aaaaaa",
-            password_confirmation: "aaaaaa")
-end
+(nounCount).times { | u | makeUsers(u) }
+puts "Created #{Player.count} players as buddies..."
 
-# --- players --- #
-10.times do | n |
-  # Provision player info
-  screenname = Faker::HarryPotter.character
-  motto = Faker::HarryPotter.quote
-  country = randCount
+(nounCount).times  do | x |
   
-  # Commit new player
-  Player.create(screenname: screenname, motto: motto, country_id: country)
-end
-
-
-# --- Country --- #
-10.times do 
+  # generate stats for the country
+  curCountryStats = countryGenerate(nounCount)
   
-  # Provision country info
-  name = Faker::LordOfTheRings.location
-  description = Faker::Hacker.adjective
-  size = randCount
+  # commit it to database
+  curCountry = countryCreate(curCountryStats)
   
-  # Commit new country
-  country = Country.create!(name: name, description: description, size: size)
-
-  # Randomly select a number of neighbors to make
-  random_count = 1 + randCount
-  
-  # Init array of ids
-  neighbors = []
-  
-  # Begin turning out pairs of id's for neighborhoods
-  random_count.times do 
-    # Find suitable neigbhor_id
-    neighbors << find_neighbor(country)
+  # if successful, make neighbors via the has_many relationship
+  if (curCountry) then
+    (max_neighbors).times do | xx |
+      neighborStats = countryGenerate(nounCount)
+      curCountry.neighbors.create!(neighborStats)
+    end
+  else
+    puts "Error - CurCountry #{curCountry}, nounCount - #{nounCount}"
   end
-  
-  # Make unique to avoid the sql constraint
-  neighbors = neighbors.uniq
-  
-  # Save each entry to database with main country's id as owner
-  neighbors.each do | x |
-    Neighborhood.create!({neighbor_id: x, target_id: country.id})
-  end
-  
+
 end
+
+    # make_neighbors(aCountry, nounCount)
+  #   aCountry.neighbors.new(countryCreate(
+  #         "name" => aCountry.name, 
+  #         "description" => aCountry.description,
+  #         "size" => aCountry.size
+  #         ))
+
+  puts "Created #{Country.count} countries..."
+  puts "Created #{Neighborhood.count} neighbors..."
 

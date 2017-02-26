@@ -5,6 +5,8 @@ class PlayersController < ApplicationController
   # GET /players.json
   def index
     @players = Player.all
+    @player = User.find(current_user.id)
+    @playerlist = @player.players
   end
 
   # GET /players/1
@@ -69,6 +71,6 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id)
+      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :user_id)
     end
 end

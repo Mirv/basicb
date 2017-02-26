@@ -27,19 +27,46 @@ class Campaignplaying_Test < ActionDispatch::IntegrationTest
     assert_template 'campaigns/index'
   end
   
-  test "can create an article" do
+  test "can create a campaign" do
+    
+    # ensure we can get to the campaign page
     sign_in users(:validuser)
     get "/campaigns/new"
     assert_response :success
    
+    # do the actual post
     post_title = "This thing"   
     post_content = "Do this thing now!"
     post "/campaigns",
       params: { campaign: { name: post_title, body: post_content } }
+
+    # ensure page loads correctly
     assert_response :redirect
     follow_redirect!
-    # page loads correctly
     assert_response :success
+
+    # make sure the new campaign is there
+    assert_match post_title, response.body
+  end
+  
+    test "user can create a player" do
+    
+    # ensure we can get to the campaign page
+    sign_in users(:validuser)
+    get "/campaigns/new"
+    assert_response :success
+   
+    # do the actual post
+    post_title = "This thing"   
+    post_content = "Do this thing now!"
+    post "/campaigns",
+      params: { campaign: { name: post_title, body: post_content } }
+
+    # ensure page loads correctly
+    assert_response :redirect
+    follow_redirect!
+    assert_response :success
+
     # make sure the new campaign is there
     assert_match post_title, response.body
   end
