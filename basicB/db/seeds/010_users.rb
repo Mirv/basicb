@@ -3,13 +3,13 @@
 
 
 def takeInfo(name, email, password, password_confirmation)
-  newUser = User.new do |u|
+  new_user_make = User.new do |u|
         u.name = name
         u.email = email
         u.password = password
         u.password_confirmation = password_confirmation
   end
-  return newUser
+  return new_user_make
 end
 
 #
@@ -21,8 +21,8 @@ def makeDefaultUser()
   pass = "aaaaaa"
   email = "a@test.com"
   unless User.find_by( email: email )
-    newUser = takeInfo("A V R", email, pass, pass)
-    newUser.save!
+    new_user_make = takeInfo("A V R", email, pass, pass)
+    new_user_make.save!
   #
   ## Stub here for a single campaign to generate
   #
@@ -57,6 +57,9 @@ end
 
 # --- player names --- #
 
+#
+### generate info for a player owned by the user
+#
 def makePlayerInfo
   hold = Hash.new
   
@@ -65,5 +68,4 @@ def makePlayerInfo
   
   hold = hold.merge({"screenname" =>  screenname})
   hold = hold.merge({"motto" =>  motto})
-  
 end

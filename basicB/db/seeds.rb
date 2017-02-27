@@ -25,7 +25,7 @@ def max_neighbors
   6
 end
 
-def aCount
+def a_count
   20
 end
 
@@ -44,16 +44,16 @@ end
 makeDefaultUser
 
 #
-### Generate a limited number of users, then players
+### Generate a limited number of users, then make them players
 #
 (max_neighbors).times do | u | 
-  curUser = makeUserInfo(u) 
+  cur_user_details = makeUserInfo(u) 
   # if hash has stuff, make a user
-  if curUser
-    newUser = User.create!(curUser)
+  if cur_user_details
+    new_user_made = User.create!(cur_user_details)
     # if user exists, we make a player for them to use 
-    if newUser
-      newUser.players.create!(makePlayerInfo)
+    if new_user_made
+      new_user_made.players.create!(makePlayerInfo)
     else
       puts "Issue making User"
     end
@@ -70,24 +70,24 @@ puts "Create #{User.count} users..."
 (noun_count).times  do | x |
   
   # generate stats for the country
-  curCountryStats = countryGenerate(noun_count)
+  cur_country_stats = countryGenerate(noun_count)
   
   # commit it to database
-  curCountry = countryCreate(curCountryStats)
+  cur_country = countryCreate(cur_country_stats)
   
   #
   ## Stub here for states
   #
   
   # if successful, make neighbors via the has_many relationship
-  if (curCountry) then
+  if (cur_country) then
     random_neighbors = rand(max_neighbors) 
     (random_neighbors).times do | xx |
-      neighborStats = countryGenerate(noun_count)
-      curCountry.neighbors.create!(neighborStats)
+      neighbor_stats = countryGenerate(noun_count)
+      cur_country.neighbors.create!(neighbor_stats)
     end
   else
-    puts "Error - CurCountry #{curCountry}, noun_count - #{noun_count}"
+    puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
   end
 end
 
