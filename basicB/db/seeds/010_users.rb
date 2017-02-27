@@ -12,15 +12,24 @@ def takeInfo(name, email, password, password_confirmation)
   return newUser
 end
 
-email = "a@test.com"
-pass = "aaaaaa"
-unless User.find_by( email: email )
-  newUser = takeInfo("A V R", email, pass, pass)
-  newUser.save!
+def makeDefaultUser()
+  pass = "aaaaaa"
+  email = "a@test.com"
+  unless User.find_by( email: email )
+    newUser = takeInfo("A V R", email, pass, pass)
+    newUser.save!
+  #
+  ## Stub here for a single campaign to generate
+  #
+  end
 end
 
 
 # --- spare users --- #
+
+#
+###  I feel like there's a better way to feed this into a hash after generating
+#
 
 def makeUserInfo(u)
   hold = Hash.new

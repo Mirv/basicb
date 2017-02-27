@@ -44,9 +44,12 @@ def find_neighbor(country, count)
 end 
 
 #
-# Takes an object (country with an ID) & count
+### Takes an object (country with an ID) & count
 # Generates array of unique id
 # Side effect: fills join table with ids linking other M:M tables
+#
+###  Pending - extract out the neighbors.each for independent connection of two
+# ... existing tables
 #
 def make_neighbors(country, count)
   # Randomly select a number of neighbors to make
