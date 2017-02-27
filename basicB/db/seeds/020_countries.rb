@@ -1,16 +1,4 @@
 
-# def countryCreate
-#   name =  Faker::LordOfTheRings.location
-#   # Get the country info after checking name
-#   if Country.find_by(name: name) then 
-#     newCountry = Country.find_or_create_by!(name: name) do |c|
-#           c.description = Faker::Hacker.adjective
-#           c.size = rand(9)
-#     end
-#   end
-#   return newCountry
-# end
-
 def countryGenerate(count)
   hold = Hash.new
   name = Faker::LordOfTheRings.location
@@ -34,11 +22,6 @@ def countryCreate(args)
     name:  args["name"],
     description: args["description"],
     size: args["size"])
-    
-  # puts "Args-name: #{args}"
-  # puts args["name"]
-  # puts "Test Args[\"name\"]"
-    
   return aCountry
 end
 

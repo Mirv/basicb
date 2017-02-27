@@ -26,18 +26,20 @@ end
 
 # --- spare users --- #
 
-def makeUsers(u)
+def makeUserInfo(u)
+  hold = Hash.new
+  
   random = rand(u)
-  email = "veloci#{u}this#{random}@test.com"
-  unless User.find_by( email: email )
-    User.create!(name:  "VR",
-              email: email,
-              password:              "aaaaaa",
-              password_confirmation: "aaaaaa")
-    # Make at least 1 match with player in the first campaign
-    User.second.players.create!(
-              screenname: "Veloci's buddy #{u}, #{random}", 
-              motto: "V is for vroom",
-              country_id: "1")
-  end
+  name = Faker::Cat.name
+  email = "The#{name}#{u}#{random}@test.com"
+  password = "aaaaaa"
+  password_confirmation = "aaaaaa"
+  
+  hold = hold.merge({"name" =>  name})
+  hold = hold.merge({"email" =>  email})
+  hold = hold.merge({"password" =>  password})
+  hold = hold.merge({"password_confirmation" =>  password_confirmation})
+  
+  return hold
 end
+

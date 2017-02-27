@@ -15,7 +15,7 @@ def aCount
 end
 
 # Number of countries & players you want - switched to var for now
-def nounCount
+def noun_count
   20
 end
 
@@ -23,7 +23,7 @@ end
 #### Adding instances to database ####
 #### Adding instances to database ####
 
-
+# My base user
 email = "a@test.com"
 unless User.find_by( email: email )
   User.create!(
@@ -36,13 +36,20 @@ unless User.find_by( email: email )
   #   screenname: "A's buddy", motto: "A's the way", country_id: "1")
 end
 
-(nounCount).times { | u | makeUsers(u) }
+(max_neighbors).times do | u | 
+  curUser = makeUserInfo(u) 
+  # if hash is good, make a user
+  if curUser
+    User.create!(curUser)
+  end
+  # end
+end
 puts "Created #{Player.count} players as buddies..."
 
-(nounCount).times  do | x |
+(noun_count).times  do | x |
   
   # generate stats for the country
-  curCountryStats = countryGenerate(nounCount)
+  curCountryStats = countryGenerate(noun_count)
   
   # commit it to database
   curCountry = countryCreate(curCountryStats)
@@ -50,22 +57,15 @@ puts "Created #{Player.count} players as buddies..."
   # if successful, make neighbors via the has_many relationship
   if (curCountry) then
     (max_neighbors).times do | xx |
-      neighborStats = countryGenerate(nounCount)
+      neighborStats = countryGenerate(noun_count)
       curCountry.neighbors.create!(neighborStats)
     end
   else
-    puts "Error - CurCountry #{curCountry}, nounCount - #{nounCount}"
+    puts "Error - CurCountry #{curCountry}, noun_count - #{noun_count}"
   end
-
 end
 
-    # make_neighbors(aCountry, nounCount)
-  #   aCountry.neighbors.new(countryCreate(
-  #         "name" => aCountry.name, 
-  #         "description" => aCountry.description,
-  #         "size" => aCountry.size
-  #         ))
-
-  puts "Created #{Country.count} countries..."
-  puts "Created #{Neighborhood.count} neighbors..."
+puts "Create #{User.count} users..."
+puts "Created #{Country.count} countries..."
+puts "Created #{Neighborhood.count} neighbors..."
 
