@@ -53,9 +53,14 @@ makeDefaultUser
     new_user_made = User.create!(cur_user_details)
     # if user exists, we make a player for them to use 
     if new_user_made
-      new_user_made.players.create!(makePlayerInfo)
+      new_player_made = new_user_made.players.create!(makePlayerInfo)
+      if new_player_made then
+       # new_player_made.countries.create!(countryGenerate(max_neighbors))
+      else
+        puts "Issue making player - skipping making of country."
+      end
     else
-      puts "Issue making User"
+      puts "Issue making User - skipping making of player & country."
     end
   end
 end
