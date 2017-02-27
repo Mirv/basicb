@@ -1,4 +1,7 @@
-
+#
+### Interfaces with faker api to get random data, returning a hash
+## Pending improvements, take optional params of hash index's & apply rules
+#
 def countryGenerate(count)
   hold = Hash.new
   name = Faker::LordOfTheRings.location
@@ -15,7 +18,9 @@ def countryGenerate(count)
   return hold
 end
 
-
+#
+### Makes the country when fed 3 params in a hash
+#
 def countryCreate(args)
   # Record created object to return & commit to db
   aCountry = Country.create!(
@@ -25,8 +30,10 @@ def countryCreate(args)
   return aCountry
 end
 
+#
 # Takes an object (country with an ID) & count
 # Spits out random id number not equal to original object id number
+#
 def find_neighbor(country, count)
   neighbor_id = country
   # Ensure we loop until a country isn't it's own neighbor
@@ -36,9 +43,11 @@ def find_neighbor(country, count)
   return neighbor_id
 end 
 
+#
 # Takes an object (country with an ID) & count
 # Generates array of unique id
 # Side effect: fills join table with ids linking other M:M tables
+#
 def make_neighbors(country, count)
   # Randomly select a number of neighbors to make
   aNumber = 1 + rand(count)

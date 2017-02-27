@@ -1,3 +1,18 @@
+#
+### Flow:  
+#
+# 1) Users
+# 2) Campaigns
+# 3) Users
+# 4) Players
+# 5) Countries
+# 6) Neighbors
+# 7) States
+#
+###
+
+
+
 #### Grab all .rb files in the root/db/seeds directory ####
 
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
@@ -23,7 +38,7 @@ end
 #### Adding instances to database ####
 #### Adding instances to database ####
 
-# My base user
+# My base user & campaign
 email = "a@test.com"
 unless User.find_by( email: email )
   User.create!(
@@ -31,15 +46,17 @@ unless User.find_by( email: email )
             email: email,
             password:              "aaaaaa",
             password_confirmation: "aaaaaa")
-  # Make at least 1 match with player in the first campaign
-  # User.first.players.create!(
-  #   screenname: "A's buddy", motto: "A's the way", country_id: "1")
+#
+## Stub here for a single campaign to generate
+#
 end
 
-# Generate a limited number of users
+#
+### Generate a limited number of users, then players
+#
 (max_neighbors).times do | u | 
   curUser = makeUserInfo(u) 
-  # if hash is good, make a user
+  # if hash has stuff, make a user
   if curUser
     newUser = User.create!(curUser)
     # if user exists, we make a player for them to use 
@@ -55,7 +72,9 @@ puts "Created #{Player.count} players"
 puts "Create #{User.count} users..."
 
 
-
+#
+### Generate countries
+#
 (noun_count).times  do | x |
   
   # generate stats for the country
@@ -63,6 +82,10 @@ puts "Create #{User.count} users..."
   
   # commit it to database
   curCountry = countryCreate(curCountryStats)
+  
+  #
+  ## Stub here for states
+  #
   
   # if successful, make neighbors via the has_many relationship
   if (curCountry) then

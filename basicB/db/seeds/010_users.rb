@@ -19,10 +19,6 @@ unless User.find_by( email: email )
   newUser.save!
 end
 
-  # Make at least 1 match with player in the first campaign
-  # User.first.players.create!(
-  #   screenname: "A's buddy", motto: "A's the way", country_id: "1")
-
 
 # --- spare users --- #
 
