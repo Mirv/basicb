@@ -43,3 +43,15 @@ def makeUserInfo(u)
   return hold
 end
 
+# --- player names --- #
+
+  def makePlayerInfo
+    hold = Hash.new
+    
+    screenname = Faker::Name.name
+    motto = Faker::StarWars.wookie_sentence 
+    
+    hold = hold.merge({"screenname" =>  screenname})
+    hold = hold.merge({"motto" =>  motto})
+    
+  end

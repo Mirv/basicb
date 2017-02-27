@@ -36,15 +36,25 @@ unless User.find_by( email: email )
   #   screenname: "A's buddy", motto: "A's the way", country_id: "1")
 end
 
+# Generate a limited number of users
 (max_neighbors).times do | u | 
   curUser = makeUserInfo(u) 
   # if hash is good, make a user
   if curUser
-    User.create!(curUser)
+    newUser = User.create!(curUser)
+    # if user exists, we make a player for them to use 
+    if newUser
+      newUser.players.create!(makePlayerInfo)
+    else
+      puts "Issue making User"
+    end
   end
-  # end
 end
-puts "Created #{Player.count} players as buddies..."
+
+puts "Created #{Player.count} players"
+puts "Create #{User.count} users..."
+
+
 
 (noun_count).times  do | x |
   
@@ -56,7 +66,8 @@ puts "Created #{Player.count} players as buddies..."
   
   # if successful, make neighbors via the has_many relationship
   if (curCountry) then
-    (max_neighbors).times do | xx |
+    random_neighbors = rand(max_neighbors) 
+    (random_neighbors).times do | xx |
       neighborStats = countryGenerate(noun_count)
       curCountry.neighbors.create!(neighborStats)
     end
@@ -65,7 +76,6 @@ puts "Created #{Player.count} players as buddies..."
   end
 end
 
-puts "Create #{User.count} users..."
 puts "Created #{Country.count} countries..."
 puts "Created #{Neighborhood.count} neighbors..."
 
