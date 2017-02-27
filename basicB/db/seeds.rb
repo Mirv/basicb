@@ -38,18 +38,10 @@ end
 #### Adding instances to database ####
 #### Adding instances to database ####
 
-# My base user & campaign
-email = "a@test.com"
-unless User.find_by( email: email )
-  User.create!(
-            name:  "A V R",
-            email: email,
-            password:              "aaaaaa",
-            password_confirmation: "aaaaaa")
 #
-## Stub here for a single campaign to generate
+## My base user & campaign
 #
-end
+makeDefaultUser
 
 #
 ### Generate a limited number of users, then players
