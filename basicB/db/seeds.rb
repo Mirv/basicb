@@ -30,25 +30,20 @@ default_user = makeDefaultUser
 
 if default_user then
   # Make a campaign owned by the user
-  first_user = default_user.campaigns.create!(name: "The First Age", description: "At start...")
-  if first_user
+  first_campaign = default_user.campaigns.create!(
+      name: "The First Age", description: "At start...")
+  if first_campaign
     # Make a player in the campaign
-    first_player = first_user.players.create!(makePlayerInfo)
-    if first_player
-      # Make a country in the campaign, belonging to first player
-      first_country = first_player.countries.create!(countryGenerate(20))
-      if first_country
-        # Make neighbors for first country
-        make_neighbors(first_country, max_neighbors)
-      end
-    end
+    puts "Campaign: #{first_campaign["name"]}"
+    newer_player = default_user.players.create!(makePlayerInfo)
+    puts "First player: #{newer_player["screenname"]}"
   end
 end
 
 #
 ### Generate a limited number of users, then make them players
 #
-(max_neighbors).times do | u | 
+(noun_count).times do | u | 
   cur_user_details = makeUserInfo(u) 
   # if hash has stuff, make a user
   if cur_user_details
@@ -57,6 +52,7 @@ end
     if new_user_made then
       new_player_made = new_user_made.players.create!(makePlayerInfo)
       if new_player_made then
+        Campplay.create!(player_id: new_player_made["id"], campaign_id: 1)
         new_country_made = new_player_made.countries.create!(countryGenerate(max_neighbors))
         if new_country_made then
           new_country_made.states.create!(stateGenerate(max_neighbors, new_country_made["country_id"]))
