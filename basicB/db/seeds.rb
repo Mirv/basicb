@@ -1,18 +1,4 @@
-#
-### Flow:  
-#
-# 1) Users
-# 2) Campaigns
-# 3) Users
-# 4) Players
-# 5) Countries
-# 6) Neighbors
-# 7) States
-#
-###
-
 #### Grab all .rb files in the root/db/seeds directory ####
-
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
 
 #### Definitions ####
@@ -42,17 +28,22 @@ end
 
 default_user = makeDefaultUser
 
-# Make a campaign owned by the user
-first_user = default_user.campaigns.create!(name: "The First Age", description: "At start...")
-
-# Make a player in the campaign
-first_player = first_user.players.create!(makePlayerInfo)
-
-# Make a country in the campaign, belonging to first player
-first_country = first_player.countries.create!(countryGenerate(20))
-
-# Make neighbors for first country
-make_neighbors(first_country, max_neighbors)
+if default_user then
+  # Make a campaign owned by the user
+  first_user = default_user.campaigns.create!(name: "The First Age", description: "At start...")
+  if first_user
+    # Make a player in the campaign
+    first_player = first_user.players.create!(makePlayerInfo)
+    if first_player
+      # Make a country in the campaign, belonging to first player
+      first_country = first_player.countries.create!(countryGenerate(20))
+      if first_country
+        # Make neighbors for first country
+        make_neighbors(first_country, max_neighbors)
+      end
+    end
+  end
+end
 
 #
 ### Generate a limited number of users, then make them players
