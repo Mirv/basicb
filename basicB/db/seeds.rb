@@ -39,16 +39,19 @@ end
 #### Adding instances to database ####
 
 #
-## My base user & campaign, with 1st player
+## My base user & campaign, with 1st player & country
 #
 
 default_user = makeDefaultUser
 
 # Make a campaign owned by the user
-default_user.campaigns.create!(name: "The First Age", description: "At start...")
+first_user = default_user.campaigns.create!(name: "The First Age", description: "At start...")
 
 # Make a player in the campaign
-default_user.campaigns.first.players.create!(makePlayerInfo)
+first_player = first_user.players.create!(makePlayerInfo)
+
+# Make a country in the campaign, belonging to first player
+first_player.countries.create!(countryGenerate(20))
 
 
 #
@@ -97,7 +100,10 @@ puts "Create #{User.count} users..."
     random_neighbors = rand(max_neighbors) 
     (random_neighbors).times do | xx |
       neighbor_stats = countryGenerate(noun_count)
-      cur_country.neighbors.create!(neighbor_stats)
+      # Check neighbor isn't matched with itself
+      if (neighbor_stats["name"] != cur_country["name"]) then
+        cur_country.neighbors.create!(neighbor_stats)
+      end
     end
   else
     puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
