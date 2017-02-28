@@ -11,8 +11,6 @@
 #
 ###
 
-
-
 #### Grab all .rb files in the root/db/seeds directory ####
 
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
@@ -51,8 +49,10 @@ first_user = default_user.campaigns.create!(name: "The First Age", description: 
 first_player = first_user.players.create!(makePlayerInfo)
 
 # Make a country in the campaign, belonging to first player
-first_player.countries.create!(countryGenerate(20))
+first_country = first_player.countries.create!(countryGenerate(20))
 
+# Make neighbors for first country
+make_neighbors(first_country, max_neighbors)
 
 #
 ### Generate a limited number of users, then make them players
@@ -63,10 +63,14 @@ first_player.countries.create!(countryGenerate(20))
   if cur_user_details
     new_user_made = User.create!(cur_user_details)
     # if user exists, we make a player for them to use 
-    if new_user_made
+    if new_user_made then
       new_player_made = new_user_made.players.create!(makePlayerInfo)
       if new_player_made then
-        new_player_made.countries.create!(countryGenerate(max_neighbors))
+        new_country_made = new_player_made.countries.create!(countryGenerate(max_neighbors))
+        if new_country_made then
+          make_neighbors(new_country_made, max_neighbors)
+        end
+          
       else
         puts "Issue making player - skipping making of country."
       end
@@ -78,6 +82,7 @@ end
 
 puts "Created #{Player.count} players"
 puts "Create #{User.count} users..."
+
 
 
 #
@@ -97,13 +102,14 @@ puts "Create #{User.count} users..."
   
   # if successful, make neighbors via the has_many relationship
   if (cur_country) then
-    make_neighbors(cur_country, max_neighbors)
+  #  make_neighbors(cur_country, max_neighbors)
     
   else
     puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
   end
   
 end
+
 
 puts "Created #{Country.count} countries..."
 puts "Created #{Neighborhood.count} neighbors..."
