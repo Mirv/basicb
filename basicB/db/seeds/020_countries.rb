@@ -91,3 +91,29 @@ def make_neighbors(cur_country, number_neighbors)
     end
   end
 end
+
+
+#
+### Generate countries -- Old don't use
+# #
+# (noun_count).times  do | x |
+  
+#   # generate stats for the country
+#   cur_country_stats = countryGenerate(noun_count)
+  
+#   # commit it to database
+#   cur_country = countryCreate(cur_country_stats)
+  
+#   #
+#   ## Stub here for states
+#   #
+  
+#   # if successful, make neighbors via the has_many relationship
+#   if (cur_country) then
+#   #  make_neighbors(cur_country, max_neighbors)
+    
+#   else
+#     puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
+#   end
+  
+# end
