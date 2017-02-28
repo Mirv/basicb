@@ -51,7 +51,7 @@ end
 ###  Pending - extract out the neighbors.each for independent connection of two
 # ... existing tables
 #
-def make_neighbors(country, count)
+def old_make_neighbors(country, count)
   # Randomly select a number of neighbors to make
   a_number = 1 + rand(count)
   
@@ -70,5 +70,24 @@ def make_neighbors(country, count)
   # Save each entry to database with main country's id as owner
   neighbors.each do | x |
     Neighborhood.create!({neighbor_id: x, target_id: country.id})
+  end
+end
+
+#
+### get info & create a random number of countries via neighborhood relationship
+#
+def make_neighbors(cur_country, number_neighbors)
+  # Random number of neighbors
+  random_neighbors = rand(number_neighbors) 
+  
+  (random_neighbors).times do | xx |
+    # Get info to make country
+    neighbor_stats = countryGenerate(number_neighbors)
+    
+    # Check neighbor isn't matched with itself
+    if (neighbor_stats["name"] != cur_country["name"]) then
+      # Make country
+      cur_country.neighbors.create!(neighbor_stats)
+    end
   end
 end

@@ -97,17 +97,12 @@ puts "Create #{User.count} users..."
   
   # if successful, make neighbors via the has_many relationship
   if (cur_country) then
-    random_neighbors = rand(max_neighbors) 
-    (random_neighbors).times do | xx |
-      neighbor_stats = countryGenerate(noun_count)
-      # Check neighbor isn't matched with itself
-      if (neighbor_stats["name"] != cur_country["name"]) then
-        cur_country.neighbors.create!(neighbor_stats)
-      end
-    end
+    make_neighbors(cur_country, max_neighbors)
+    
   else
     puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
   end
+  
 end
 
 puts "Created #{Country.count} countries..."
