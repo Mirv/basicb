@@ -59,6 +59,7 @@ end
       if new_player_made then
         new_country_made = new_player_made.countries.create!(countryGenerate(max_neighbors))
         if new_country_made then
+          new_country_made.states.create!(stateGenerate(max_neighbors, new_country_made["country_id"]))
           make_neighbors(new_country_made, max_neighbors)
         end
       else
