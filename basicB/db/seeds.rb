@@ -61,7 +61,6 @@ end
         if new_country_made then
           make_neighbors(new_country_made, max_neighbors)
         end
-          
       else
         puts "Issue making player - skipping making of country."
       end
@@ -73,35 +72,6 @@ end
 
 puts "Created #{Player.count} players"
 puts "Create #{User.count} users..."
-
-
-
-#
-### Generate countries
-#
-(noun_count).times  do | x |
-  
-  # generate stats for the country
-  cur_country_stats = countryGenerate(noun_count)
-  
-  # commit it to database
-  cur_country = countryCreate(cur_country_stats)
-  
-  #
-  ## Stub here for states
-  #
-  
-  # if successful, make neighbors via the has_many relationship
-  if (cur_country) then
-  #  make_neighbors(cur_country, max_neighbors)
-    
-  else
-    puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
-  end
-  
-end
-
-
 puts "Created #{Country.count} countries..."
 puts "Created #{Neighborhood.count} neighbors..."
 
