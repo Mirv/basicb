@@ -44,36 +44,6 @@ def find_neighbor(country, count)
 end 
 
 #
-### Takes an object (country with an ID) & count
-# Generates array of unique id
-# Side effect: fills join table with ids linking other M:M tables
-#
-###  Pending - extract out the neighbors.each for independent connection of two
-# ... existing tables
-#
-def old_make_neighbors(country, count)
-  # Randomly select a number of neighbors to make
-  a_number = 1 + rand(count)
-  
-  # Init array of ids
-  neighbors = []
-  
-  # Begin turning out pairs of id's for neighborhoods
-  a_number.times do 
-    # Find suitable neigbhor_id
-    neighbors << find_neighbor(country, count)
-  end
-  
-  # Drop duplicate entries to avoid the sql constraint
-  neighbors = neighbors.uniq
-  
-  # Save each entry to database with main country's id as owner
-  neighbors.each do | x |
-    Neighborhood.create!({neighbor_id: x, target_id: country.id})
-  end
-end
-
-#
 ### get info & create a random number of countries via neighborhood relationship
 #
 def make_neighbors(cur_country, number_neighbors)
@@ -92,28 +62,3 @@ def make_neighbors(cur_country, number_neighbors)
   end
 end
 
-
-#
-### Generate countries -- Old don't use
-# #
-# (noun_count).times  do | x |
-  
-#   # generate stats for the country
-#   cur_country_stats = countryGenerate(noun_count)
-  
-#   # commit it to database
-#   cur_country = countryCreate(cur_country_stats)
-  
-#   #
-#   ## Stub here for states
-#   #
-  
-#   # if successful, make neighbors via the has_many relationship
-#   if (cur_country) then
-#   #  make_neighbors(cur_country, max_neighbors)
-    
-#   else
-#     puts "Error - cur_country #{cur_country}, noun_count - #{noun_count}"
-#   end
-  
-# end
