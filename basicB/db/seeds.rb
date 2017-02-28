@@ -39,12 +39,16 @@ end
 #### Adding instances to database ####
 
 #
-## My base user & campaign
+## My base user & campaign, with 1st player
 #
+
 default_user = makeDefaultUser
+
+# Make a campaign owned by the user
 default_user.campaigns.create!(name: "The First Age", description: "At start...")
-    # Probably shouldn't gen players before the campaign they belong to
-   # default_user.players.create!(makePlayerInfo)
+
+# Make a player in the campaign
+default_user.campaigns.first.players.create!(makePlayerInfo)
 
 
 #
