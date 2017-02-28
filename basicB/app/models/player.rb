@@ -1,7 +1,9 @@
 class Player < ApplicationRecord
-  # belongs_to :country
   has_many  :countries
-  belongs_to :campaign
+  
+  has_many  :campplays
+  has_many  :campaigns, through: :campplays
+  
   has_one   :userplay
   has_one   :user, through: :userplay
 

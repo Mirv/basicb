@@ -8,5 +8,9 @@ class User < ApplicationRecord
   
   has_many :userplays
   has_many :players, through: :userplays
+  
+  has_many  :usercamps
+  has_many  :campaigns, through: :usercamps
+  
 end
 

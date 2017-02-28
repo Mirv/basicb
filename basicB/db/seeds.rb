@@ -41,7 +41,11 @@ end
 #
 ## My base user & campaign
 #
-makeDefaultUser
+default_user = makeDefaultUser
+default_user.campaigns.create!(name: "The First Age", description: "At start...")
+    # Probably shouldn't gen players before the campaign they belong to
+   # default_user.players.create!(makePlayerInfo)
+
 
 #
 ### Generate a limited number of users, then make them players
@@ -55,7 +59,7 @@ makeDefaultUser
     if new_user_made
       new_player_made = new_user_made.players.create!(makePlayerInfo)
       if new_player_made then
-       # new_player_made.countries.create!(countryGenerate(max_neighbors))
+        new_player_made.countries.create!(countryGenerate(max_neighbors))
       else
         puts "Issue making player - skipping making of country."
       end

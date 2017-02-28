@@ -13,20 +13,24 @@ def takeInfo(name, email, password, password_confirmation)
 end
 
 #
-### Generate a default test user
+### Generate a default test user, then a campaign
 #
 ## Pending - do we want this to be a sideeffect as that blocks reusability?
 #
 def makeDefaultUser()
-  pass = "aaaaaa"
+
   email = "a@test.com"
+
   unless User.find_by( email: email )
-    new_user_make = takeInfo("A V R", email, pass, pass)
-    new_user_make.save!
+    new_user_make = makeUserInfo(1)
+    new_user_make["email"] = email
+    new_user_made = User.create!(new_user_make)
+    return new_user_made
   #
   ## Stub here for a single campaign to generate
   #
   end
+#  new_player_made = new_user_made.players.create!(makePlayerInfo)
 end
 
 

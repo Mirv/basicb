@@ -23,11 +23,11 @@ end
 #
 def countryCreate(args)
   # Record created object to return & commit to db
-  aCountry = Country.create!(
+  a_country = Country.create!(
     name:  args["name"],
     description: args["description"],
     size: args["size"])
-  return aCountry
+  return a_country
 end
 
 #
@@ -53,13 +53,13 @@ end
 #
 def make_neighbors(country, count)
   # Randomly select a number of neighbors to make
-  aNumber = 1 + rand(count)
+  a_number = 1 + rand(count)
   
   # Init array of ids
   neighbors = []
   
   # Begin turning out pairs of id's for neighborhoods
-  aNumber.times do 
+  a_number.times do 
     # Find suitable neigbhor_id
     neighbors << find_neighbor(country, count)
   end
