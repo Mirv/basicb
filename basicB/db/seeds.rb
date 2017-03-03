@@ -44,27 +44,21 @@ end
 ### Generate a limited number of users, then make them players
 #
 (noun_count).times do | u | 
-  cur_user_details = makeUserInfo(u) 
-  # if hash has stuff, make a user
-  if cur_user_details
+  begin
+    cur_user_details = makeUserInfo(u) 
     new_user_made = User.create!(cur_user_details)
-    # if user exists, we make a player for them to use 
-    if new_user_made then
-      new_player_made = new_user_made.players.create!(makePlayerInfo)
-      if new_player_made then
-        Campplay.create!(player_id: new_player_made["id"], campaign_id: 1)
-        new_country_made = new_player_made.countries.create!(countryGenerate(max_neighbors))
-        if new_country_made then
-          new_country_made.states.create!(stateGenerate(max_neighbors, new_country_made["country_id"]))
-          make_neighbors(new_country_made, max_neighbors)
-        end
-      else
-        puts "Issue making player - skipping making of country."
-      end
-    else
-      puts "Issue making User - skipping making of player & country."
-    end
+    new_player_made = new_user_made.players.create!(makePlayerInfo)
+    neighbor = Campplay.create!(player_id: new_player_made["id"], campaign_id: 1)
+    new_country_made = new_player_made.countries.create!(countryGenerate(max_neighbors))
+    new_country_made.states.create!(
+      stateGenerate(max_neighbors, new_country_made["country_id"]))
+    make_neighbors(new_country_made, max_neighbors)
+  rescue Exception=>e
+    puts "Error with Loop #: #{u}, Message is: #{e.message}"
+  else
+    
   end
+  
 end
 
 puts "Created #{Player.count} players"

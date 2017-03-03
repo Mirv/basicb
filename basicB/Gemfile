@@ -37,6 +37,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'faker'
 
+  gem 'hihi'
+
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too
 end
 
