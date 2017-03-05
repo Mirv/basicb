@@ -1,0 +1,11 @@
+%table{:class => "table table-striped table-hover"}
+  %thead
+    %tr
+      %th Screen Name
+      %th Motto
+      %th Country
+      // %th Country
+      %th
+      %th
+      %th
+    = render partial: 'shared/table_data', locals: { list: @players }

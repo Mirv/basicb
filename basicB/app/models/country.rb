@@ -6,6 +6,7 @@ class Country < ApplicationRecord
   
   has_many  :states
   has_many  :counties, through: :state
+  
   belongs_to  :player
   belongs_to  :campcount
   

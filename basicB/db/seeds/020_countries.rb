@@ -1,3 +1,4 @@
+require 'filler.rb'
 #
 ### Interfaces with faker api to get random data, returning a hash
 ## Pending improvements, take optional params of hash index's & apply rules

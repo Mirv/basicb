@@ -6,14 +6,15 @@ class CampaignsController < ApplicationController
   # GET /campaigns
   # GET /campaigns.json
   def index
-    @campaigns = Campaign.all
+    @campaigns = Campaign.paginate(page: params[:page])
   end
 
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
-    @ccountries = @campaign.campcounts
-    @pplayers = @campaign.campplays
+    #@posts = Post.paginate(page: params[:page], per_page: 15).order('created_at DESC')
+    @ccountries = @campaign.campcounts.paginate(page: params[:page], per_page: 5)
+    @pplayers = @campaign.players.paginate(page: params[:page], per_page: 5)
   end
 
   # GET /campaigns/new

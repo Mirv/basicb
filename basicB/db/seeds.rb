@@ -50,11 +50,12 @@ end
     new_player_made = new_user_made.players.create!(makePlayerInfo)
     neighbor = Campplay.create!(player_id: new_player_made["id"], campaign_id: 1)
     new_country_made = new_player_made.countries.create!(countryGenerate(max_neighbors))
+    neighbor = Campcount.create!(country_id: new_country_made["id"], campaign_id: 1)
     new_country_made.states.create!(
       stateGenerate(max_neighbors, new_country_made["country_id"]))
     make_neighbors(new_country_made, max_neighbors)
   rescue Exception=>e
-    puts "Error with Loop #: #{u}, Message is: #{e.message}"
+    puts "Error with User>Player.Neighobr>Country ownership chain Loop #: #{u}, Message is: #{e.message}"
   else
     
   end
@@ -66,3 +67,6 @@ puts "Create #{User.count} users..."
 puts "Created #{Country.count} countries..."
 puts "Created #{Neighborhood.count} neighbors..."
 
+
+
+  

@@ -1,0 +1,10 @@
+- list.each do |player|
+  .list-group-item.my-well.nested-player
+    = player.screenname
+    = player.motto
+    = player.country_id
+    // %td= player.country_name
+    = link_to 'Show', player, :class => "btn btn-default btn-xs" 
+    = link_to 'Edit', edit_player_path(player), :class => "btn btn-default btn-xs" 
+    = link_to 'Destroy', player, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-default btn-xs" 
+
