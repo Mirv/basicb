@@ -1,0 +1,27 @@
+%h1 Listing dashes
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th User
+      %th Dashcampaigns
+      %th Dashplayers
+      %th
+      %th
+      %th
+
+  %tbody
+    - @dashes.each do |dash|
+      %tr
+        %td= dash.name
+        %td= dash.user
+        %td= dash.dashcampaigns
+        %td= dash.dashplayers
+        %td= link_to 'Show', dash
+        %td= link_to 'Edit', edit_dash_path(dash)
+        %td= link_to 'Destroy', dash, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Dash', new_dash_path

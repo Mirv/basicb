@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227220330) do
+ActiveRecord::Schema.define(version: 20170305225022) do
 
   create_table "Countries", force: :cascade do |t|
     t.string   "name"
@@ -54,6 +54,36 @@ ActiveRecord::Schema.define(version: 20170227220330) do
     t.integer  "state_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "dashcampaigns", force: :cascade do |t|
+    t.integer  "dash_id"
+    t.integer  "campaign_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["campaign_id"], name: "index_dashcampaigns_on_campaign_id"
+    t.index ["dash_id"], name: "index_dashcampaigns_on_dash_id"
+  end
+
+  create_table "dashes", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "dashcampaigns_id"
+    t.integer  "dashplayers_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["dashcampaigns_id"], name: "index_dashes_on_dashcampaigns_id"
+    t.index ["dashplayers_id"], name: "index_dashes_on_dashplayers_id"
+    t.index ["user_id"], name: "index_dashes_on_user_id"
+  end
+
+  create_table "dashplayers", force: :cascade do |t|
+    t.integer  "dash_id"
+    t.integer  "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dash_id"], name: "index_dashplayers_on_dash_id"
+    t.index ["player_id"], name: "index_dashplayers_on_player_id"
   end
 
   create_table "neighborhoods", force: :cascade do |t|

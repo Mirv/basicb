@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @dash.name
+%p
+  %b User:
+  = @dash.user
+%p
+  %b Dashcampaigns:
+  = @dash.dashcampaigns
+%p
+  %b Dashplayers:
+  = @dash.dashplayers
+
+= link_to 'Edit', edit_dash_path(@dash)
+\|
+= link_to 'Back', dashes_path
