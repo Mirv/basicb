@@ -1,10 +1,13 @@
 class DashesController < ApplicationController
   before_action :set_dash, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /dashes
   # GET /dashes.json
+    
   def index
     @dashes = Dash.all
+    @user_dash = @user.dash
   end
 
   # GET /dashes/1
@@ -65,6 +68,10 @@ class DashesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_dash
       @dash = Dash.find(params[:id])
+    end
+    
+    def set_user
+      @user = current_user
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

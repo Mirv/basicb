@@ -12,5 +12,7 @@ class User < ApplicationRecord
   has_many  :usercamps
   has_many  :campaigns, through: :usercamps
   
+  has_one  :dash
+  
 end
 
