@@ -15,9 +15,9 @@
     - @dashes.each do |dash|
       %tr
         %td= dash.name
-        %td= dash.user
-        %td= dash.dashcampaigns
-        %td= dash.dashplayers
+        %td= dash.user.id
+        %td= dash.dashcampaigns.name
+        %td= dash.dashplayers.name
         %td= link_to 'Show', dash
         %td= link_to 'Edit', edit_dash_path(dash)
         %td= link_to 'Destroy', dash, :method => :delete, :data => { :confirm => 'Are you sure?' }

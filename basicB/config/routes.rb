@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  get 'dash', to: :show, controller: 'dash'
+  # get 'profile', to: :show, controller: 'users'
+  # get 'profile', to: :show, controller: 'users'
+  # get 'index', to: :show, controller: 'dashes'
+  
+  # get 'profile', to: 'users#show'
+  get 'dash', to: 'dashes#show'
+  
   resources :dashes
   resources :campaigns
   resources :players

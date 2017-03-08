@@ -19,17 +19,21 @@
             %span.caret
           %ul.dropdown-menu{:role => "menu"}
             %li
-              %a{:href => "/users/edit"} Edit Profile
-            %li
               = link_to "Neighborhoods", :neighborhoods
+            %li.divider
             %li
-              %a{:href => "#"} Something else here
+              %a{:href => "#"} Switch campaign
             %li.divider
             %li
               %a{:href => "#"} Switch character
             %li.divider
             %li
-              = link_to "Logout", destroy_user_session_path, method: :delete
+              %a{:href => "/users/edit"} Edit Profile
+            %li
+              - if current_user 
+                = link_to "Logout", destroy_user_session_path, method: :delete
+              - else
+                = link_to "Login", '/users/sign_in'
       %form.navbar-form.navbar-left{:role => "search"}
         .form-group
           %input.form-control{:placeholder => "Search", :type => "text"}/
