@@ -83,24 +83,12 @@ class Randomiz < RecordTools
     num = size * modifier
     num = ran(num)
 
-      
     msg = "#{msg}, the #{num}#{@ending} of their name."
   return msg
 end
 
-  def ordinalize(num)
-    @ending = "th"
-    
-    case num
-    when 1
-      @ending = 'st'
-    when 2
-      @ending = 'nd'
-    when 3
-      @ending = 'rd'
-    end
-    
-    return @ending
+  def end_num(num)
+    ordinalize(num)
   end
 
 end
