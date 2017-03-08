@@ -46,18 +46,21 @@ class RecordTools
   def getFields
     @fields
   end
-  
-  #
-  # Takes an object (with an ID) & count
-  # Spits out random id number > 0 & != original object id number
-  #
-
- 
 end
 
 class Randomiz < RecordTools
   
-  @size = 20 
+  def max_value
+    @size = 20
+  end
+  
+  def half_value
+    return @size / 2
+  end
+  
+  def set_max(value)
+    @size = value
+  end
 
   # No zero's assigned
   def ran(number)
@@ -82,10 +85,9 @@ class Randomiz < RecordTools
   def suffix_num(msg, size, modifier=1)
     num = size * modifier
     num = ran(num)
-
     msg = "#{msg}, the #{num}#{@ending} of their name."
   return msg
-end
+  end
 
   def end_num(num)
     ordinalize(num)
