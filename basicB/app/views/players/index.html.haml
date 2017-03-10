@@ -8,7 +8,8 @@
 - if @players
   //= render @feed_items
   .list-group
-    = render partial: 'shared/player_list', locals: { list: @players.paginate(page: params[:page], per_page: 5) }
+    = render partial: 'shared/player_list', locals: { list: @players }
+    //= render partial: 'shared/player_list', locals: { list: @players.paginate(page: params[:page], per_page: 5) }
     = will_paginate @players
 - else
   No players found

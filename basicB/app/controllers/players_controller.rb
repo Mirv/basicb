@@ -5,7 +5,7 @@ class PlayersController < ApplicationController
   # GET /players.json
 
   def index
-    @players = Player.paginate(page: params[:page], per_page: 15)
+    @players = Player.paginate(page: params[:page], per_page: 10)
     # User who to reference when retrieving players
     @user = User.find(current_user.id)
     # Show all players belonging to the user in question
