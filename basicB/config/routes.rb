@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/registrations_controller.rb' }
   # get 'profile', to: :show, controller: 'users'
   # get 'profile', to: :show, controller: 'users'
   # get 'index', to: :show, controller: 'dashes'
