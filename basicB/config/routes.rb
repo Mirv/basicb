@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  devise_for :users, controllers: { sessions: 'users/registrations_controller.rb' }
+  #devise_for :users, controllers: { sessions: {url: 'users/pink_elephants_controller.rb'} }
+  devise_for :users, controllers: { sessions: 'users/registrations' }
   # get 'profile', to: :show, controller: 'users'
   # get 'profile', to: :show, controller: 'users'
   # get 'index', to: :show, controller: 'dashes'
