@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_save :initializeDash
+  after_commit :initializeDash
   
   
   # Include default devise modules. Others available are:
@@ -20,6 +20,7 @@ class User < ApplicationRecord
   private
     def initializeDash
        puts "Boom shakalakah" 
+       Dash.create(user_id: self.id)
     end
   
 end
