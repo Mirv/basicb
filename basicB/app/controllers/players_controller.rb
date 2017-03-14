@@ -1,5 +1,6 @@
 class PlayersController < ApplicationController
   before_action :set_player, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /players
   # GET /players.json
@@ -7,7 +8,7 @@ class PlayersController < ApplicationController
   def index
     @players = Player.paginate(page: params[:page], per_page: 10)
     # User who to reference when retrieving players
-    @user = User.find(current_user.id)
+    # @user = User.find(current_user.id)
     # Show all players belonging to the user in question
     @user_players = @user.players
   end
@@ -70,6 +71,10 @@ class PlayersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_player
       @player = Player.find(params[:id])
+    end
+    
+    def set_user
+      @user = User.find(current_user.id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
