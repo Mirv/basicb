@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :players
   resources :countries
   
-  # get 'dash', to: 'dashes#show'
+  get 'dash', to: 'dashes#show'
   
   root "campaigns#index" 
   
