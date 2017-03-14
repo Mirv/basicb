@@ -12,6 +12,7 @@ class DashesController < ApplicationController
   # GET /dashes/1
   # GET /dashes/1.json
   def show
+    @dash = set_dash
   end
 
   # GET /dashes/new

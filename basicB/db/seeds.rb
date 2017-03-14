@@ -1,3 +1,5 @@
+# ----- Note:  You must comment out any activerecord callbacks which insert or you'll get dupes...ie: user.rb has one
+
 #### Grab all .rb files in the root/db/seeds directory ####
 Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
 
@@ -28,10 +30,11 @@ end
 #
 
 default_user = makeDefaultUser 1, "a@test.com"
-campaign = campaign_create default_user
+userdashes = userDash default_user
+campaign = campaign_create userdashes
 
 puts "Campaign: #{campaign["name"]}"
-newer_player = default_user.players.create!(makePlayerInfo)
+newer_player = userdashes.players.create!(makePlayerInfo)
 puts "First player: #{newer_player["screenname"]}"
 
 #
@@ -39,11 +42,12 @@ puts "First player: #{newer_player["screenname"]}"
 #
 
 another_user = makeDefaultUser 2, "b@test.com"
-campaign = campaign_create another_user
+userdashes = userDash another_user
+campaign = campaign_create userdashes
 
 puts "Campaign: #{campaign["name"]}"
 newer_player = another_user.players.create!(makePlayerInfo)
-puts "First player: #{newer_player["screenname"]}"
+puts "Second player: #{newer_player["screenname"]}"
 
 # Make a player in the campaign
   # puts "Campaign: #{first_campaign["name"]}"
@@ -54,6 +58,7 @@ puts "First player: #{newer_player["screenname"]}"
 #
 ### Generate a limited number of users, then make them players
 #
+puts "filling campaigns ... \n"
 fillCampaign 1
 fillCampaign 2
 

@@ -1,3 +1,9 @@
+def userDash(user)
+  name = Faker::Cat.name
+  userdash = Dash.create!(name: name, user_id: user.id)
+  return userdash
+end
+
 
 def campaign_create(owner)
   # Make a campaign owned by a user
@@ -14,7 +20,8 @@ def fillCampaign(campaign)
     begin
       cur_user_details = makeUserInfo(u) 
       new_user_made = User.create!(cur_user_details)
-      new_player_made = new_user_made.players.create!(makePlayerInfo)
+      user_dash_made = userDash new_user_made
+      new_player_made = user_dash_made.players.create!(makePlayerInfo)
       neighbor = Campplay.create!(
           player_id: new_player_made["id"], campaign_id: campaign)
       new_country_made = new_player_made.countries.create!(
@@ -25,7 +32,7 @@ def fillCampaign(campaign)
         stateGenerate(max_neighbors, new_country_made["country_id"]))
       make_neighbors(new_country_made, max_neighbors)
     rescue Exception=>e
-      puts "Error with User>Player.Neighobr>Country ownership chain Loop #: #{u}, 
+      puts "Error with User>Player.Neighbor>Country ownership chain Loop #: #{u}, 
         Message is: #{e.message}"
     else
     end
@@ -77,8 +84,8 @@ def makeUserInfo(u)
   random = rand(u)
   name = Faker::Cat.name
   email = "The#{name}#{u}#{random}@test.com"
-  password = "aaaaaa"
-  password_confirmation = "aaaaaa"
+  password = "ssssss"
+  password_confirmation = password
   
   # load to hash .... can this be done more efficiently & keep ease of reading?
   hold = hold.merge({"name" =>  name})

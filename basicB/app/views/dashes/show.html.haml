@@ -8,7 +8,16 @@
   = @dash.user_id
 %p
   %b Dashcampaigns:
-  = @dash.dashcampaigns
+  = @dash.dashcampaigns.name
+%p
+  %b Dashcampaigns: 
+  %ul
+  - if @dash.campaigns.count > 0 then
+    - @dash.campaigns.each do |x|
+      %li= x.id
+      %li= x.name
+  - else
+    Nothing to see here
 %p
   %b Dashplayers:
   = @dash.dashplayers
