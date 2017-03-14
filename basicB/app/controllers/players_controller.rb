@@ -7,8 +7,6 @@ class PlayersController < ApplicationController
 
   def index
     @players = Player.paginate(page: params[:page], per_page: 10)
-    # User who to reference when retrieving players
-    # @user = User.find(current_user.id)
     # Show all players belonging to the user in question
     @user_players = @user.players
   end

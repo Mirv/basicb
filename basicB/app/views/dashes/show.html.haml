@@ -7,20 +7,23 @@
   %b User:
   = @dash.user_id
 %p
-  %b Dashcampaigns:
-  = @dash.dashcampaigns.name
-%p
-  %b Dashcampaigns: 
-  %ul
+%b Campaigns I run ... (Dashcampaigns):
+%ul
   - if @dash.campaigns.count > 0 then
     - @dash.campaigns.each do |x|
       %li= x.id
       %li= x.name
   - else
-    Nothing to see here
+    Campaigns to see here
 %p
-  %b Dashplayers:
-  = @dash.dashplayers
+  %b Characters to play ... (dashplayers):
+%ul  
+  - if @dash.dashplayers.count > 0 then
+    - @dash.dashplayers.each do |x|
+      %li= x.id
+      %li= x.name
+  - else
+    No players to see here  
 
 = link_to 'Edit', edit_dash_path(@dash)
 \|
