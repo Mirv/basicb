@@ -1,4 +1,5 @@
 class Player < ApplicationRecord
+  
   has_many  :countries
   
   # reverse of campaigns owning players

@@ -59,6 +59,7 @@ puts "Second player: #{newer_player["screenname"]}"
 ### Generate a limited number of users, then make them players
 #
 puts "filling campaigns ... \n"
+
 fillCampaign 1
 fillCampaign 2
 
