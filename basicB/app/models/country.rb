@@ -7,7 +7,9 @@ class Country < ApplicationRecord
   has_many  :states
   has_many  :counties, through: :state
   
-  belongs_to  :player
+  has_many  :playercountries
+  has_many  :players, through: :playercountries
+  
   belongs_to  :campcount
   
   validates :name, presence: true, uniqueness: true
