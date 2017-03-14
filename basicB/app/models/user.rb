@@ -18,7 +18,6 @@ class User < ApplicationRecord
   
   private
     def initializeDash
-       puts "Boom shakalakah" 
        Dash.create(user_id: self.id)
     end
   
