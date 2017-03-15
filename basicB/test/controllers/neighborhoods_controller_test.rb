@@ -1,44 +1,52 @@
 require "test_helper"
 
-describe NeighborhoodsController do
-  let(:neighborhood) { neighborhoods :one }
+class CountriesControllerTest < ActionDispatch::IntegrationTest
+    include Devise::Test::IntegrationHelpers
 
-  it "gets index" do
+
+#describe NeighborhoodsController do
+ # let(:neighborhood) { neighborhoods :one }
+ 
+  setup do
+    sign_in users(:validuser)
+    @neighborhood = neighborhoods(:one)
+  end
+  
+  test "should get index" do
     get neighborhoods_url
-    value(response).must_be :success?
+    assert_response :success
   end
 
-  it "gets new" do
+  test "should get new" do
     get new_neighborhood_url
-    value(response).must_be :success?
+    assert_response :success
+  end
+  
+  test "should create Neighborhood" do
+    assert_difference('Neighborhood.count') do
+      post neighborhoods_url, params: { neighborhood: { neighbor_id: '1', target_id: '2' }  }
+    end
+   assert_redirected_to neighborhood_url(Neighborhood.last)
   end
 
-  it "creates neighborhood" do
-    expect {
-      post neighborhoods_url, params: { neighborhood: { neighbor_id: neighborhood.neighbor_id, target_id: neighborhood.target_id } }
-    }.must_change "Neighborhood.count"
-
-    must_redirect_to neighborhood_path(Neighborhood.last)
+  test "should show neighborhood" do
+    get neighborhoods_url(@neighborhood)
+    assert_response :success
   end
 
-  it "shows neighborhood" do
-    get neighborhood_url(neighborhood)
-    value(response).must_be :success?
+  test "should get edit" do
+    get edit_neighborhood_path(@neighborhood)
+    assert_response :success
   end
 
-  it "gets edit" do
-    get edit_neighborhood_url(neighborhood)
-    value(response).must_be :success?
-  end
-
-  it "updates neighborhood" do
-    patch neighborhood_url(neighborhood), params: { neighborhood: { neighbor_id: neighborhood.neighbor_id, target_id: neighborhood.target_id } }
-    must_redirect_to neighborhood_path(neighborhood)
+  test "should update neighborhood" do
+    patch neighborhood_url(@neighborhood), params: { neighborhood: { neighbor_id: '1', target_id: '2' } }
+    assert_response :redirect
   end
 
   it "destroys neighborhood" do
     expect {
-      delete neighborhood_url(neighborhood)
+      delete neighborhood_url(@neighborhood)
     }.must_change "Neighborhood.count", -1
 
     must_redirect_to neighborhoods_path
