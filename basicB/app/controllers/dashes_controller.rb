@@ -72,6 +72,6 @@ class DashesController < ApplicationController
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def dash_params
-      params.require(:dash).permit(:name, :user_id, :dashcampaigns_id, :dashplayers_id)
+      params.require(:dash).permit(:id, :name, :user_id, :dashcampaigns_id, :dashplayers_id)
     end
 end

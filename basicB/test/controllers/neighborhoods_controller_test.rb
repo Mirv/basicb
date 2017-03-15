@@ -12,12 +12,12 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     @neighborhood = neighborhoods(:one)
   end
   
-  test "should get index" do
+  test "should get neighborhoods index" do
     get neighborhoods_url
     assert_response :success
   end
 
-  test "should get new" do
+  test "should get neighborhoods new" do
     get new_neighborhood_url
     assert_response :success
   end
@@ -34,7 +34,7 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should get neighborhoods edit" do
     get edit_neighborhood_path(@neighborhood)
     assert_response :success
   end
