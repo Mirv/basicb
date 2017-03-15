@@ -7,6 +7,7 @@ class Campaignplaying_Test < ActionDispatch::IntegrationTest
   
   def setup
     @validuser = users(:validuser)
+    sign_in users(:validuser)
     #need to test campaign creation
     #need to test campaign's country creation
     # @micropost = @validuser.microposts.build(content: "Lorem ipsum")
@@ -28,7 +29,6 @@ class Campaignplaying_Test < ActionDispatch::IntegrationTest
   end
   
   test "can create a campaign" do
-    
     # ensure we can get to the campaign page
     sign_in users(:validuser)
     get "/campaigns/new"
@@ -49,8 +49,7 @@ class Campaignplaying_Test < ActionDispatch::IntegrationTest
     assert_match post_title, response.body
   end
   
-    test "user can create a player" do
-    
+  test "user can create a player" do
     # ensure we can get to the campaign page
     sign_in users(:validuser)
     get "/campaigns/new"

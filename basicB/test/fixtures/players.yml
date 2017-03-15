@@ -3,9 +3,9 @@
 one:
   screenname: MyString
   motto: MyString
-  country_id: one
+  # country_id: one
 
 two:
   screenname: MyString
   motto: MyString
-  country_id: two
+  # country_id: two

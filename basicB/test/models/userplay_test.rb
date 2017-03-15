@@ -5,7 +5,7 @@ require 'test_helper'
 # might just be common name issue though
 class Userplays < ActiveSupport::TestCase
   def setup
-    @campaignPlayerCombo = Userplay.new(campaign_id: "1", player_id: "1", user_id: "1")
+    @campaignPlayerCombo = Userplay.new(player_id: "1", user_id: "1")
   end
 
   test 'valid player & campaign' do

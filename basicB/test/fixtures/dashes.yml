@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  user: one
-  dashcampaigns: one
-  dashplayers: one
+# one:
+#   name: MyString
+#   user: one
+#   dashcampaigns_id: one
+#   dashplayers_id: one
 
-two:
-  name: MyString
-  user: two
-  dashcampaigns: two
-  dashplayers: two
+# two:
+#   name: MyString
+#   user: two
+#   dashcampaigns_id: two
+#   dashplayers_id: two

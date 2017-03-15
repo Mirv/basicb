@@ -2,7 +2,6 @@ class CampaignsController < ApplicationController
   before_action :set_campaign, only: [:show, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index]
 
-
   # GET /campaigns
   # GET /campaigns.json
   def index
@@ -18,6 +17,7 @@ class CampaignsController < ApplicationController
   end
 
   # GET /campaigns/new
+  #test
   def new
     @campaign = Campaign.new
   end

@@ -1,6 +1,8 @@
 require "test_helper"
 
+
 describe DashesController do
+  
   let(:dash) { dashes :one }
 
   it "gets index" do
