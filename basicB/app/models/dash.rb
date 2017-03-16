@@ -1,5 +1,6 @@
 class Dash < ApplicationRecord
-  belongs_to :user
+  has_many  :userdashes
+  has_many  :users, through: :userdashes
   
   # campaigns I run
   has_many :dashcampaigns

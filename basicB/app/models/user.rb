@@ -14,7 +14,8 @@ class User < ApplicationRecord
   has_many  :usercamps
   has_many  :campaigns, through: :usercamps
   
-  has_one  :dash
+  has_many  :userdashes
+  has_many  :dashes, through: :userdashes
   
   private
     def initializeDash

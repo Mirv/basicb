@@ -4,7 +4,7 @@ class DashesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
   
   setup do
-    @dash = Dash.create!(user_id: "1", name: "Steve")
+    @dash = Dash.create!(name: "Steve")
     sign_in users(:validuser)
   end
 
@@ -22,7 +22,7 @@ class DashesControllerTest < ActionDispatch::IntegrationTest
 
   it "creates dash" do
     expect {
-      post dashes_url, params: { dash: { name: @dash.name, user_id: @dash.user_id } }
+      post dashes_url, params: { dash: { name: @dash.name } }
     }.must_change "Dash.count"
 
     must_redirect_to dash_path(Dash.last)
@@ -34,7 +34,7 @@ class DashesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "gets dash edit" do
-    get edit_dash_path(@dash)
+    get edit_dash_url(@dash)
     assert_response :success
   end
   
@@ -48,9 +48,10 @@ class DashesControllerTest < ActionDispatch::IntegrationTest
 ## => Apparantley this is a NIL issue or empty something somewhere
 ##
 ##
+#   patch dash_url(@dash), params: { dash: { dashcampaigns_id: @dash.dashcampaigns_id, dashplayers_id: @dash.dashplayers_id, name: @dash.name, user_id: @dash.user_id } }
+
   it "updates dash" do
- #   patch dash_url(@dash), params: { dash: { dashcampaigns_id: @dash.dashcampaigns_id, dashplayers_id: @dash.dashplayers_id, name: @dash.name, user_id: @dash.user_id } }
-    patch dash_url(@dash), params: { dash: { user_id: "1" } }
+    patch dash_url(@dash), params: { dash: { name: "NameMe" } }
     assert_response :redirect
   end
 

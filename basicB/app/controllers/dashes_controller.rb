@@ -67,8 +67,9 @@ class DashesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dash
-      @dash = Dash.find_by(user_id: current_user.id)
+      @dash = Dash.find(params[:id])
     end
+
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def dash_params
