@@ -7,6 +7,8 @@ class DashesController < ApplicationController
   def index
     @dashes_list = Dash.paginate(page: params[:page], per_page: 10)
     @my_dash = set_dash_via_cr
+    # @dash_playing = @my_dash.players
+    # @dash_hosting = @my_dash.campaigns
   end
 
   # GET /dashes/1

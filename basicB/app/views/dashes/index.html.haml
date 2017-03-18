@@ -1,7 +1,12 @@
 %h1 Listing Dashboards
 
 %h3 My dash
-= @my_dash.first.name
+= @my_dash.first
+%ul
+ %li Campaigns I run
+ = render partial: 'dash_campaigns'
+ %li Games I am playing
+ = render partial: 'dash_players'
 
 %h3 All dashes
 
