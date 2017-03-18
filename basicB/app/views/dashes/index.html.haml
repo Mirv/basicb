@@ -1,11 +1,11 @@
-%h1 Listing dashes
+%h1 Listing Dashboards
 
-= render partial: 'list_dashes', locals: { list: @dashes_list }
-
-List
+%h3 My dash
 = @my_dash.first.name
 
+%h3 All dashes
 
+= render partial: 'list_dashes', locals: { list: @dashes_list }
 
 %br
 
