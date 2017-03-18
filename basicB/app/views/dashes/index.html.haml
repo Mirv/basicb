@@ -1,5 +1,8 @@
 %h1 Listing dashes
 
+List
+= @dash_user
+
 %table
   %thead
     %tr
@@ -12,7 +15,7 @@
       %th
 
   %tbody
-    - @dashes.each do |dash|
+    - @dashes_list.each do |dash|
       %tr
         %td= dash.name
         // %td= dash.user_id
@@ -21,6 +24,7 @@
         %td= link_to 'Show', dash
         %td= link_to 'Edit', edit_dash_path(dash)
         %td= link_to 'Destroy', dash, :method => :delete, :data => { :confirm => 'Are you sure?' }
+= will_paginate @dashes_list
 
 %br
 

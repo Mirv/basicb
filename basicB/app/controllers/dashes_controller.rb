@@ -5,14 +5,16 @@ class DashesController < ApplicationController
   # GET /dashes.json
     
   def index
-    @dashes = Dash.all
+    @dashes_list = Dash.paginate(page: params[:page], per_page: 10)
+#    @x = set_dash
+    
+  #  @user_dash = @ui.dashes
     # @user_dash = @user.dash
   end
 
   # GET /dashes/1
   # GET /dashes/1.json
   def show
-    @dash = set_dash
   end
 
   # GET /dashes/new
@@ -67,9 +69,17 @@ class DashesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_dash
+    #  byebug
       @dash = Dash.find(params[:id])
-    end
+     # byebug
 
+      @dash_user = set_ident.dashes
+      byebug
+    end
+    
+    def set_ident
+      @user_ident = User.find(current_user.id)
+    end    
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def dash_params

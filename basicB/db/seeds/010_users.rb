@@ -1,6 +1,6 @@
 def userDash(user)
   name = Faker::Cat.name
-  userdash = Dash.create!(name: name, user_id: user.id)
+  userdash = Dash.create!(name: name)
   return userdash
 end
 

@@ -1,27 +1,30 @@
 %p#notice= notice
-
+%ul
+  %li= @dash.id
+  %li= dashes_path
+  %li 
+    Dashboard:
+    = dashboard_path
 %p
   %b Name:
   = @dash.name
 %p
   %b User:
-  = @dash.user_id
+  = @dash.name
 %p
-%b Campaigns I run ... (Dashcampaigns):
+%b Campaigns I run ... (dashcampaigns):
 %ul
   - if @dash.campaigns.count > 0 then
     - @dash.campaigns.each do |x|
-      %li= x.id
       %li= x.name
   - else
     Campaigns to see here
 %p
   %b Characters to play ... (dashplayers):
 %ul  
-  - if @dash.dashplayers.count > 0 then
-    - @dash.dashplayers.each do |x|
-      %li= x.id
-      %li= x.name
+  - if @dash.players.count > 0 then
+    - @dash.players.each do |x|
+      %li= x.screenname
   - else
     No players to see here  
 
