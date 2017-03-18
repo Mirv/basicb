@@ -19,11 +19,6 @@ class User < ApplicationRecord
   
   private
     def initializeDash
-      #
-      #
-      # add in ownership chain make
-      #
-      #
        self.dashes.create!(name: self.id)
     end
   

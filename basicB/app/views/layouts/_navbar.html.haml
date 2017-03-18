@@ -13,33 +13,7 @@
           = link_to "Neighborhoods", :neighborhoods
         %li
           = link_to "Countries", :countries
-        %li.dropdown
-          %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-            User Navigation
-            %span.caret
-          %ul.dropdown-menu{:role => "menu"}
-            %li
-              - if user_signed_in? 
-                = link_to 'Edit Profile', '/users/edit'
-              - else
-                = link_to 'Register', new_user_registration_path
-            %li
-              - if user_signed_in? 
-                = link_to "Logout", destroy_user_session_path, method: :delete
-              - else
-                = link_to "Login", '/users/sign_in'
-            %li.divider
-            %li
-              = link_to 'Dashboard', "#"
-            %li
-              %a{:href => "/campaigns"} Switch campaign
-            %li.divider
-            %li
-              %a{:href => "#"} Switch character
-            %li
-              = link_to "Neighborhoods", :neighborhoods
-
-
+        = render partial: 'layouts/navbar_dropdown'
       %form.navbar-form.navbar-left{:role => "search"}
         .form-group
           %input.form-control{:placeholder => "Search", :type => "text"}/
