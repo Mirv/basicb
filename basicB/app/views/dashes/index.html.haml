@@ -1,30 +1,11 @@
 %h1 Listing dashes
 
+= render partial: 'list_dashes', locals: { list: @dashes_list }
+
 List
 = @my_dash.first.name
 
-%table
-  %thead
-    %tr
-      %th Name
-      %th User
-      %th Dashcampaigns
-      %th Dashplayers
-      %th
-      %th
-      %th
 
-  %tbody
-    - @dashes_list.each do |dash|
-      %tr
-        %td= dash.name
-        // %td= dash.user_id
-        %td= dash.dashcampaigns.name
-        %td= dash.dashplayers.name
-        %td= link_to 'Show', dash
-        %td= link_to 'Edit', edit_dash_path(dash)
-        %td= link_to 'Destroy', dash, :method => :delete, :data => { :confirm => 'Are you sure?' }
-= will_paginate @dashes_list
 
 %br
 
