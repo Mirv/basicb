@@ -6,10 +6,7 @@ class DashesController < ApplicationController
     
   def index
     @dashes_list = Dash.paginate(page: params[:page], per_page: 10)
-#    @x = set_dash
-    
-  #  @user_dash = @ui.dashes
-    # @user_dash = @user.dash
+    @my_dash = set_dash_via_cr
   end
 
   # GET /dashes/1
@@ -73,13 +70,13 @@ class DashesController < ApplicationController
       @dash = Dash.find(params[:id])
      # byebug
 
-      @dash_user = set_ident.dashes
       byebug
     end
     
-    def set_ident
+    def set_dash_via_cr
       @user_ident = User.find(current_user.id)
-    end    
+      @dash_user = @user_ident.dashes
+    end
     
     # Never trust parameters from the scary internet, only allow the white list through.
     def dash_params
