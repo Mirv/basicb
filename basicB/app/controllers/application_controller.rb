@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+
   
     # strong_param permits
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -24,6 +26,11 @@ class ApplicationController < ActionController::Base
     end
   
   private
+    #protect from no ID in params
+    def record_not_found
+      redirect_to :back
+    end
+  
     # override the devise helper to store the current location so we can
     # redirect to it after loggin in or out. This override makes signing in
     # and signing up work automatically.
