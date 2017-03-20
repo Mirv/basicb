@@ -1,17 +1,17 @@
 %h1 Listing Dashboards
 
-%h3 My dash
-= @my_dash.first
-%ul
- %li Campaigns I run
- = render partial: 'dash_campaigns'
- %li Games I am playing
- = render partial: 'dash_players'
+= greet_user_message(@my_dash.name, @user_ident.last_sign_in_at)
 
+%h2 My dash: #{@my_dash.name}
+
+%h3 Campaigns I run
+= render partial: 'dash_campaigns'
+
+%h3 Characters I am playing
+= render partial: 'dash_players'
+ 
 %h3 All dashes
-
 = render partial: 'list_dashes', locals: { list: @dashes_list }
 
 %br
-
 = link_to 'New Dash', new_dash_path

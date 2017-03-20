@@ -1,45 +1,3 @@
-def userDash(user)
-  name = Faker::Cat.name
-  userdash = Dash.create!(name: name)
-  return userdash
-end
-
-
-def campaign_create(owner)
-  # Make a campaign owned by a user
-  name = "#{owner.name}'s campaign"
-  description = "At start..."
-  first_campaign = owner.campaigns.create!(
-      name: name, 
-      description: description)
-  return first_campaign
-end
-
-def fillCampaign(campaign)
-  (noun_count).times do | u | 
-    begin
-      cur_user_details = makeUserInfo(u) 
-      new_user_made = User.create!(cur_user_details)
-      user_dash_made = userDash new_user_made
-      new_player_made = user_dash_made.players.create!(makePlayerInfo)
-      neighbor = Campplay.create!(
-          player_id: new_player_made["id"], campaign_id: campaign)
-      new_country_made = new_player_made.countries.create!(
-        countryGenerate(max_neighbors))
-      neighbor = Campcount.create!(
-          country_id: new_country_made["id"], campaign_id: campaign)
-      new_country_made.states.create!(
-        stateGenerate(max_neighbors, new_country_made["country_id"]))
-      make_neighbors(new_country_made, max_neighbors)
-    rescue Exception=>e
-      puts "Error with User>Player.Neighbor>Country ownership chain Loop #: #{u}, 
-        Message is: #{e.message}"
-    else
-    end
-  end
-end
-
-
 # --- default user --- #
 
 def takeInfo(name, email, password, password_confirmation)
@@ -52,23 +10,6 @@ def takeInfo(name, email, password, password_confirmation)
   return new_user_make
 end
 
-#
-### Generate a default test user, then a campaign
-#
-## Pending - do we want this to be a sideeffect as that blocks reusability?
-#
-def makeDefaultUser(x, email)
-  unless User.find_by( email: email )
-    new_user_make = makeUserInfo(x)
-    new_user_make["email"] = email
-    new_user_made = User.create!(new_user_make)
-    return new_user_made
-  #
-  ## Stub here for a single campaign to generate
-  #
-  end
-#  new_player_made = new_user_made.players.create!(makePlayerInfo)
-end
 
 
 # --- spare users --- #
@@ -81,7 +22,10 @@ def makeUserInfo(u)
   hold = Hash.new
   
   # get the info and apply any data shaping
+  
+  u = u * 1000
   random = rand(u)
+
   name = Faker::Cat.name
   email = "The#{name}#{u}#{random}@test.com"
   password = "ssssss"
@@ -109,4 +53,22 @@ def makePlayerInfo
   
   hold = hold.merge({"screenname" =>  screenname})
   hold = hold.merge({"motto" =>  motto})
+end
+
+#
+### Generate a default test user, then a campaign
+#
+## Pending - do we want this to be a sideeffect as that blocks reusability?
+#
+def makeDefaultUser(x, email)
+  unless User.find_by( email: email )
+    new_user_make = makeUserInfo(x)
+    new_user_make["email"] = email
+    new_user_made = User.create!(new_user_make)
+    return new_user_made
+  #
+  ## Stub here for a single campaign to generate
+  #
+  end
+#  new_player_made = new_user_made.players.create!(makePlayerInfo)
 end

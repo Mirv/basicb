@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  after_create_commit :initializeDash
+ # after_create_commit :initializeDash
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
