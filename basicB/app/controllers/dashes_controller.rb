@@ -6,9 +6,9 @@ class DashesController < ApplicationController
     
   def index
     @dashes_list = Dash.paginate(page: params[:page], per_page: 10)
-    @my_dash = set_dash_via_cr
+    @my_dash = set_dash_via_cr(setUser)
     @dash_playing = @my_dash.players
-    @dash_hosting = @my_dash.campaigns.all
+    @dash_hosting = @my_dash.campaigns
   end
 
   # GET /dashes/1
@@ -73,9 +73,12 @@ class DashesController < ApplicationController
      # byebug
     end
 
-    def set_dash_via_cr
+    def setUser
       @user_ident = User.find(current_user.id)
-      @dash_user = Dash.find(@user_ident)
+    end
+
+    def set_dash_via_cr(user)
+      @dash_user = Dash.find(user)
     end
     
     # Never trust parameters from the scary internet, only allow the white list through.

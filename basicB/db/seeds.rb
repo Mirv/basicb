@@ -31,9 +31,10 @@ end
 
 default_user = makeDefaultUser 1, "a@test.com"
 userdashes = userDash default_user
-campaign = campaignCreate userdashes
 
+campaign = campaignCreate userdashes
 puts "Campaign: #{campaign["name"]}"
+
 newer_player = userdashes.players.create!(makePlayerInfo)
 puts "First player: #{newer_player["screenname"]}"
 
@@ -43,9 +44,10 @@ puts "First player: #{newer_player["screenname"]}"
 
 another_user = makeDefaultUser 2, "b@test.com"
 userdashes = userDash another_user
-campaign = campaignCreate userdashes
 
+campaign = campaignCreate userdashes
 puts "Campaign: #{campaign["name"]}"
+
 newer_player = another_user.players.create!(makePlayerInfo)
 puts "Second player: #{newer_player["screenname"]}"
 

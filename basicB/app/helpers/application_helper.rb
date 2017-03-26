@@ -9,11 +9,7 @@ module ApplicationHelper
     end
   end
   
-  def dashboard_path
-    the_id = 1 unless current_user.id
-    @d_pash = "/dashes/#{the_id}" 
-    return @d_pash
-  end
+
   
   #   def full_title(page_title = '')                     
   #   base_title = "Basic Borders" 

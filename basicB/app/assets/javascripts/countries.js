@@ -1,4 +1,4 @@
-$(document).on("ready", function() {
+$(document).on('turbolinks:load', function() {
     console.log("-- Page Load --");
   
   $(document).on('cocoon:before-insert', 'form', function(e,field_to_be_added) {

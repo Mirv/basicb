@@ -12,8 +12,8 @@ class RecordTools
   extend Filler
 
   def initialize 
-  @table = ""
-  @fields = Hash.new
+    @table = ""
+    @fields = Hash.new
   end
  
   # --- Table accessors --- #

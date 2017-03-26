@@ -286,7 +286,6 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails (~> 2.8.0)
-  minitest (~> 5.10, >= 5.10.1)
   minitest-color
   minitest-rails-capybara
   nokogiri

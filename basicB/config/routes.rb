@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   # get 'dash', to: 'dashes#show', :via => [:post], as: :dash  ## Original named route
 
   resources :dashes
-  resources :campaigns
+  resources :campaigns do
+    member do
+      get 'join'
+      get 'leave'
+    end
+  end
   resources :players
   resources :countries
 

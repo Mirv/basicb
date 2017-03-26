@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'countries/countries_controller.rb'
 
 class CountriesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers

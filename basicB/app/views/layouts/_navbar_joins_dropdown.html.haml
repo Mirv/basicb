@@ -1,25 +1,19 @@
 %li.dropdown
   %a.dropdown-toggle{"aria-expanded" => "false", "data-toggle" => "dropdown", :href => "#", :role => "button"}
-    User Navigation
+    Dev Stuff
     %span.caret
   %ul.dropdown-menu{:role => "menu"}
     %li
-      - if user_signed_in? 
-        = link_to 'Edit Profile', '/users/edit'
-      - else
-        = link_to 'Register', new_user_registration_path
+      = link_to 'Campaign', '/campaigns'
     %li
-      - if user_signed_in? 
-        = link_to "Logout", destroy_user_session_path, method: :delete
-      - else
-        = link_to "Login", '/users/sign_in'
+      = link_to "Neighborhoods", :neighborhoods      
+    %li
+      = link_to 'CampCount', '#'
     %li.divider
     %li
       = link_to 'Dashboard', "/dashes"
     %li
       %a{:href => "/campaigns"} Switch campaign
-    %li
-      = link_to "Campaigns List", "/campaigns"
     %li.divider
     %li
       %a{:href => "#"} Switch character

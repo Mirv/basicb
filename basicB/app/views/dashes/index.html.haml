@@ -5,9 +5,11 @@
 %h2 My dash: #{@my_dash.name}
 
 %h3 Campaigns I run
+= link_to 'Make New Campaign', new_campaign_path, :class => "btn btn-default btn-xs" 
 = render partial: 'dash_campaigns'
 
 %h3 Characters I am playing
+= link_to 'Join New Game', campaigns_path, :class => "btn btn-default btn-xs" 
 = render partial: 'dash_players'
  
 %h3 All dashes

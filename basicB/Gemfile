@@ -32,16 +32,17 @@ group :development, :test do
   gem 'simple_form'
   gem 'cocoon'
   gem 'nokogiri' # required for minitest-have_tag
-  gem 'minitest', '~> 5.10', '>= 5.10.1'
+  # minitest I put in previously
+  # gem 'minitest', '~> 5.10', '>= 5.10.1'
+  # this two are extras included in minitest-rails-capybara from earlier
+  # gem 'minitest-rails'
+  # gem 'minitest-capybara'
   gem 'minitest-color'
-  gem 'minitest-rails-capybara'
   gem 'guard', '~>2.14'
   gem 'guard-minitest'
   gem 'rails-controller-testing'
   gem 'faker'
-
   gem 'hihi'
-
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too
 end
 

@@ -9,8 +9,9 @@
           = link_to "Home", root_path
         %li
           = link_to "Players", :players
-        %li
-          = link_to "Neighborhoods", :neighborhoods
+        = render partial: 'layouts/navbar_joins_dropdown'
+        // %li
+        //   = link_to "Neighborhoods", :neighborhoods
         %li
           = link_to "Countries", :countries
         = render partial: 'layouts/navbar_dropdown'
