@@ -19,8 +19,8 @@ end
 class GameDsl
   extend DomainIdentities
 
-  def setUsers(user)
-    @user = user
+  def setDash
+    @dash = @user.userdash.first
   end
 
 end
