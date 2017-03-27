@@ -11,6 +11,7 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
+    #old - pre class
     #@posts = Post.paginate(page: params[:page], per_page: 15).order('created_at DESC')
     @ccountries = @campaign.campcounts.paginate(page: params[:page], per_page: 5)
     @pplayers = @campaign.players.paginate(page: params[:page], per_page: 5)
