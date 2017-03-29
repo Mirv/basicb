@@ -1,4 +1,5 @@
-= provide(:title, "Players")
+- the_title = "Players"
+= provide(:title, the_title)
 
 %h1 Your players
 .list-group
@@ -10,7 +11,7 @@
     
   - else
     .my-well
-      %li No players found.
+      %li No #{the_title} found.
 
 %br
 
@@ -26,7 +27,7 @@
     
   - else
   
-    %li No players found
+    %li No #{the_title} found.
 
 %br
 
