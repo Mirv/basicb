@@ -7,21 +7,18 @@
       %th Name
       %th Description
       %th
-      %th
-      %th
+
 
   %tbody
     - @campaigns.each do |campaign|
       %tr
         %td= campaign.name
         %td= campaign.description
-        .btn-group.btn-group-xs	
-          %td= link_to 'Show', campaign, :class => "btn btn-xs btn-default"
-          %td= link_to 'Edit', edit_campaign_path(campaign), :class => "btn btn-xs btn-default"
-          %td= link_to 'Destroy', campaign, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-xs btn-default"
+        // %td= link_to 'Show', [campaign], :class => "btn btn-xs btn-default"
+        %td= render partial: 'shared/interact_options', locals: { interact_item: campaign }
 
 %br
 
-= link_to 'New Campaign', new_campaign_path
+= link_to 'New Campaign', new_campaign_path, :class => "btn btn-md btn-default"
 
 

@@ -1,4 +1,5 @@
 class DashesController < ApplicationController
+  include DomainIdentities
   before_action :set_dash, only: [:show, :edit, :update, :destroy]
 
   # GET /dashes
@@ -6,7 +7,7 @@ class DashesController < ApplicationController
     
   def index
     @dashes_list = Dash.paginate(page: params[:page], per_page: 10)
-    @my_dash = set_dash_via_cr(setUser)
+    @my_dash = set_dash_via_cr(setUser.id)
     @dash_playing = @my_dash.players
     @dash_hosting = @my_dash.campaigns
   end
@@ -73,9 +74,9 @@ class DashesController < ApplicationController
      # byebug
     end
 
-    def setUser
-      @user_ident = User.find(current_user.id)
-    end
+    # def setUser
+    #   @user_ident = User.find(current_user.id)
+    # end
 
     def set_dash_via_cr(user)
       @dash_user = Dash.find(user)

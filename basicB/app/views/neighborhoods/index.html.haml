@@ -16,9 +16,7 @@
       %tr
         %td= neighborhood.target_id
         %td= neighborhood.neighbor_id
-        %td= link_to 'Show', neighborhood, :class => "btn btn-default btn-xs" 
-        %td= link_to 'Edit', edit_neighborhood_path(neighborhood), :class => "btn btn-default btn-xs" 
-        %td= link_to 'Destroy', neighborhood, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => "btn btn-default btn-xs" 
+        %td= render partial: 'shared/interact_options', locals: { interact_item: campaign }
 
 %br
 

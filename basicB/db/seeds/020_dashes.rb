@@ -1,6 +1,7 @@
 def userDash(user)
   name = Faker::Cat.name
-  user_dash = Dash.create!(name: name)
+  name = "#{user.name}'s cat buddy ... #{name}"
+  user_dash = user.dashes.create!(name: name)
   return user_dash
 end
 

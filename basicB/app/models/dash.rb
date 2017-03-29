@@ -9,4 +9,12 @@ class Dash < ApplicationRecord
   # players I run in campaigns
   has_many :dashplayers
   has_many :players, through: :dashplayers
+  
+  def addCampaign
+    
+  end
+    
+  def addPlayer
+    
+  end
 end

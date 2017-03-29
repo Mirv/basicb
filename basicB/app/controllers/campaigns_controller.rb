@@ -2,7 +2,7 @@ require 'DomainIdentities.rb'
 
 class CampaignsController < ApplicationController
   # include ApplicationHelper
-  include GameDsl::DomainIdentities
+  include DomainIdentities
   
   # before_action :set_campaign, only: [:join, :edit, :update, :destroy]
   # before_action :set_dash
@@ -17,20 +17,16 @@ class CampaignsController < ApplicationController
   # GET /campaigns/1
   # GET /campaigns/1.json
   def show
-    # @user = setUser
     @campaign = setCampaign
-    # @new_user = GameDsl.setUsers
-    # @new_user = setUsers
-    @new_user = GameDsl.new
-    @blah = @new_user.setUsers(current_user)
-    @user = User.first
+    @user = setUser
+    # @user = setUser(current_user)
+    @dash = setDash
+    # byebug
 
     # Old listings
     @ccountries = @campaign.campcounts.paginate(page: params[:page], per_page: 5)
     @pplayers = @campaign.players.paginate(page: params[:page], per_page: 5)
-
   end
-  
 
   # GET /campaigns/new
   #test
@@ -63,8 +59,6 @@ class CampaignsController < ApplicationController
   # PATCH/PUT /campaigns/1.json
   def update
     @campaign = setCampaign
-
-    @campaign = setCampaign
     respond_to do |format|
       if @campaign.update(campaign_params)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
@@ -79,6 +73,8 @@ class CampaignsController < ApplicationController
   # DELETE /campaigns/1
   # DELETE /campaigns/1.json
   def destroy
+    @campaign = setCampaign
+
     @campaign.destroy
     respond_to do |format|
       format.html { redirect_to campaigns_url, notice: 'Campaign was successfully destroyed.' }

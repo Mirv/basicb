@@ -1,0 +1,8 @@
+- the_list.each do |listing|
+  .list-group-item.my-well.nested-player
+    - list_columns = listing.attribute_names
+    - for x in list_columns
+      %li= "#{x.capitalize}:  #{listing[x]}"
+    = render partial: 'shared/interact_options', locals: { interact_item: listing }
+
+

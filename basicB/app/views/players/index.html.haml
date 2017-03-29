@@ -2,18 +2,19 @@
 
 %h1 Your players
 = render partial: 'shared/player_list', locals: { list: @user_players }
+
 %br
 
 %h1 Listing all players
-- if @players
-  //= render @feed_items
-  .list-group
-    = render partial: 'shared/player_list', locals: { list: @players }
-    //= render partial: 'shared/player_list', locals: { list: @players.paginate(page: params[:page], per_page: 5) }
+.list-group
+  - if @players.count > 0
     = will_paginate @players
-- else
-  No players found
+  
+    = render partial: 'shared/lister_all', locals: { the_list: @players }
+    = will_paginate @players
+  - else
+    No players found
 
 %br
 
-= link_to 'New Player', new_player_path
+= link_to 'New Player', new_player_path,:class => "btn btn-md btn-default"

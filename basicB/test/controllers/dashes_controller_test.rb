@@ -1,17 +1,26 @@
 require "test_helper"
+require "DomainIdentities"
 
 class DashesControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+  include DomainIdentities
   
   setup do
-    @dash = Dash.create!(name: "Steve")
+    @dash = dashes(:one)
     sign_in users(:validuser)
   end
+  
+  def should_get_dash_index
+    get "/dashes"
+    assert_select "h1", "Listing Dashboards"
 
-  it "gets dash index" do
-    get dashes_url
-    value(response).must_be :success?
+    # assert page.has_content?("Listing Dashboards")
   end
+
+  # it "gets dash index" do
+  #   get dashes_url
+  #   value(response).must_be :success?
+  # end
 
   it "gets dash new" do
     get new_dash_url
@@ -26,9 +35,9 @@ class DashesControllerTest < ActionDispatch::IntegrationTest
     must_redirect_to dash_path(Dash.last)
   end
 
-  it "shows dash" do
+  def test_shows_get
     get dashes_url(@dash)
-    assert_response :success
+    assert_select "h1", "Showing ..."
   end
 
   test "gets dash edit" do
@@ -46,11 +55,5 @@ class DashesControllerTest < ActionDispatch::IntegrationTest
       delete dash_url(@dash)
     end
     assert_redirected_to dashes_url
-  end
-  
-  # Test the /dash path I made
-  test "test custom dash path" do
-    dash_path @dash
-    assert_response :success
   end
 end
