@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   # get '/dash', :controller => 'dashes', :action => 'show'  ## 2nd try
   # get 'dash', to: 'dashes#show', :via => [:post], as: :dash  ## Original named route
 
-  resources :dashes
+  
+  resources :dashes 
   resources :campaigns do
     member do
       get 'join'

@@ -11,8 +11,8 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   end
   
   def test_should_get_dash_index
-    # get dashes_url
-    get dash_url(@dash)
+    get dashes_url
+    # get dash_url(@dash)
     assert_response :success
   end
 
