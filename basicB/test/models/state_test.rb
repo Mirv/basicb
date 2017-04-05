@@ -2,11 +2,11 @@ require 'test_helper'
 
 class StateTest < ActiveSupport::TestCase
   test 'valid state' do
-    aState = State.new(name: "aStateTest")
+    aState = State.new(name: "aStateTest", description: "This state was once ...")
     assert aState.valid?, "state should be valid"
   end
   
-    test 'invalid state' do
+  test 'invalid state' do
     aState = State.new(name: "")
     refute aState.valid?, "invalid state should not have passed"
   end

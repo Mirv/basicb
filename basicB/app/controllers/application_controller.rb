@@ -28,7 +28,8 @@ class ApplicationController < ActionController::Base
   private
     #protect from no ID in params
     def record_not_found
-      redirect_to root_path
+      puts "RecordNotFound"
+      redirect_to request.referrer || root_path
     end
   
     # override the devise helper to store the current location so we can

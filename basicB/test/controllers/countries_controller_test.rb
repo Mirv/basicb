@@ -11,6 +11,7 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get countries_url
+    # get '/countries/1' -- fails -- bad test format
     assert_response :success
   end
 

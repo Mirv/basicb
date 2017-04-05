@@ -20,7 +20,7 @@
         %td= country.description
         %td= country.size
         .btn-group-xs	
-          %td= render partial: 'shared/interact_options', locals: { interact_item: campaign }
+          // %td= render partial: 'shared/interact_options', locals: { interact_item: @country }
           %td= link_to 'Add Neighbors', :neighborhoods, :class => "btn btn-default btn-xs" 
       - if country.states.count > 0
         %tr

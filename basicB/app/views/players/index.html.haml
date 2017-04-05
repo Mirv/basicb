@@ -1,7 +1,11 @@
 - the_title = "Players"
 = provide(:title, the_title)
 
+
 %h1 Your players
+
+= link_to 'New Player', new_player_path,:class => "btn btn-md btn-default"
+
 .list-group
   - if @user_players.count > 0
   
@@ -31,4 +35,3 @@
 
 %br
 
-= link_to 'New Player', new_player_path,:class => "btn btn-md btn-default"

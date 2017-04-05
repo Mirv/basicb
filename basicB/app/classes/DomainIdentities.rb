@@ -12,8 +12,13 @@ module DomainIdentities
     @dash = @user.dashes.first
   end
 
-  def makePlayer(user)
-    @player = user.players.create!(screenname: "A mysterious figure")
+  def setupDefaultPlayer(owner)
+    @player_info = { screenname: "A mysterious figure" }
+  end
+
+  def makePlayer(owner)
+    @dash = setDash
+    @player = owner.players.create!(screenname: "A mysterious figure")
   end
   
   # Can this be included to be called in member notation (x.signPlayer)?

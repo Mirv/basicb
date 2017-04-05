@@ -3,6 +3,7 @@ class State < ApplicationRecord
   has_many    :counties
 
   validates :name, presence: true
+  validates :description, presence: true
   
   # accepts_nested_attributes_for :neighbors
   # accepts_nested_attributes_for :borders

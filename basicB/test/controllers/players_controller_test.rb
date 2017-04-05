@@ -51,7 +51,7 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update player" do
-    patch player_url(@player), params: { player: { player:  @player } }
+    patch player_url(@player), params: { player: { screenname:  @player.screenname } }
     assert_redirected_to player_url(@player)
   end
 

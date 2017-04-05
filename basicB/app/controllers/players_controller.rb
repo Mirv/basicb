@@ -28,6 +28,9 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
+    a_name = "A dark and mysterious figure"
+  #  player_params = player_params.merge(screenname: a_name) unless player_params.key?("screenname")
+    
     @player = Player.new(player_params)
 
     respond_to do |format|
