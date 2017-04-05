@@ -10,6 +10,11 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
     sign_in users(:validuser)
   end
   
+  it "dashbard stub route test" do
+    get '/dashboard'
+    assert_response :success
+  end
+  
   def test_should_get_dash_index
     get dashes_url
     # get dash_url(@dash)
