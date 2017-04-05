@@ -4,7 +4,8 @@ module DomainIdentities
   extend ActiveSupport::Concern
 
   def setUser
-    @user = User.find(current_user.id)
+    @user_id = current_user 
+    # @user = User.find(@user_id)
   end
   
   def setDash

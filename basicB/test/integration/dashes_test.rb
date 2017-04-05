@@ -10,9 +10,14 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
     sign_in users(:validuser)
   end
   
-  it "dashbard stub route test" do
+  it "dashbard singular route test" do
+    # current_user = User.first
+    puts "This is user: #{@user}\n"
+    puts "Players: #{@dash.players.first}"
+    @dash_hosting = @dash.campaigns
     get '/dashboard'
-    assert_response :success
+    assert @dash_hosting
+    # assert_response :success
   end
   
   def test_should_get_dash_index
