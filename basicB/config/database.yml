@@ -29,5 +29,5 @@ production:
   encoding: SQL_ASCII
   database: cc_database
   pool: 5
-  username: ubuntu
-  password: password
+  username: psql_admin
+  password: 
