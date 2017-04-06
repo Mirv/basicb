@@ -35,12 +35,13 @@ class PlayersController < ApplicationController
   # u.dashes.first.dashplayers.first.player
     @dash = setDash
     @user = setUser
-    @player = @dash.players.new(player_params)
-    
+    @player = Player.new(player_params)
     # @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
+        # byebug
+        Dashplayer.create(player_id: @player.id, dash_id: @dash.id)
         Userplay.create(player_id: @player.id, user_id: @user.id)
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
@@ -88,6 +89,8 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, userplays_attributes: [:id, :user_id, :player_id])
+      # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, userplays_attributes: [:id, :user_id, :player_id]) # runs but still not permited
+      # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :user_id) # fails
+      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id)
     end
 end
