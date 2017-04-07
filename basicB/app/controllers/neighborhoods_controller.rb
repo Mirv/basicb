@@ -27,12 +27,14 @@ class NeighborhoodsController < ApplicationController
     @neighborhood = Neighborhood.new(neighborhood_params)
 
     respond_to do |format|
-      if @neighborhood.save
-        format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully created.' }
-        format.json { render :show, status: :created, location: @neighborhood }
-      else
-        format.html { render :new }
-        format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
+      if @neighborhood["target_id"].notItSelf(neighborhood_params[:neighbor_id]) then
+        if @neighborhood.save
+          format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully created.' }
+          format.json { render :show, status: :created, location: @neighborhood }
+        else
+          format.html { render :new }
+          format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

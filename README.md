@@ -8,6 +8,8 @@ Mini game for testing a Risk like strategy game
 ## Status
 
 - RVM loaded 2.3.1
+- postgresql
+- puma server in all ENV
 - For implementations being worked on - see issues list - https://github.com/Mirv/basicb/issues
 
 - For plans ... 
