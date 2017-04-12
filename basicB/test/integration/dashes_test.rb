@@ -12,8 +12,9 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   
   it "dashbard singular route test" do
     # current_user = User.first
-    puts "This is user: #{@user}\n"
-    puts "Players: #{@dash.players.first}"
+    # puts "\nThis is user: #{@user}\n"
+    # puts "Players: #{@dash.players}\n"
+    # puts "Players: #{@dash.players.first}\n"
     @dash_hosting = @dash.campaigns
     get '/dashboard'
     assert @dash_hosting
