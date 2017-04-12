@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316134046) do
+ActiveRecord::Schema.define(version: 20170412134947) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "Countries", force: :cascade do |t|
     t.string   "name"
@@ -19,7 +22,7 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "player_id"
-    t.index ["player_id"], name: "index_countries_on_player_id"
+    t.index ["player_id"], name: "index_countries_on_player_id", using: :btree
   end
 
   create_table "Playercountries", force: :cascade do |t|
@@ -27,8 +30,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["country_id"], name: "index_playercountries_on_Country_id"
-    t.index ["player_id"], name: "index_playercountries_on_Player_id"
+    t.index ["country_id"], name: "index_playercountries_on_Country_id", using: :btree
+    t.index ["player_id"], name: "index_playercountries_on_Player_id", using: :btree
   end
 
   create_table "campaigns", force: :cascade do |t|
@@ -43,9 +46,9 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "country_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["campaign_id", "country_id"], name: "index_campcounts_on_campaign_id_and_country_id", unique: true
-    t.index ["campaign_id"], name: "index_campcounts_on_campaign_id"
-    t.index ["country_id"], name: "index_campcounts_on_country_id"
+    t.index ["campaign_id", "country_id"], name: "index_campcounts_on_campaign_id_and_country_id", unique: true, using: :btree
+    t.index ["campaign_id"], name: "index_campcounts_on_campaign_id", using: :btree
+    t.index ["country_id"], name: "index_campcounts_on_country_id", using: :btree
   end
 
   create_table "campplays", force: :cascade do |t|
@@ -53,8 +56,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "player_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["campaign_id"], name: "index_campplays_on_campaign_id"
-    t.index ["player_id"], name: "index_campplays_on_player_id"
+    t.index ["campaign_id"], name: "index_campplays_on_campaign_id", using: :btree
+    t.index ["player_id"], name: "index_campplays_on_player_id", using: :btree
   end
 
   create_table "counties", force: :cascade do |t|
@@ -65,13 +68,21 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "player_id"
+  end
+
   create_table "dashcampaigns", force: :cascade do |t|
     t.integer  "dash_id"
     t.integer  "campaign_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["campaign_id"], name: "index_dashcampaigns_on_campaign_id"
-    t.index ["dash_id"], name: "index_dashcampaigns_on_dash_id"
+    t.index ["campaign_id"], name: "index_dashcampaigns_on_campaign_id", using: :btree
+    t.index ["dash_id"], name: "index_dashcampaigns_on_dash_id", using: :btree
   end
 
   create_table "dashes", force: :cascade do |t|
@@ -80,8 +91,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "dashplayers_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
-    t.index ["dashcampaigns_id"], name: "index_dashes_on_dashcampaigns_id"
-    t.index ["dashplayers_id"], name: "index_dashes_on_dashplayers_id"
+    t.index ["dashcampaigns_id"], name: "index_dashes_on_dashcampaigns_id", using: :btree
+    t.index ["dashplayers_id"], name: "index_dashes_on_dashplayers_id", using: :btree
   end
 
   create_table "dashplayers", force: :cascade do |t|
@@ -89,8 +100,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["dash_id"], name: "index_dashplayers_on_dash_id"
-    t.index ["player_id"], name: "index_dashplayers_on_player_id"
+    t.index ["dash_id"], name: "index_dashplayers_on_dash_id", using: :btree
+    t.index ["player_id"], name: "index_dashplayers_on_player_id", using: :btree
   end
 
   create_table "neighborhoods", force: :cascade do |t|
@@ -98,9 +109,9 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "target_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["neighbor_id"], name: "index_neighborhoods_on_neighbor_id"
-    t.index ["target_id", "neighbor_id"], name: "index_Neighborhoods_on_target_id_and_neighbor_id", unique: true
-    t.index ["target_id"], name: "index_neighborhoods_on_target_id"
+    t.index ["neighbor_id"], name: "index_neighborhoods_on_neighbor_id", using: :btree
+    t.index ["target_id", "neighbor_id"], name: "index_Neighborhoods_on_target_id_and_neighbor_id", unique: true, using: :btree
+    t.index ["target_id"], name: "index_neighborhoods_on_target_id", using: :btree
   end
 
   create_table "players", force: :cascade do |t|
@@ -109,7 +120,7 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["country_id"], name: "index_players_on_country_id"
+    t.index ["country_id"], name: "index_players_on_country_id", using: :btree
   end
 
   create_table "states", force: :cascade do |t|
@@ -119,7 +130,7 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "level"
-    t.index ["country_id"], name: "index_states_on_country_id"
+    t.index ["country_id"], name: "index_states_on_country_id", using: :btree
   end
 
   create_table "usercamps", force: :cascade do |t|
@@ -127,8 +138,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.index ["campaign_id"], name: "index_usercamps_on_campaign_id"
-    t.index ["user_id"], name: "index_usercamps_on_user_id"
+    t.index ["campaign_id"], name: "index_usercamps_on_campaign_id", using: :btree
+    t.index ["user_id"], name: "index_usercamps_on_user_id", using: :btree
   end
 
   create_table "userdashes", force: :cascade do |t|
@@ -143,8 +154,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
-    t.index ["player_id"], name: "index_userplays_on_player_id"
-    t.index ["user_id"], name: "index_userplays_on_user_id"
+    t.index ["player_id"], name: "index_userplays_on_player_id", using: :btree
+    t.index ["user_id"], name: "index_userplays_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -159,8 +170,8 @@ ActiveRecord::Schema.define(version: 20170316134046) do
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
     t.string   "name"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
 end

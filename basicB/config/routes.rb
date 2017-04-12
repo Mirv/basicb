@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :countries
     devise_for :users #, controllers: { sessions: 'users/registrations' }
    
    # map.login '/login', :controller => 'sessions', :action => 'new'  ## 3rd try
@@ -14,8 +15,7 @@ Rails.application.routes.draw do
      end
    end
    resources :players
-   resources :countries
- 
+  
   #get 'exit', to: 'sessions#destroy', as: :logout
  
    root "campaigns#index" 

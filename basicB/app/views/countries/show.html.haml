@@ -1,33 +1,15 @@
-// = for @neighbors do |b|
-//   = b.name
+%p#notice= notice
 
-// %p#notice= notice
-
-%p
-  %b Country:
-  = @country.id
 %p
   %b Name:
   = @country.name
 %p
+  %b Description:
+  = @country.description
+%p
+  %b Player:
+  = @country.player
 
-- if @country.neighbors.count > 0
-  %table{:class => "table table-striped table-hover"}
-    %thead
-      %tr
-        %td
-          Neighbor ID
-        %td
-          Neighbor Name
-    %tbody
-    // = @neighborhood.neighbor_id
-    - for neighbor in @country.neighbors
-      %tr
-        %td
-          = neighbor.id
-        %td
-          = neighbor.name
-        .btn-group-xs	
-          %td= link_to 'Show', neighbor, :class => "btn btn-default btn-xs" 
-          %td= link_to 'Edit', edit_country_path(neighbor), :class => "btn btn-default btn-xs" 
-          %td= link_to 'Add Neighbors', :neighborhoods, :class => "btn btn-default btn-xs" 
+= link_to 'Edit', edit_country_path(@country)
+\|
+= link_to 'Back', countries_path

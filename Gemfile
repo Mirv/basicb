@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 gem 'rails', '5'  # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'puma'
 
 gem 'coffee-script'
 gem 'therubyracer'

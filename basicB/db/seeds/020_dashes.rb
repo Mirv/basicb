@@ -1,7 +1,7 @@
-def userDash(user)
-  name = Faker::Cat.name
-  name = "#{user.name}'s cat buddy ... #{name}"
-  user_dash = user.dashes.create!(name: name)
+def userDash(a_user)
+  new_name = Faker::Cat.name
+  new_name = "#{a_user["name"]}'s cat buddy ... #{new_name}"
+  user_dash = user.dashes.create!(name: new_name)
   return user_dash
 end
 

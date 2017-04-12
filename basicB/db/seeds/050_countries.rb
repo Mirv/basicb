@@ -13,7 +13,7 @@ def countryGenerate(count)
   
   hold = hold.merge({"name" =>  name})
   hold = hold.merge({"description" => Faker::Hacker.adjective})
-  hold = hold.merge({"size" => rand(9)})
+  # hold = hold.merge({"size" => rand(9)})
 
   # puts "Generater -- Hold-name: #{hold["name"]}"
   return hold

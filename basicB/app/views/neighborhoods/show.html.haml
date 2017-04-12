@@ -5,11 +5,11 @@
 %p
   %b Neighbor:
   = @neighborhood.neighbor_id
-  = @neighborhood.neighbor.name
+  // = @neighborhood.neighbor.name
 %p
   %b Target:
   = @neighborhood.target_id
-  = @neighborhood.target.name
+  // = @neighborhood.target.name
 
 = link_to 'Edit', edit_neighborhood_path(@neighborhood), :class => "btn xs-btn"
 

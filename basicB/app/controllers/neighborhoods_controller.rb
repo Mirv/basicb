@@ -27,14 +27,12 @@ class NeighborhoodsController < ApplicationController
     @neighborhood = Neighborhood.new(neighborhood_params)
 
     respond_to do |format|
-      if @neighborhood["target_id"].notItSelf(neighborhood_params[:neighbor_id]) then
-        if @neighborhood.save
-          format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully created.' }
-          format.json { render :show, status: :created, location: @neighborhood }
-        else
-          format.html { render :new }
-          format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
-        end
+      if @neighborhood.save
+        format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully created.' }
+        format.json { render :show, status: :created, location: @neighborhood }
+      else
+        format.html { render :new }
+        format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -43,12 +41,16 @@ class NeighborhoodsController < ApplicationController
   # PATCH/PUT /neighborhoods/1.json
   def update
     respond_to do |format|
+      
       if @neighborhood.update(neighborhood_params)
-        format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully updated.' }
-        format.json { render :show, status: :ok, location: @neighborhood }
-      else
-        format.html { render :edit }
-        format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
+        if notItSelf? then
+  
+          format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully updated.' }
+          format.json { render :show, status: :ok, location: @neighborhood }
+        else
+          format.html { render :edit }
+          format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -64,13 +66,14 @@ class NeighborhoodsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_neighborhood
-      @neighborhood = Neighborhood.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_neighborhood
+    @neighborhood = Neighborhood.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def neighborhood_params
-      params.require(:neighborhood).permit(:neighbor_id, :target_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def neighborhood_params
+    params.require(:neighborhood).permit(:neighbor_id, :target_id)
+  end
+
 end
