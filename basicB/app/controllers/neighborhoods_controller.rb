@@ -43,14 +43,14 @@ class NeighborhoodsController < ApplicationController
     respond_to do |format|
       
       if @neighborhood.update(neighborhood_params)
-        if notItSelf? then
-  
-          format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully updated.' }
-          format.json { render :show, status: :ok, location: @neighborhood }
-        else
-          format.html { render :edit }
-          format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
-        end
+    #  if notItSelf? then
+
+        format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully updated.' }
+        format.json { render :show, status: :ok, location: @neighborhood }
+        # end
+      else
+        format.html { render :edit }
+        format.json { render json: @neighborhood.errors, status: :unprocessable_entity }
       end
     end
   end
