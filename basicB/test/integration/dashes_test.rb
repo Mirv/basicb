@@ -8,6 +8,12 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   setup do
     @dash = dashes(:one)
     sign_in users(:validuser)
+    @relation_dash_player = Dashplayer.new(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+  end
+  
+  
+  test "relationship between dash and player" do
+    assert @relation_dash_player.valid?  
   end
   
   it "dashbard singular route test" do
