@@ -1,9 +1,16 @@
 require "test_helper"
 
-describe Dashplayer do
-  let(:dashplayer) { Dashplayer.new }
+# setup do
+#   @dash = dashes(:one)
+#   sign_in users(:validuser)
+#   @relation_dash_player = Dashplayer.new(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+# end
 
-  it "must be valid" do
-    value(dashplayer).must_be :valid?
+class Dashplayers < ActiveSupport::TestCase
+
+  test "dashplayer not valid" do
+    dashplayer = Dashplayer.new()  
+    assert_not dashplayer.valid?
   end
 end
+
