@@ -26,7 +26,9 @@ guard :minitest, spring: "bin/rails test", all_on_start: false do
   watch(%r{^test/test_helper\.rb$})      { 'test' }
   watch(%r{^test/integration/*})
   watch(%r{^test/model/*})
+  watch(%r{^test/controller/*})
   watch(%r{^app/model/*})
+  watch(%r{^app/controller/*})
 
 
   # with Minitest::Spec

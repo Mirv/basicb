@@ -4,6 +4,15 @@
     = f.input :screenname
     = f.input :motto
     = f.input :country_id
-    // = f.input :user_id, :as => :hidden, :input_html => { :value => current_user }
+    = @campaign
+    
+    // f.input :recipients, input_html: { value: @target }
+    // = f.input :user_id, :as => :hidden, :input_html => { :user_id => current_user }
   .form-actions
     = f.button :submit
+
+= "This is :campaign_id ... #1 ... : ..." 
+= :campaign_test
+%br
+= "This is :campaign_id ... #2 ... @ ..." 
+= @campaign_test

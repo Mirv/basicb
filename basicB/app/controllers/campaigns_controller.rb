@@ -8,6 +8,10 @@ class CampaignsController < ApplicationController
   # before_action :set_dash
   skip_before_action :authenticate_user!, only: [:index]
 
+  # def join
+  #   redirect_to new_player_path, :campaign_id => @campaign.id
+  # end
+  
   # GET /campaigns
   # GET /campaigns.json
   def index

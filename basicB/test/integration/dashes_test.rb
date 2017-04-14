@@ -16,6 +16,16 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
     assert @relation_dash_player.valid?  
   end
   
+  test "relationship between dash and player - must have dash_id" do
+    @relation_dash_player.dash_id = nil
+    assert_not @relation_dash_player.valid?  
+  end
+  
+  test "relationship between dash and player - must have player_id" do
+    @relation_dash_player.player_id = nil
+    assert_not @relation_dash_player.valid?  
+  end
+  
   it "dashbard singular route test" do
     # current_user = User.first
     # puts "\nThis is user: #{@user}\n"
@@ -23,6 +33,7 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
     # puts "Players: #{@dash.players.first}\n"
     @dash_hosting = @dash.campaigns
     get '/dashboard'
+    puts "\n \n #{body.response}\n \n"
     assert @dash_hosting
     # assert_response :success
   end

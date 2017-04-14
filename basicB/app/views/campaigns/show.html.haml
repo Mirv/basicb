@@ -19,7 +19,11 @@
 .hoster
   %h2= "#{@user.name} runs this..."
   %br
-  = link_to "Join Campaign", '#', :class => "btn xs-btn"
+  = link_to "Join Campaign", new_player_path, campaign: @campaign.id
+  = link_to "Join Campaign", new_player_path, :campaign_test => "HERE"
+  = link_to "Join Campaign", new_player_path, "HERE" => :campaign_test 
+  // {:controller => "car", :action => "add_to_cart", :car => car.id }
+
   %br
 
 .players
@@ -27,6 +31,8 @@
     Player List
   - if @pplayers.count > 0
     = render partial: 'shared/player_list', locals: { list: @pplayers }
+    = will_paginate @pplayers
+
   - else
     %p
       No players signed yet...
@@ -42,6 +48,8 @@
           %td= joinedc.country.name
           %td= link_to "Show", country_url(joinedc.country)
           %td= link_to "Edit", edit_country_url(joinedc.country.id)
+      = will_paginate @ccountries
+
   - else
     %p
       No countries found...

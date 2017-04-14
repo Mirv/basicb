@@ -30,19 +30,22 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-    a_name = "A dark and mysterious figure"
   #  player_params = player_params.merge(screenname: a_name) unless player_params.key?("screenname")
   # u.dashes.first.dashplayers.first.player
-    @dash = setDash
-    @user = setUser
+    
     @player = Player.new(player_params)
     # @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
-        # byebug
-        Dashplayer.create(player_id: @player.id, dash_id: @dash.id)
-        Userplay.create(player_id: @player.id, user_id: @user.id)
+        # Setup replationships
+        #  Campaign_id passes via link_to to _form.html.haml
+        @dash = setDash
+        @user = setUser 
+        @player.dashplayers.create(dash_id: @dash.id)
+        @player.userplays.create(user_id: @user.id)
+        @player.campplays.create(campaign_id: @campaign_id)
+
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
@@ -91,6 +94,6 @@ class PlayersController < ApplicationController
     def player_params
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, userplays_attributes: [:id, :user_id, :player_id]) # runs but still not permited
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :user_id) # fails
-      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id)
+      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :dash_id)
     end
 end

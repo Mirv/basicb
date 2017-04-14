@@ -1,7 +1,9 @@
 require 'test_helper'
+require 'DomainIdentities.rb'
 
 class PlayersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
   setup do
     @player = players(:one)
     sign_in users(:validuser)
@@ -32,12 +34,12 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
     # assert_difference('Country.count') do
     #   post countries_url, params: { country: { description: "Test - D", name: "TestName", size:"1" }   }
     # end
-    
+    puts "Test"
     assert_difference('Player.count') do
-      post '/players',  params: { player: { screenname: "screenname" } } 
-   #   get new_player_url, params: { player: { screenname: "screenname" } } 
+      get new_player_path,  params: { player: { screenname: "screenname" } } 
+      # puts "\n\nIn the assert_difference - #{response.body}\n\nThe player ... #{@player.screenname}"
     end
-    assert_redirected_to player_path(Player.last)
+    puts "\n The response: #{response.body}\n"
   end
 
   test "should show player" do

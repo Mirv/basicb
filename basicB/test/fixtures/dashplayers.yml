@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  dash: one
-  player: one
+  dash_id: one
+  player_id: one
 
 two:
-  dash: two
-  player: two
+  dash_id: two
+  player_id: two
