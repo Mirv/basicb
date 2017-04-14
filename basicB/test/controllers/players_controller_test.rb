@@ -1,6 +1,8 @@
 require 'test_helper'
 require 'DomainIdentities.rb'
 
+
+
 class PlayersControllerTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
 
@@ -36,10 +38,14 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
     # end
     puts "Test"
     assert_difference('Player.count') do
-      get new_player_path,  params: { player: { screenname: "screenname" } } 
-      # puts "\n\nIn the assert_difference - #{response.body}\n\nThe player ... #{@player.screenname}"
+      @player_test = Player.create(screenname: "test_screen_name")
+      puts @player_test.screenname
+      post players_url,  params: { player:  @player_test }  
+      # post players_url,  params: { player: { screenname: 'screenname' } } 
+      puts "\n\nIn the assert_difference - #{response.body}\n\nThe player ... #{@player.screenname}"
     end
-    puts "\n The response: #{response.body}\n"
+    assert_redirected_to player_url(Player.last)
+    puts "redirect completed or failed"
   end
 
   test "should show player" do
