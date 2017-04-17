@@ -7,6 +7,7 @@ class DashesController < ApplicationController
   
   def dashboard
     @my_dash = setDash
+    
     @dash_playing = @my_dash.players
     @dash_hosting = @my_dash.campaigns
     # byebug

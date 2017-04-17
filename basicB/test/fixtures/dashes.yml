@@ -3,11 +3,9 @@
 one:
   name: MyString
   id: "1"
-  dashcampaigns_id: one
-  dashplayers_id: one
+
 
 two:
   name: MyString
-  dashcampaigns_id: two
-  dashplayers_id: two
+
 # 
