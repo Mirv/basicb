@@ -1,25 +1,27 @@
 %h1 Listing countries
 
-%table
+%table{:class => "table table-striped table-hover"}  
   %thead
     %tr
       %th Name
       %th Description
       %th Player
-      %th
-      %th
-      %th
-
   %tbody
     - @countries.each do |country|
       %tr
         %td= country.name
         %td= country.description
-        %td= country.player
-        %td= link_to 'Show', country
-        %td= link_to 'Edit', edit_country_path(country)
-        %td= link_to 'Destroy', country, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+        .btn-group-xs
+          // %td= render partial: 'shared/interact_options', locals: { interact_item: @country }
+          %td= link_to 'Add Neighbors', :neighborhoods, :class => "btn btn-default btn-xs" 
+      - if country.neighbors.count > 0
+        - for neighbor in country.neighbors
+          %tr
+            %td
+              = neighbor.id
+            %td
+              = neighbor.name
+            %td
+              
 %br
-
 = link_to 'New Country', new_country_path

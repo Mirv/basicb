@@ -18,4 +18,18 @@ module ApplicationHelper
     end
   end
   
+  def listHorizontal(listing, spacer = ', ')
+    list_columns = listing.attribute_names
+    result = Array.new
+    for x in list_columns
+       result << "#{x.capitalize}:  #{listing[x]}"
+    end
+    result = result.join(spacer)
+    return result
+  end
+  
+  def verticalList(hashie)
+    
+  end
+  
 end

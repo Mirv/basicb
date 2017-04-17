@@ -1,0 +1,15 @@
+.nested-fields.list-group-item
+    .well
+        %h4 State
+        .form-inline.text
+            = f.input :name, input_html: {:placeholder => "...insert State Name ..."} 
+            = f.input :description
+            = link_to_remove_association f, class: 'btn btn-default btn-xs' do
+                .glyphicon.glyphicon-remove
+        - if :counties 
+            %h4 Counties
+            .counties
+            = f.simple_fields_for :counties do |c|
+                = render 'county_fields', :f => c
+                .links.text
+                    = link_to_add_association 'Add County', f, :counties, :class => "btn btn-default"

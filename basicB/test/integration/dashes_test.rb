@@ -31,7 +31,7 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
     # puts "\nThis is user: #{@user}\n"
     # puts "Players: #{@dash.players}\n"
     # puts "Players: #{@dash.players.first}\n"
-    @dash_hosting = @dash.campaigns
+    @dash_hosting = @dash.new(name: "TheTestDash",)
     get '/dashboard'
     puts "\n \n #{body.response}\n \n"
     assert @dash_hosting
