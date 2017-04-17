@@ -28,8 +28,4 @@ module ApplicationHelper
     return result
   end
   
-  def verticalList(hashie)
-    
-  end
-  
 end
