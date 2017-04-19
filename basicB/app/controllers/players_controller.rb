@@ -38,14 +38,6 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
-        # Setup replationships
-        #  Campaign_id passes via link_to to _form.html.haml
-        @dash = setDash
-        @user = setUser 
-       # @player.dashplayers.create(dash_id: @dash.id)
-        @player.userplays.create(user_id: @user.id)
-        @player.campplays.create(campaign_id: @campaign_id)
-
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else

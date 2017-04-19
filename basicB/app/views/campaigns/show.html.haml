@@ -19,10 +19,8 @@
 .hoster
   %h2= "#{@user.name} runs this..."
   %br
-  = link_to "Join Campaign", new_player_path, campaign: @campaign.id
-  = link_to "Join Campaign", new_player_path, :campaign_test => "HERE"
-  = link_to "Join Campaign", new_player_path, "HERE" => :campaign_test 
-  // {:controller => "car", :action => "add_to_cart", :car => car.id }
+  = link_to "Join Campaign", new_player_path
+
 
   %br
 
