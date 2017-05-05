@@ -19,6 +19,7 @@ class CountriesController < ApplicationController
 
   # GET /countries/1/edit
   def edit
+    @some_name = params[:display_me]
   end
 
   # POST /countries
