@@ -12,16 +12,17 @@
         %td= country.name
         %td= country.description
         .btn-group-xs
-          // %td= render partial: 'shared/interact_options', locals: { interact_item: @country }
+          %td= render partial: 'shared/interact_options', locals: { interact_item: country }
           %td= link_to 'Add Neighbors', :neighborhoods, :class => "btn btn-default btn-xs" 
       - if country.neighbors.count > 0
         - for neighbor in country.neighbors
           %tr
             %td
+            %td
               = neighbor.id
             %td
               = neighbor.name
             %td
-              
+              // = render 'shared/interact_options', locals: { interact_item: neighbor }
 %br
 = link_to 'New Country', new_country_path

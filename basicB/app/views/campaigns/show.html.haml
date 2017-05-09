@@ -19,8 +19,7 @@
 .hoster
   %h2= "#{@user.name} runs this..."
   %br
-  = link_to "Join Campaign", new_player_path
-
+  = link_to "Join", join_campaign_path(@campaign)
 
   %br
 

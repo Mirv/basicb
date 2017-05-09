@@ -8,9 +8,29 @@ class CampaignsController < ApplicationController
   # before_action :set_dash
   skip_before_action :authenticate_user!, only: [:index]
 
-  # def join
-  #   redirect_to new_player_path, :campaign_id => @campaign.id
-  # end
+  def join
+    @player = Player.new(screenname: "A dark and mysterious figure ... ")
+
+    respond_to do |format|
+      if @player.save
+        
+        @campaign = setCampaign
+        puts "#{@campaign.id}"
+        @player.campplays.create!(campaign_id: @campaign.id)
+        
+        @dash = setDash
+        @player.dashplayers.create(dash_id: @dash.id)
+        
+        format.html { redirect_to @player, notice: 'Player was successfully created.' }
+        format.json { render :show, status: :created, location: @player }
+      else
+        format.html { render :new }
+        format.json { render json: @player.errors, status: :unprocessable_entity }
+      end
+    end
+   
+    # redirect_to new_player_path
+  end
   
   # GET /campaigns
   # GET /campaigns.json

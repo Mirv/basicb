@@ -7,7 +7,7 @@
     .row-fuild
       %a.btn.btn-primary{"aria-controls" => "neighborsDisplay", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#neighborsDisplay"}
         Show Neighbors
-      = render :partial => 'country_neighbors', :f => @country
+      = render partial: 'country_neighbors', :f => @country
       .states
       = f.simple_fields_for :states do |state|
         = render 'state_fields', :f => state

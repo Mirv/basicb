@@ -86,6 +86,6 @@ class PlayersController < ApplicationController
     def player_params
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, userplays_attributes: [:id, :user_id, :player_id]) # runs but still not permited
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :user_id) # fails
-      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :dash_id, :user_id, :campaign_id, :screenname)
+      params.require(:player).permit(:id, :player_id, :screenname, :motto)
     end
 end

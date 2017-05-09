@@ -19,6 +19,7 @@ class CountriesController < ApplicationController
 
   # GET /countries/1/edit
   def edit
+    # @partial_choice = params[:partial_choice]
   end
 
   # POST /countries
