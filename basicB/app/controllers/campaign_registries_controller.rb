@@ -1,3 +1,4 @@
+# Not actually using yet - created for DRY purpose later
 class CampaignRegistriesController < ApplicationController
   before_action :set_campaign_registry, only: [:show, :edit, :update, :destroy]
 
