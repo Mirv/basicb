@@ -24,3 +24,4 @@
 /app/config/secrets.yml
 
 /app/views/countries/checkthis
+.byebug_history
