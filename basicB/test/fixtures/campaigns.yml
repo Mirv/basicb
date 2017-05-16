@@ -1,16 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+DEFAULTS: &DEFAULTS
+  created_at: <%= 3.weeks.ago.to_s(:db) %>
 
 one:
   name: MyString
   description: MyText
-  created_at: <%= 4.years.ago %>
+  <<: *DEFAULTS
 
+  
 two:
   name: MyString
   description: MyText
-  created_at: <%= 3.years.ago %>
-
-most_recent:
-  name: MyString
-  description: MyTest
-  created_at: <%= Time.zone.now %>
+  <<: *DEFAULTS

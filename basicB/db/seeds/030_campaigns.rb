@@ -25,7 +25,7 @@ def fillCampaign(campaign)
       new_country_made.states.create!(
         stateGenerate(max_neighbors, new_country_made["country_id"]))
       make_neighbors(new_country_made, max_neighbors)
-    rescue Exception=>e
+    rescue 
       puts "Error with User>Player.Neighbor>Country ownership chain Loop #: #{u}, 
         Message is: #{e.message}"
     else

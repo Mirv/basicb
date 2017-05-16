@@ -1,5 +1,6 @@
-#neighborsDisplay.collapse
-   .list-group
-      - @country.neighbors.each do |x|
-         .list-group-item
-            = link_to x.name, edit_country_url(x.id)
+// #neighborsDisplay.collapse
+//    .list-group
+//       - @country.neighbors.each do |x|
+.list-group-item
+   = link_to neighbor.name, edit_country_url(neighbor.id)
+   

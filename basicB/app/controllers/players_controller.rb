@@ -9,8 +9,10 @@ class PlayersController < ApplicationController
 
   def index
     @players = Player.paginate(page: params[:page], per_page: 10)
-    # Show all players belonging to the user in question
-    @user_players = @user.players
+    # Show all players belonging to the dash of the user in question
+    @dash = setDash
+    @dash_players = @dash.players
+    
   end
 
   # GET /players/1
@@ -38,6 +40,9 @@ class PlayersController < ApplicationController
 
     respond_to do |format|
       if @player.save
+        @dash = setDash
+        @player.dashplayers.create(dash_id: @dash.id)
+        
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
       else
@@ -86,6 +91,6 @@ class PlayersController < ApplicationController
     def player_params
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, userplays_attributes: [:id, :user_id, :player_id]) # runs but still not permited
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :user_id) # fails
-      params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :dash_id, :user_id, :campaign_id, :screenname)
+      params.require(:player).permit(:id, :player_id, :country_id, :screenname, :motto)
     end
 end

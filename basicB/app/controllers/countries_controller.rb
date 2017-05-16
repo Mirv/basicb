@@ -4,7 +4,7 @@ class CountriesController < ApplicationController
   # GET /countries
   # GET /countries.json
   def index
-    @countries = Country.all
+    @countries = Country.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /countries/1
@@ -19,6 +19,7 @@ class CountriesController < ApplicationController
 
   # GET /countries/1/edit
   def edit
+    # @partial_choice = params[:partial_choice]
   end
 
   # POST /countries

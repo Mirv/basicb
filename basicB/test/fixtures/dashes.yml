@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+DEFAULTS: &DEFAULTS
+  created_at: <%= 3.weeks.ago.to_s(:db) %>
+
 one:
   name: MyString
-  id: "1"
-
-
+  <<: *DEFAULTS
+  
 two:
   name: MyString
+  <<: *DEFAULTS
 
-# 

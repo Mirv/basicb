@@ -5,13 +5,15 @@
       = f.input :name, input_html: {:placeholder => "...insert country name..."}
       = f.input :description
     .row-fuild
-      %a.btn.btn-primary{"aria-controls" => "neighborsDisplay", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#neighborsDisplay"}
-        Show Neighbors
-      = render :partial => 'country_neighbors', :f => @country
+      %a.btn.btn-primary{"aria-controls" => "neighborsDisplay", "aria-expanded" => "false", "data-toggle" => "collapse", :href => "#neighborsDisplay"} Show Neighbors
+      #neighborsDisplay.collapse
+        .list-group
+          - for neighbor in @country.neighbors
+            = render partial: 'country_neighbors', locals: {neighbor: neighbor}
       .states
       = f.simple_fields_for :states do |state|
         = render 'state_fields', :f => state
     .links.row
-      = link_to_add_association 'Add State', f, :states,  render_options: { wrapper: 'inline_form' }
+      = link_to_add_association 'Add State', f, :states,  render_options: { wrapper: 'inline_form' }, :class => "btn btn-default"
     .form-actions.row
       = f.button :submit

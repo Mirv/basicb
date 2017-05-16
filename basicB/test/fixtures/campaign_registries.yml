@@ -1,14 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-DEFAULTS: &DEFAULTS
-  created_at: <%= 3.weeks.ago.to_s(:db) %>
-
 one:
+  campaign: one
+  user: one
   dash: one
-  <<: *DEFAULTS
+  user: one
 
-  
 two:
-  dash: two
   campaign: two
-  <<: *DEFAULTS
+  user: two
+  dash: two
+  user: two

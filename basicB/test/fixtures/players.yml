@@ -1,11 +1,20 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
+DEFAULTS: &DEFAULTS
+  created_at: <%= 3.weeks.ago.to_s(:db) %>
+
 one:
   screenname: MyString
   motto: MyString
-  # country_id: one
+  <<: *DEFAULTS
 
 two:
   screenname: MyString
   motto: MyString
-  # country_id: two
+  <<: *DEFAULTS
+
+three:
+  screenname: MyString
+  motto: MyString
+  <<: *DEFAULTS
