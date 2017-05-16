@@ -3,7 +3,19 @@
 one:
   dash_id: one
   player_id: one
+  created_at: <%= 10.minutes.ago %>
 
 two:
   dash_id: two
   player_id: two
+  created_at: <%= 10.minutes.ago %>
+
+one2ndPlayer:
+  dash_id: one
+  player_id: three
+  created_at: <%= 10.minutes.ago %>
+  
+one3rdPlayer:
+  dash_id: one
+  player_id: three
+  created_at: <%= 10.minutes.ago %>

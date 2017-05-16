@@ -3,22 +3,12 @@ require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 require "minitest/rails"
 require "minitest/rails/capybara"
-require 'capybara/rails'
-# require 'capybara/minitest'
+require "DomainIdentities"
 
-# class ActionDispatch::IntegrationTest
-#   # Make the Capybara DSL available in all integration tests
-#   include Capybara::DSL
-#   # Make `assert_*` methods behave like Minitest assertions
-#   include Capybara::Minitest::Assertions
 
-#   # Reset sessions and driver between tests
-#   # Use super wherever this method is redefined in your individual test classes
-#   def teardown
-#     Capybara.reset_sessions!
-#     Capybara.use_default_driver
-#   end
-# end
+# To add Capybara feature tests add `gem "minitest-rails-capybara"`
+# to the test group in the Gemfile and uncomment the following:
+# require "minitest/rails/capybara"
 
 # Uncomment for awesome colorful output
 # require "minitest/pride"
@@ -29,6 +19,9 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
-class ActionController::TestCase
+class ActionDispatch::IntegrationTest
   # include Devise::Test::ControllerHelpers
+  include Devise::Test::IntegrationHelpers
+  include DomainIdentities
+  include FactoryGirl::Syntax::Methods
 end

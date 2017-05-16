@@ -37,17 +37,20 @@ group :development, :test do
   # this two are extras included in minitest-rails-capybara from earlier
   # gem 'minitest-rails'
   # gem 'minitest-capybara'
+  gem "minitest", "5.10.1"
   gem 'minitest-color'
   gem 'guard', '~>2.14'
   gem 'guard-minitest'
   gem 'rails-controller-testing'
   gem 'faker'
+  gem 'factory_girl'
   gem 'hihi'
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too
 end
 
 group :test do
   gem 'minitest-rails-capybara'
+  gem 'minitest-reporters'
 end
 
 group :production do
@@ -58,6 +61,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+  
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

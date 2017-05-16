@@ -1,16 +1,13 @@
 require "test_helper"
-require "DomainIdentities"
 
 class DashesControllerTest <  ActionDispatch::IntegrationTest
-  include Devise::Test::IntegrationHelpers
-  include DomainIdentities
 
   setup do
+    @users = users(:one, :two)
     @dash = dashes(:one)
     sign_in users(:validuser)
-    @relation_dash_player = Dashplayer.new(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
   end
-  
   
   test "relationship between dash and player" do
     assert @relation_dash_player.valid?  
@@ -27,19 +24,13 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   end
   
   it "dashbard singular route test" do
-    # current_user = User.first
-    # puts "\nThis is user: #{@user}\n"
-    # puts "Players: #{@dash.players}\n"
-    # puts "Players: #{@dash.players.first}\n"
-    @dash_hosting = @dash.new(name: "TheTestDash",)
+    # @my_dash = dashes(:one)
     get '/dashboard'
-    puts "\n \n #{body.response}\n \n"
-    assert @dash_hosting
-    # assert_response :success
+    assert_response :success
   end
   
   def test_should_get_dash_index
-    get dashes_url
+    get dashes_url, params: { my_dash: @dash }
     # get dash_url(@dash)
     assert_response :success
   end
@@ -56,7 +47,6 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
 
     must_redirect_to dash_path(Dash.last)
   end
-
 
   test "test show dash" do
     get dash_url(@dash)

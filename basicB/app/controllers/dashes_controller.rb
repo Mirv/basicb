@@ -1,5 +1,8 @@
+require 'DomainIdentities.rb'
+
 class DashesController < ApplicationController
   include DomainIdentities
+  
   before_action :set_dash, only: [:show, :edit, :update, :destroy]
 
   # GET /dashes
@@ -7,10 +10,9 @@ class DashesController < ApplicationController
   
   def dashboard
     @my_dash = setDash
-    
-    @dash_playing = @my_dash.players
-    @dash_hosting = @my_dash.campaigns
-    # byebug
+    # @my_dash = set_dash
+    # @dash_playing = @my_dash.players
+    # @dash_hosting = @my_dash.campaigns
   end
     
   def index
