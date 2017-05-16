@@ -1,6 +1,6 @@
 class DashesController < ApplicationController
   include DomainIdentities
-  before_action :set_dash, only: [:show, :edit, :update, :destroy]
+  before_action :set_dash, only: [:show, :dashboard, :edit, :update, :destroy]
 
   # GET /dashes
   # GET /dashes.json
@@ -77,6 +77,11 @@ class DashesController < ApplicationController
       @dash = Dash.find(params[:id])
     end
 
+    # Never trust parameters from the scary internet, only allow the white list through.
+    def dash_params
+      params.require(:dash).permit(:id, :name, :dashcampaigns_id, :dashplayers_id) #pulled user_id for player_controller test
+    end
+end
     # def setUser
     #   @user_ident = User.find(current_user.id)
     # end
@@ -84,9 +89,3 @@ class DashesController < ApplicationController
     # def set_dash_via_cr(user)
     #   @dash_user = Dash.find(user)
     # end
-    
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def dash_params
-      params.require(:dash).permit(:id, :name, :dashcampaigns_id, :dashplayers_id) #pulled user_id for player_controller test
-    end
-end
