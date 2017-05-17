@@ -3,6 +3,8 @@
 
 DEFAULTS: &DEFAULTS
   created_at: <%= 3.weeks.ago.to_s(:db) %>
+  # created_at: <%= 3.weeks.ago %>
+  # update_at: <%= 3.weeks.ago.to_s(:db) %>
 
 one:
   screenname: MyString

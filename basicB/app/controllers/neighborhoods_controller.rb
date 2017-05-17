@@ -42,7 +42,7 @@ class NeighborhoodsController < ApplicationController
   def update
     respond_to do |format|
       
-      if @neighborhood.update(neighborhood_params)
+      if @neighborhood.update!(neighborhood_params)
     #  if notItSelf? then
 
         format.html { redirect_to @neighborhood, notice: 'Neighborhood was successfully updated.' }

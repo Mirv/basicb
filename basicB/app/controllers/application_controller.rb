@@ -3,7 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   # This might need to be rescue => e at some point
-  rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  # rescue_from ActiveRecord::RecordNotFound, :with => :record_not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+  rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
   
     # strong_param permits
@@ -31,6 +33,18 @@ class ApplicationController < ActionController::Base
     def record_not_found
       puts "RecordNotFound"
       redirect_to request.referrer || root_path
+    end
+    # Version 2 from https://blog.rebased.pl/2016/11/07/api-error-handling.html
+    def render_unprocessable_entity_response(exception)
+            puts "RecordNotFound -- unprocessable_entity response"
+
+      render json: exception.record.errors, status: :unprocessable_entity
+    end
+  
+    def render_not_found_response(exception)
+            puts "RecordNotFound -- not found response"
+
+      render json: { error: exception.message }, status: :not_found
     end
   
     # override the devise helper to store the current location so we can

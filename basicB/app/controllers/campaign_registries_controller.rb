@@ -42,7 +42,7 @@ class CampaignRegistriesController < ApplicationController
   # PATCH/PUT /campaign_registries/1.json
   def update
     respond_to do |format|
-      if @campaign_registry.update(campaign_registry_params)
+      if @campaign_registry.update!(campaign_registry_params)
         format.html { redirect_to @campaign_registry, notice: 'Campaign registry was successfully updated.' }
         format.json { render :show, status: :ok, location: @campaign_registry }
       else

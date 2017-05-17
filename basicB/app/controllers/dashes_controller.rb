@@ -14,9 +14,9 @@ class DashesController < ApplicationController
     # @my_dash = set_dash
     
     # Version 2
-    @my_dash = setDash
-    @dash_playing = @my_dash.players
-    @dash_hosting = @my_dash.campaigns
+    # @my_dash = setDash
+    # @dash_playing = @my_dash.players
+    # @dash_hosting = @my_dash.campaigns
   end
     
   def index
@@ -57,7 +57,7 @@ class DashesController < ApplicationController
   # PATCH/PUT /dashes/1.json
   def update
     respond_to do |format|
-      if @dash.update(dash_params)
+      if @dash.update!(dash_params)
         format.html { redirect_to @dash, notice: 'Dash was successfully updated.' }
         format.json { render :show, status: :ok, location: @dash }
       else
@@ -82,8 +82,7 @@ class DashesController < ApplicationController
       User.find(params[:id])
     end
     # Use callbacks to share common setup or constraints between actions.
-    def set_dash(options = {})
-      
+    def set_dash
       @dash = Dash.find(params[:id])
     end
 

@@ -42,6 +42,8 @@ group :development, :test do
   gem 'guard', '~>2.14'
   gem 'guard-minitest'
   gem 'rails-controller-testing'
+  gem 'factory_girl'
+  gem 'factory_girl_rails'
   gem 'faker'
   gem 'hihi'
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too

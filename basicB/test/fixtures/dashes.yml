@@ -2,9 +2,12 @@
 
 DEFAULTS: &DEFAULTS
   created_at: <%= 3.weeks.ago.to_s(:db) %>
+  # update_at: <%= 3.weeks.ago.to_s(:db) %>
 
 one:
   name: MyString
+  # players: one, two
+  # player: one, two
   <<: *DEFAULTS
   
 two:

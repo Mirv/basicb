@@ -1,5 +1,7 @@
 = simple_form_for(@dash) do |f|
   = f.error_notification
+  - flash.each do |message_type, message|
+    %br= "#{message_type} -- #{message}"
 
   .form-inputs
     = f.input :name

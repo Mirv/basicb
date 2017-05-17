@@ -1,13 +1,26 @@
 require "test_helper"
+require "factories.rb"
 
 class DashesControllerTest <  ActionDispatch::IntegrationTest
 
-  setup do
-    @users = users(:one, :two)
-    @dash = dashes(:one)
+  
+  # setup do
+  #   @users = users(:one, :two)
+  #   @dash = dashes(:one)
+  #   sign_in users(:validuser)
+  #   @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+  # end
+  
+  it "dashbard singular route test" do
     sign_in users(:validuser)
-    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+    # @my_dash = dashes(:one)
+
+    player = create(:player)
+    user = create(:user)
+    get '/dashboard', params: {id: user.id}
+    assert_response :success
   end
+
   
   test "relationship between dash and player" do
     assert @relation_dash_player.valid?  
@@ -21,12 +34,6 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   test "relationship between dash and player - must have player_id" do
     @relation_dash_player.player_id = nil
     assert_not @relation_dash_player.valid?  
-  end
-  
-  it "dashbard singular route test" do
-    # @my_dash = dashes(:one)
-    get '/dashboard'
-    assert_response :success
   end
   
   def test_should_get_dash_index
