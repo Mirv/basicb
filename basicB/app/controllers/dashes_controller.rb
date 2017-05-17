@@ -10,8 +10,8 @@ class DashesController < ApplicationController
   
   def dashboard
     # # version 3
-    # @user = set_user
-    # @my_dash = set_dash
+    @user = set_user
+    @my_dash = set_dash
     
     # Version 2
     # @my_dash = setDash

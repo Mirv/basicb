@@ -12,3 +12,14 @@ FactoryGirl.define do
     name "#{Faker::Name.name}"
   end
 end
+
+# FactoryGirl.define do
+#   factory :relationship do
+#     guardian
+#     relationship_type RelationshipType.first
+
+#     after(:build) do |relationship|
+#       relationship.student = FactoryGirl.create(:student, school: relationship.guardian.school) unless relationship.student.present?
+#     end
+#   end
+# end

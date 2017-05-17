@@ -13,10 +13,10 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   
   it "dashbard singular route test" do
     sign_in users(:validuser)
-    # @my_dash = dashes(:one)
 
     player = create(:player)
     user = create(:user)
+    dash = create(:dash)
     get '/dashboard', params: {id: user.id}
     assert_response :success
   end
