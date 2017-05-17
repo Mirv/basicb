@@ -11,3 +11,6 @@ two:
   name: MyString
   <<: *DEFAULTS
 
+validuser:
+  name: validuser
+  <<: *DEFAULTS

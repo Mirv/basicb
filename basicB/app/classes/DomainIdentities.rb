@@ -10,7 +10,8 @@ module DomainIdentities
   end
   
   def setDash
-    @user = setUser
+    # @user = setUser
+    @user = current_user
     @dash = @user.dashes.first
   end
   
