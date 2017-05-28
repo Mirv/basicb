@@ -51,4 +51,17 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  
+  console do
+    # def obie
+    #   User.where(email: "obiefernandez@gmail.com").first
+    # end
+    
+    def setupObj
+      require 'DomainIdentities'
+      config.console = DomainIdentities
+      
+      a = DomainIdentities::GameDsl.new
+    end
+  end
 end

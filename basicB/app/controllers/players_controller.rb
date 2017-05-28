@@ -11,7 +11,7 @@ class PlayersController < ApplicationController
     @players = Player.paginate(page: params[:page], per_page: 10)
     # Show all players belonging to the dash of the user in question
     @dash = setDash
-    @dash_players = @dash.players
+    @dash_players = @dash.players #.all.paginate(page: params[:page], per_page: 5)
     
   end
 
@@ -82,6 +82,11 @@ class PlayersController < ApplicationController
     def set_player
       @player = Player.find(params[:id])
     end
+
+    def set_dash
+      @dash = User.find(current_user.id)
+    end
+
     
     def set_user
       @user = User.find(current_user.id)
@@ -91,6 +96,10 @@ class PlayersController < ApplicationController
     def player_params
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, userplays_attributes: [:id, :user_id, :player_id]) # runs but still not permited
       # params.require(:player).permit(:id, :player_id, :screenname, :motto, :country_id, :user_id) # fails
-      params.require(:player).permit(:id, :player_id, :country_id, :screenname, :motto)
+      # params.require(:player).permit(:id, :player_id, :country_id, :screenname, :motto)
+      # params.require(:player).permit(:id, :country_id, :screenname, :motto)
+      # params.require(:player).permit(:id)
+      # params.require(:player).permit()
+      params.require(:player).permit(:id, :screenname, :country_id, :motto)
     end
 end

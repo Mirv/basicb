@@ -2,6 +2,7 @@ require 'test_helper'
 
 class CountriesControllerTest < ActionDispatch::IntegrationTest
   setup do
+    sign_in users(:validuser)
     @country = countries(:one)
   end
 
@@ -15,9 +16,12 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+
+  #  MOdeled after - http://edgeguides.rubyonrails.org/testing.html - but oddly in some places, not all - Article_url instead is used, but in my code post looks like plural - need mentor help
   test "should create country" do
     assert_difference('Country.count') do
-      post countries_url, params: { country: { description: @country.description, name: @country.name, player_id: @country.player_id } }
+      # post countries_url, params: { country: { description: @country.description, name: @country.name } } # removed from after country.name ... ', player_id: @country.player_id'
+      post countries_url, params: { country: { description: @country.description, name: @country.name } } # removed from after country.name ... ', player_id: @country.player_id'
     end
 
     assert_redirected_to country_url(Country.last)

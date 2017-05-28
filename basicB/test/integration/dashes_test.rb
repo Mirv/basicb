@@ -1,24 +1,30 @@
 require "test_helper"
 require "factories.rb"
 
+## Needs massive work - http://edgeguides.rubyonrails.org/testing.html - believe setup block & dashboard singular route test is too fragile
+
+
 class DashesControllerTest <  ActionDispatch::IntegrationTest
 
   
-  # setup do
-  #   @users = users(:one, :two)
-  #   @dash = dashes(:one)
-  #   sign_in users(:validuser)
-  #   @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
-  # end
+  setup do
+    @users = users(:one, :two)
+    @dash = dashes(:one)
+    sign_in users(:validuser)
+    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+  end
   
   it "dashbard singular route test" do
     sign_in users(:validuser)
-
-    player = create(:player)
     user = create(:user)
+    # for some reason this existing is tied to the test passing even though we are using @dash from setup block in the get call  following
     dash = create(:dash)
-    get '/dashboard', params: {id: user.id}
+    get '/dashboard', params: {id: user.id, dash: @dash}
+
+    # puts "\n#{@user}\n"
     assert_response :success
+    
+    # Part 2 -- Need to test rails association
   end
 
   

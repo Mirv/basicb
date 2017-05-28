@@ -3,31 +3,48 @@ require 'active_support/concern'
 module DomainIdentities
   extend ActiveSupport::Concern
 
+  def tester
+    puts "HI"*25
+  end
+
+### Use this from now on
+  
+  class GameDsl
+    
+    def hi; puts "Hi"; end    
+    def setUser; @user_id = User.first; end
+    def setDash; @dash = Dash.first; end
+    def setPlayer; @player = Player.first; end
+      
+    def userSetDash
+      @user = setUser
+      @dash = @user.dashes.create!(name: "Something")
+    end     
+  end
+  
+  class DashDslExt < GameDsl
+
+    def userSetDash
+      @user = setUser
+      @dash = @user.dash.create!()
+    end
+    
+  end
+  
+#### Don't use the module level anymore - backwards compatability till refactor only
   def setUser
-    @user_id = User.first 
+    @user_id = current_user || User.first 
     # @user_id = current_user 
     # @user = User.find(@user_id)
   end
   
   def setDash
     # @user = setUser
-    @user = current_user
+    @user = self.current_user
     @dash = @user.dashes.first
   end
   
-  class GameDsl
-    def setUser
-      @user_id = User.first 
-    end
-
-    def self.setUser
-      @user_id = User.first 
-    end
-    
-    def hi
-      puts "Hi"
-    end
-  end
+#### End backwards compatibility
 
   class PlayerHelper
   

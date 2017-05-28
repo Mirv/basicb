@@ -13,10 +13,12 @@ class DashesController < ApplicationController
     @user = set_user
     @my_dash = set_dash
     
+    # @my_dash = setDash
     # Version 2
     # @my_dash = setDash
-    # @dash_playing = @my_dash.players
-    # @dash_hosting = @my_dash.campaigns
+
+    @dash_playing = @my_dash.players
+    @dash_hosting = @my_dash.campaigns
   end
     
   def index
@@ -79,10 +81,11 @@ class DashesController < ApplicationController
 
   private
     def set_user
-      User.find(params[:id])
+      @user = User.find(params[:id])
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_dash
+      # @dash = player.dash.first
       @dash = Dash.find(params[:id])
     end
 

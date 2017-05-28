@@ -7,11 +7,14 @@
 one: 
 # column: value
   email: test1@test.com
+  name: Test
 
 #
 two: 
 # column: value
   email: test2@test.com
+  name: Test2
 
 validuser:
   email: a@test.com
+  name: Test

@@ -4,8 +4,10 @@ require "rails/test_help"
 require "minitest/rails"
 require "minitest/rails/capybara"
 # require "DomainIdentities"
+require 'DomainIdentities.rb'
 require 'factory_girl'
 # require 'factory_girl_rails'
+require 'minitest/byebug' if ENV['DEBUG']
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
 # to the test group in the Gemfile and uncomment the following:
@@ -26,7 +28,8 @@ class ActionDispatch::IntegrationTest
   # include Devise::Test::ControllerHelpers
   include Devise::Test::IntegrationHelpers
   include FactoryGirl::Syntax::Methods
-  # taking DI out for now
-  # include DomainIdentities
+  # include DomainIdentities::GameDsl
+  include DomainIdentities
+  
   # include FactoryGirl::Syntax::Methods
 end

@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     email "#{Faker::Cat.name}.person@test.com"
     password "aaaaaa"
+    # association :dash
   end
 
   factory :player do
@@ -10,6 +11,11 @@ FactoryGirl.define do
   
   factory :dash do
     name "#{Faker::Name.name}"
+  end
+  
+  factory :dashplayer do
+    dash_id {rand(9)}
+    player_id {rand(9)}
   end
 end
 
