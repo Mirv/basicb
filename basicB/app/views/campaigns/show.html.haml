@@ -9,12 +9,13 @@
   %li
     = @result
 
-  %li
-    = @dash
-    = @dash.name
-    // = @dash.users.first.name
-  %li
-    = @user
+  - if !@dash.nil?
+    %li
+      = @dash.name
+    %li
+      = @dash.users.first.name
+    %li
+      = @user
 
 .hoster
   %h2= "#{@user.name} runs this..."

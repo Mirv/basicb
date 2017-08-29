@@ -62,17 +62,17 @@ class CountriesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_country
-      @country = Country.find(params[:id])
-    end
+private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_country
+    @country = Country.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-   def country_params
-    params.require(:country).permit(:id, :name, :description, :size,
-       countryneighbor_attritubtes: [:id, :bordercountry_id, :country_id, :_destroy],
-       states_attributes: [:id, :name, :description, :country_id, :_destroy,
-       counties_attributes: [:id, :name, :description, :state_id, :_destroy]])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+ def country_params
+  params.require(:country).permit(:id, :name, :description, :size, :player_id,
+     countryneighbor_attritubtes: [:id, :bordercountry_id, :country_id, :_destroy],
+     states_attributes: [:id, :name, :description, :country_id, :_destroy,
+     counties_attributes: [:id, :name, :description, :state_id, :_destroy]])
+  end
 end

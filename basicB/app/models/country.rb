@@ -5,12 +5,17 @@ class Country < ApplicationRecord
   has_many :neighbors, through: :centers, source: :neighbor
   
   has_many  :states
-  has_many  :counties, through: :state
+  has_many  :counties, through: :states
 
   belongs_to  :player
-  belongs_to  :campcount
   
-  validates :name, presence: true, uniqueness: true
+  has_many  :campcount
+  has_many  :campaign, through: :campcount
+  
+  validates :name, presence: true 
+  #, uniqueness: true  # We remove the uniqueness as countries in different 
+  # ... campaigns  need to be able to have same name ... will need a composite 
+  # ... key check at some point
 
   accepts_nested_attributes_for :states, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true
   accepts_nested_attributes_for :counties, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true

@@ -8,11 +8,11 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:validuser)
     
     setter = DomainIdentities::GameDsl.new
-    @user = setter.setUser
-    @dash = setter.setDash
-    @dash = userSetDash
+    # puts "#{setter.userSetDash}"
+    # @user = setter.setUser
+    # @dash = setter.setDash
+    # @dash = userSetDash
     
-    @player_test = Player.create(screenname: "test_screen_name")
   end
 
   test "should get index" do
@@ -37,24 +37,15 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
 #   end
   
   test "should create player" do
-    # assert_difference('Country.count') do
-    #   post countries_url, params: { country: { description: "Test - D", name: "TestName", size:"1" }   }
-    # end
+    @player_test = Player.create(screenname: "test_screen_name")
+
     assert_difference('Player.count') do
-      # DomainIdentities::tester
-      # puts "\n#{DomainIdentities::tester}\n"
-      # byebugexit
-
-      # puts "\n#{@player_test.screenname}\n"
-
-      post players_url,  params: { id:  @player_test.id, player: @player_test }  
-      # post players_url,  params: { player: { screenname: 'screenname' } } 
-      # puts "\n\nIn the assert_difference - #{response.body}\n\nThe player ... #{@player.screenname}"
+      post players_url,  params: { player: { screenname: "Testee Name" } }  
     end
     # assert_redirected_to player_url(Player.last)
     # puts "redirect completed or failed"
   end
-
+  
   test "should show player" do
     get player_url(@player)
     assert_response :success

@@ -26,7 +26,7 @@ def makeUserInfo(u)
   u = u * 1000
   random = rand(u)
 
-  name = Faker::Cat.name
+  name = Faker::Cat.name ||= "Mr. Meowmix"
   email = "The#{name}#{u}#{random}@test.com"
   password = "ssssss"
   password_confirmation = password
@@ -36,7 +36,6 @@ def makeUserInfo(u)
   hold = hold.merge({"email" =>  email})
   hold = hold.merge({"password" =>  password})
   hold = hold.merge({"password_confirmation" =>  password_confirmation})
-  
   return hold
 end
 
@@ -61,14 +60,18 @@ end
 ## Pending - do we want this to be a sideeffect as that blocks reusability?
 #
 def makeDefaultUser(x, email)
+  # puts "entering makeDefaultUser"
   unless User.find_by( email: email )
+    # puts "calling makeUserInfo"
     new_user_make = makeUserInfo(x)
     new_user_make["email"] = email
     new_user_made = User.create!(new_user_make)
+    print "New user made -- #{new_user_made}"
     return new_user_made
   #
   ## Stub here for a single campaign to generate
   #
   end
+  puts "makeDefaultUser failed on ##{x}"
 #  new_player_made = new_user_made.players.create!(makePlayerInfo)
 end

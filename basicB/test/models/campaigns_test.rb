@@ -11,8 +11,8 @@ class CampaignsTest < ActiveSupport::TestCase
     refute cc.valid?, 'Campaign must have name'
   end
   
-  test 'campaigns should list most recent first' do
-    # assert_equal microposts(:most_recent), Micropost.first
-    assert_equal campaigns(:most_recent), Campaign.first
-  end
+  # test 'campaigns should list most recent first' do
+  #   # assert_equal microposts(:most_recent), Micropost.first
+  #   assert_equal campaigns(:most_recent), Campaign.first
+  # end
 end

@@ -10,9 +10,9 @@ class PlayersController < ApplicationController
   def index
     @players = Player.paginate(page: params[:page], per_page: 10)
     # Show all players belonging to the dash of the user in question
-    @dash = setDash
+    # @dash = setDash
+    @dash = set_dash
     @dash_players = @dash.players #.all.paginate(page: params[:page], per_page: 5)
-    
   end
 
   # GET /players/1
@@ -34,13 +34,12 @@ class PlayersController < ApplicationController
   def create
   #  player_params = player_params.merge(screenname: a_name) unless player_params.key?("screenname")
   # u.dashes.first.dashplayers.first.player
-    
     @player = Player.new(player_params)
     # @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
-        @dash = setDash
+        @dash = set_dash
         @player.dashplayers.create(dash_id: @dash.id)
         
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
@@ -100,6 +99,6 @@ class PlayersController < ApplicationController
       # params.require(:player).permit(:id, :country_id, :screenname, :motto)
       # params.require(:player).permit(:id)
       # params.require(:player).permit()
-      params.require(:player).permit(:id, :screenname, :country_id, :motto)
+      params.require(:player).permit(:id,:screenname, :country_id, :motto)
     end
 end

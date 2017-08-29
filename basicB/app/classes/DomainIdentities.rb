@@ -17,18 +17,16 @@ module DomainIdentities
     def setPlayer; @player = Player.first; end
       
     def userSetDash
-      @user = setUser
-      @dash = @user.dashes.create!(name: "Something")
+      @owner = setUser
+      @dash = @owner.dashes.create!(name: "Something")
     end     
   end
   
   class DashDslExt < GameDsl
-
     def userSetDash
       @user = setUser
       @dash = @user.dash.create!()
     end
-    
   end
   
 #### Don't use the module level anymore - backwards compatability till refactor only
@@ -47,7 +45,10 @@ module DomainIdentities
 #### End backwards compatibility
 
   class PlayerHelper
-  
+    initialize  
+      @user = setUser
+      @dash = setDash(@user)
+    end
     # include UserHelpers::DomainIdentities
     # extend DomainIdentities
     # @dash = setDash
@@ -57,39 +58,45 @@ module DomainIdentities
       current_user
     end
     
-    def setDash
-      @user = setUser
-      @dash = @user.dashes.first
+    def setDash(user)
+      @dash = user.dashes.first
     end
   
-    def defaultPlayer
+    def defaultPlayerName
       @player_info = { screenname: "A shadowy & mysterious figure ... " }
     end
     
-    def defaultCampaign
+    def defaultCampaignName
       @campaign_info = { name: "A mysterious mission in a far away place ..." }
     end
     
-    def defaultDash
+    def defaultDashName
       @dash_info = { name: "A magical thing to see what the naked eye can not ... " }
     end
     
+    ### Create new objects
     def createPlayer
-      Player.new(defaultPlayer)
+      Player.new(defaultPlayerName)
     end
      
     def createPlayer!(owner)
-      owner.players.new(defaultPlayer)
+      owner.players.new(defaultPlayerName)
     end   
-
+    ### Create new objects
+    
+    ### Create AND assign new objects
+    def assignDash(player)
+      dash = setDash
+      player.dashplayers.create(dash_id: dash.id)
+    end
+    
     def assignDash(player)
       dash = setDash
       player.dashplayers.create(dash_id: dash.id)
     end
     
     def assignCampaign(campaign_id)
-      @campaign = Campaign.first
-      
+      @campaign = Campaign.find(campaign_id) || Campaign.first
       owner.campplays.create(campaign_id: @campaign.id)
     end
     
@@ -101,7 +108,7 @@ module DomainIdentities
   
     def makePlayer(owner)
       @dash = setDash
-      @player = defaultPlayer 
+      @player = defaultPlayer Name
       
       respond_to do |format|
         if @player.save

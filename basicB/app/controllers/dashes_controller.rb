@@ -10,7 +10,7 @@ class DashesController < ApplicationController
   
   def dashboard
     # # version 3
-    @user = set_user
+    @user = cur_user
     @my_dash = set_dash
     
     # @my_dash = setDash
@@ -80,13 +80,19 @@ class DashesController < ApplicationController
   end
 
   private
+    def cur_user
+      # relies on devise
+      cur_user = current_user
+      # attr_accessor
+    end
     def set_user
       @user = User.find(params[:id])
     end
     # Use callbacks to share common setup or constraints between actions.
     def set_dash
       # @dash = player.dash.first
-      @dash = Dash.find(params[:id])
+      # @dash = Dash.find(params[:id])
+      @dash = cur_user.dashes.first
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

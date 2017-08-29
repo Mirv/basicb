@@ -1,7 +1,16 @@
 require "test_helper"
 
 describe CampaignsController do
-  let(:campaign) { campaigns :one }
+  before do
+    sign_in users(:validuser)
+    let(:campaign) { campaigns :one }
+  end
+
+  # it "executes join" do
+  #   expect { 
+  #     post :create, params: { campaign: { description: campaign.description, name: campaign.name, player_id: campaign.player_id } }
+  #   }.to change { User.count }
+  # end
 
   it "gets index" do
     get campaigns_url
@@ -15,7 +24,7 @@ describe CampaignsController do
 
   it "creates campaign" do
     expect {
-      post campaigns_url, params: { campaign: { description: campaign.description, name: campaign.name, player_id: campaign.player_id } }
+      post campaigns_url, params: { campaign: { description: campaign.description, name: campaign.name } }
     }.must_change "Campaign.count"
 
     must_redirect_to campaign_path(Campaign.last)
@@ -32,7 +41,7 @@ describe CampaignsController do
   end
 
   it "updates campaign" do
-    patch campaign_url(campaign), params: { campaign: { description: campaign.description, name: campaign.name, player_id: campaign.player_id } }
+    patch :update, params: { campaign: { description: campaign.description, name: campaign.name } }
     must_redirect_to campaign_path(campaign)
   end
 

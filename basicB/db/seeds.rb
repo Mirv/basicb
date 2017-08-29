@@ -39,7 +39,7 @@ newer_player = userdashes.players.create!(makePlayerInfo)
 puts "First player -- #{newer_player["screenname"]}"
 
 #
-## My base user & campaign, with 1st player & country
+## My base 2nd user & campaign, with 1st player & country
 #
 
 another_user = makeDefaultUser 2, "b@test.com"

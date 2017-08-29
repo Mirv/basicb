@@ -3,13 +3,31 @@ require 'filler.rb'
 ### Interfaces with faker api to get random data, returning a hash
 ## Pending improvements, take optional params of hash index's & apply rules
 #
+
+def genName
+  name = Faker::LordOfTheRings.location
+  count = pickPlayer()
+  number = rand(count * 300)
+  # The 10 ensures less chance of duplicate entries
+  name = "#{name} of # #{number}"
+  # puts "name: #{name}"
+  return name
+end
+
+
+#### 
+####
+#### 
+####
+def pickPlayer(x = -1)
+  count = x > -1 ? x : rand(Player.count - 1)
+end
+
+
 def countryGenerate(count)
   hold = Hash.new
-  name = Faker::LordOfTheRings.location
-  number = rand(count * 30)
-  # The 10 ensures less chance of duplicate entries
-  name = "#{name} #{number}"
-  # puts "name: #{name}"
+  name = genName
+  
   
   hold = hold.merge({"name" =>  name})
   hold = hold.merge({"description" => Faker::Hacker.adjective})
@@ -27,7 +45,8 @@ def countryCreate(args)
   a_country = Country.create!(
     name:  args["name"],
     description: args["description"],
-    size: args["size"])
+    size: args["size"],
+    player_id: 1)
   return a_country
 end
 

@@ -8,18 +8,26 @@ class CampaignsController < ApplicationController
   # before_action :set_dash
   skip_before_action :authenticate_user!, only: [:index]
 
-  def join
-    @player = Player.new(screenname: "A dark and mysterious figure ... ")
+  def join(player_name = "A dark and mysterious figure ... ")
+    @default_player = player_name
+    @player = Player.new(screenname: @default_player)
 
     respond_to do |format|
       if @player.save
         
+        # Grab campaign & then assign player to campaign
         @campaign = setCampaign
-        puts "#{@campaign.id}"
         @player.campplays.create!(campaign_id: @campaign.id)
         
+        # Grab dash & then assign player to the dash
         @dash = setDash
-        @player.dashplayers.create(dash_id: @dash.id)
+        @player.dashplayers.create(dash_id: @dash)
+        
+        # Get count to prevent dupes, create country (w/player id), map to campaign
+        # Too much logic - need a revision to handle count in an object elsewhere?
+        @count = Country.count
+        @country = @player.countries.create!(name: "A shadowy & mysterious land ... #{@count}")
+        @country.campcount.create!(campaign_id: @campaign.id)
         
         format.html { redirect_to @player, notice: 'Player was successfully created.' }
         format.json { render :show, status: :created, location: @player }
@@ -109,7 +117,8 @@ class CampaignsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
   def setCampaign
-    @campaign = Campaign.find(params[:id]) 
+    # @campaign = Campaign.find(params[:id])
+    @campaign = Campaign.first
   end
 
     # Never trust parameters from the scary internet, only allow the white list through.
