@@ -1,30 +1,6 @@
+#  See bottom for domain logic insights
+
 require 'active_support/concern'
-
-##### Goals #####
-
-#1 - handle enrollment of users in campaigns
-#2 - concentrate making of all relationships
-
-#### Business logic ####
-
-#1a -- create player in campaign
-#1b -- create organization in campaign (assigned to player too)
-#2a -- assign player to dashboard of user controlling player
-#2b -- assign organization to dashboard of user controlling player
-
-#### Requirements ####
-
-### Relationships
-# user -> dashboard -> campaign -> player, organization
-# dashboard -> campaign , player, organization 
-# dashboard -> player -> organization
-
-### Vars ###
-# for campaign, dashboard, player, organization
-
-### Methods ###
-# Method to assign things to campaign
-# Method to assign things to domain
 
 module Enroller
   extend ActiveSupport::Concern
@@ -71,46 +47,32 @@ module Enroller
   def assign_dashboard_organization
     Dashcount.create!(country_id: @organization, dash_id: @dashboard)
   end
+end
 
 
-  ### Create new player objects
-  
-    # create just the player, no relationship
-    def createPlayer! 
-      Player.new(defaultPlayerName)
-    end
-    
-    # variable relationship owner with param, takes AR obj, req's has_many: :through
-    def createPlayer!(owner)
-      owner.players.new(defaultPlayerName)
-    end
-    
-    # no parameter
-    def createPlayer!
-      @dashboard.players.create!(defaultPlayerName)
-    end
-  
-  ### Assign objects
-    def assigner!(assigne, assigned, relationshipName)
-      assigne.relationshipName.create!(assigned)
-    end
-  
-  # Assign new objects
-  def assign_dash!(player)
-    @dash.player.create!(player_id: player.id)
-  end
-  
-  def assign_dash(player)
-    player.dashplayers.create(dash_id: @dash.id)
-  end
-  
-  def assignCampaign(campaign_id)
-    @campaign = Campaign.find(campaign_id) || Campaign.first
-    owner.campplays.create(campaign_id: @campaign.id)
-  end
-  
-  def assignRelationships(owner)
-    #call 
-    assignDash owner 
-    assignCampaign owner
-  end
+
+##### Goals #####
+
+#1 - handle enrollment of users in campaigns
+#2 - concentrate making of all relationships
+
+#### Business logic ####
+
+#1a -- create player in campaign
+#1b -- create organization in campaign (assigned to player too)
+#2a -- assign player to dashboard of user controlling player
+#2b -- assign organization to dashboard of user controlling player
+
+#### Requirements ####
+
+### Relationships
+# user -> dashboard -> campaign -> player, organization
+# dashboard -> campaign , player, organization 
+# dashboard -> player -> organization
+
+### Vars ###
+# for campaign, dashboard, player, organization
+
+### Methods ###
+# Method to assign things to campaign
+# Method to assign things to domain
