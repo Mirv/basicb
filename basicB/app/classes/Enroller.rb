@@ -1,51 +1,72 @@
-#  See bottom for domain logic insights
-
 require 'active_support/concern'
 
+#  See bottom for domain logic insights
 module Enroller
-  extend ActiveSupport::Concern
+  
+  class Enroller
+    extend ActiveSupport::Concern
+  
+    attr_accessor :player, :organization, :campaign
+  
+    def initialize(campaign_id, current_user_id)
+      @user = User.find(current_user_id)
+      @dashboard = @user.dashes.first
+      @campaign = Campaign.find(campaign_id)
+    end
 
-  def initialize(campaign_id, current_user)
-    @user = current_user
-    @dashboard = find_dashboard(@user) # This one looks up the dash id based on user id
-    @campaign = Campaign.find(campaign_id)
-    @organization = Country.new(name: defaultOrganizationName)
-  end
+    ### Mid level business logic methods
+    # ... player & organization are created off relationship model implicitly
+    # ... then assign methods explicitly create entries on the join tables
+    
+    def create_campaign_player
+      @campaign.players.create!(screenname: "Test") 
+    end
+    
+    def create_campaign_organization
+      @campaign.countries.create!(name: "Blah")
+      # works
+      # Campcount.create!(campaign_id: @campaign.id, country_id: (Country.count))
+    end
+    
+    # for some reason playcount or countplay doesn't appear to exist in basicB
+    def assign_campaign_organization_to_player(organization, player)
+      Countplay.create!(count: organization, player: player)
+    end
+  
+    def assign_dashboard_player
+      Dashplayer.create!(player_id: @player, dash_id: @dashboard)
+    end
+    
+    # Dashcount doesn't exist yet, but is necessary to find orphaned countries in campaign
+    def assign_dashboard_organization
+      Dashcount.create!(country_id: @organization, dash_id: @dashboard)
+    end
+    
+    def defaultOrganizationName
+      @player_info = {name: "A mysterious group ... " }
+    end
+    def defaultPlayerName
+      @player_info = { screenname: "A shadowy & mysterious figure ... " }
+    end
+    
+    def defaultCampaignName
+      @campaign_info = { name: "A mysterious mission in a far away place ..." }
+    end
+    
+    def defaultDashName
+      @dash_info = { name: "A magical thing to see what the naked eye can not ... " }
+    end
+  
+    ### Top level business logic methods
+    
+    def execute_enrollment
+      @player = create_campaign_player
+      @organization = create_campaign_organization
+      assign_campaign_organization_to_player(@organization, @player)
+      assign_dashboard_player
+      assign_dashboard_organization
+    end
 
-  ### Top level business logic methods
-  
-  def execute_enrollment
-    @player = create_campaign_player
-    @organization = create_campaign_organization(@player)
-    assign_campaign_organization_to_player(@organization, @player)
-    assign_dashboard_player
-    assign_dashboard_organization
-  end
-
-  ### Mid level business logic methods
-  # ... player & organization are created off relationship model implicitly
-  # ... then assign methods explicitly create entries on the join tables
-  
-  def create_campaign_player
-    @campaign.players.create!(screenname: defaultPlayerName) 
-  end
-  
-  def create_campaign_organization(player)
-    @campaign.countries.create!(name: defaultOrganizationName)
-  end
-  
-  # for some reason playcount or countplay doesn't appear to exist in basicB
-  def assign_campaign_organization_to_player(organization, player)
-    Countplay.create!(count: organization, player: player)
-  end
-
-  def assign_dashboard_player
-    Dashplayer.create!(player_id: @player, dash_id: @dashboard)
-  end
-  
-  # Dashcount doesn't exist yet, but is necessary to find orphaned countries in campaign
-  def assign_dashboard_organization
-    Dashcount.create!(country_id: @organization, dash_id: @dashboard)
   end
 end
 

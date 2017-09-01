@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170419225517) do
+ActiveRecord::Schema.define(version: 20170901125051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,13 +53,10 @@ ActiveRecord::Schema.define(version: 20170419225517) do
   end
 
   create_table "campcounts", force: :cascade do |t|
-    t.integer  "campaign_id"
-    t.integer  "country_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.index ["campaign_id", "country_id"], name: "index_campcounts_on_campaign_id_and_country_id", unique: true, using: :btree
-    t.index ["campaign_id"], name: "index_campcounts_on_campaign_id", using: :btree
-    t.index ["country_id"], name: "index_campcounts_on_country_id", using: :btree
+    t.integer "campaign_id"
+    t.integer "country_id"
+    t.index ["campaign_id"], name: "index_campcounts_on_Campaign_id", using: :btree
+    t.index ["country_id"], name: "index_campcounts_on_Country_id", using: :btree
   end
 
   create_table "campplays", force: :cascade do |t|

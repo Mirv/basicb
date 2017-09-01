@@ -61,17 +61,20 @@ end
 #
 def makeDefaultUser(x, email)
   # puts "entering makeDefaultUser"
-  unless User.find_by( email: email )
+  if User.find_by( email: email )
+    puts "makeDefaultUser failed on ##{x}"
+  else
     # puts "calling makeUserInfo"
     new_user_make = makeUserInfo(x)
     new_user_make["email"] = email
     new_user_made = User.create!(new_user_make)
     print "New user made -- #{new_user_made}"
     return new_user_made
+  end
   #
   ## Stub here for a single campaign to generate
   #
-  end
-  puts "makeDefaultUser failed on ##{x}"
+
+  
 #  new_player_made = new_user_made.players.create!(makePlayerInfo)
 end

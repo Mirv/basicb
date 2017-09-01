@@ -48,20 +48,10 @@ module DomainIdentities
     initialize  
       @user = setUser
       @dash = setDash(@user)
+      @campaign = setCampaign
     end
-    # include UserHelpers::DomainIdentities
-    # extend DomainIdentities
-    # @dash = setDash
-    # @dash = self.setDash
-  
-    def setUser
-      current_user
-    end
-    
-    def setDash(user)
-      @dash = user.dashes.first
-    end
-  
+
+    ### default names ###
     def defaultPlayerName
       @player_info = { screenname: "A shadowy & mysterious figure ... " }
     end
@@ -75,19 +65,24 @@ module DomainIdentities
     end
     
     ### Create new objects
-    def createPlayer
-      Player.new(defaultPlayerName)
-    end
-     
-    def createPlayer!(owner)
-      owner.players.new(defaultPlayerName)
-    end   
-    ### Create new objects
+      def createPlayer!
+        Player.new(defaultPlayerName)
+      end
+       
+      def createPlayer!(owner)
+        owner.players.new(defaultPlayerName)
+      end   
     
-    ### Create AND assign new objects
-    def assignDash(player)
-      dash = setDash
-      player.dashplayers.create(dash_id: dash.id)
+    ### Assign objects
+      def assigner!(assigne, assigned, relationshipName)
+        assigne = relationshipName.assigned
+      end
+    
+    ### Assign new objects
+    def assignDash!(player)
+      # Player doesn't own the dash...dont use
+      # player.dashplayers.create(dash_id: @dash.id)
+      @dash.players.create(player_id: player.id, screenname: player.screenname)
     end
     
     def assignDash(player)

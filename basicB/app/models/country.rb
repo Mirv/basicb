@@ -9,8 +9,8 @@ class Country < ApplicationRecord
 
   belongs_to  :player
   
-  has_many  :campcount
-  has_many  :campaign, through: :campcount
+  has_many  :campcounts
+  has_many  :campaign, through: :campcounts
   
   validates :name, presence: true 
   #, uniqueness: true  # We remove the uniqueness as countries in different 
