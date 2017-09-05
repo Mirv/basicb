@@ -2,7 +2,7 @@ require 'DomainIdentities.rb'
 
 class CampaignsController < ApplicationController
   # include ApplicationHelper
-  include DomainIdentities
+  # include DomainIdentities
   
   # before_action :set_campaign, only: [:join, :edit, :update, :destroy]
   # before_action :set_dash

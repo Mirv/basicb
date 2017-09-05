@@ -1,5 +1,5 @@
 class PlayersController < ApplicationController
-  include DomainIdentities
+  # include DomainIdentities
 
   before_action :set_player, only: [:show, :edit, :update, :destroy]
   before_action :set_user

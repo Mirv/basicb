@@ -7,10 +7,14 @@ class Country < ApplicationRecord
   has_many  :states
   has_many  :counties, through: :states
 
-  belongs_to  :player
+  has_many  :playercountries
+  has_many  :players, through: :playercountries
   
   has_many  :campcounts
   has_many  :campaign, through: :campcounts
+  
+  has_many  :dashcounts
+  has_many  :dashes, through: :dashcounts
   
   validates :name, presence: true 
   #, uniqueness: true  # We remove the uniqueness as countries in different 

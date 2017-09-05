@@ -37,7 +37,6 @@ module Enroller
       Dashplayer.create!(player_id: @player, dash_id: @dashboard)
     end
     
-    # Dashcount doesn't exist yet, but is necessary to find orphaned countries in campaign
     def assign_dashboard_organization
       Dashcount.create!(country_id: @organization, dash_id: @dashboard)
     end

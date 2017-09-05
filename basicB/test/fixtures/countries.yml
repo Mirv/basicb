@@ -3,9 +3,9 @@
 one:
   name: FixtureOneName
   description: MyString
-  player: one
+  # player: one
 
 two:
   name: FixtureTwoName
   description: MyString
-  player: two
+  # player: two

@@ -36,11 +36,6 @@ group :development, :test do
   gem 'simple_form'
   gem 'cocoon'
   gem 'nokogiri' # required for minitest-have_tag
-  # minitest I put in previously
-  # gem 'minitest', '~> 5.10', '>= 5.10.1'
-  # this two are extras included in minitest-rails-capybara from earlier
-  # gem 'minitest-rails'
-  # gem 'minitest-capybara'
   gem "minitest", "5.10.1"
   gem 'minitest-color'
   gem 'guard', '~>2.14'

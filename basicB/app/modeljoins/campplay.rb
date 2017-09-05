@@ -4,5 +4,4 @@ class Campplay < ApplicationRecord
   
   validates :campaign_id, presence: true
   validates :player_id, presence: true
-  
 end

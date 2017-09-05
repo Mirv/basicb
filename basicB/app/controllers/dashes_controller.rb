@@ -1,7 +1,7 @@
 require 'DomainIdentities.rb'
 
 class DashesController < ApplicationController
-  include DomainIdentities
+  # include DomainIdentities
 
   before_action :set_dash, only: [:show, :dashboard, :edit, :update, :destroy]
 
