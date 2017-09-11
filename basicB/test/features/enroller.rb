@@ -55,23 +55,13 @@ class EnrollerTest < ActiveSupport::TestCase
       @enroller.assign_dashboard_organization
     }.must_change "Dashcount.count" 
   end
-
-
-
-#   test 'valid Campplay' do
-#     cp = Campplay.new(player_id: "1", campaign_id: "1")
-#     assert cp.valid?, 'Campplay must have name'
-#   end
   
-#   # Test one missing from pair of ID
-#   test 'invalid - no campaign' do
-#     cp = Campplay.new(player_id: 1)
-#     refute cp.valid?, 'Campplay passed without a name'
-#   end
+  test "does execute_enrollment set values" do
+    @enroller.execute_enrollment
+    assert_not_nil @enroller.player
+    assert_not_nil @enroller.organization
+    assert_not_nil @enroller.campaign
+  end
 
-#   test 'invalid - no player' do
-#     cp = Campplay.new(campaign_id: 1)
-#     refute cp.valid?, 'Campplay passed without a name'
-#   end
 
 end

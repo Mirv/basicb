@@ -12,7 +12,7 @@ module Enroller
       @user = User.find(current_user_id || User.create(screenname: "Default"))
       @dashboard = @user.dashes.first || Dash.create(name: "Default")
       @campaign = Campaign.find(campaign_id)
-      @player = create_campaign_player
+      # @player = create_campaign_player
       # @country = create_campaign_organization
     end
 
@@ -21,7 +21,7 @@ module Enroller
     def execute_enrollment
       @player = create_campaign_player
       @organization = create_campaign_organization
-      assign_campaign_organization_to_player(@organization, @player)
+      assign_organization_to_player
       assign_dashboard_player
       assign_dashboard_organization
     end
