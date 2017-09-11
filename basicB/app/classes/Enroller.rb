@@ -19,7 +19,7 @@ module Enroller
 
     ### Top level business logic methods
     
-    #  Does 
+    #  Currently creates each db entry as called
     def execute_enrollment
       @player = create_campaign_player
       @organization = create_campaign_organization
@@ -31,17 +31,22 @@ module Enroller
     end
     
     def rollback
+      @player.destroy unless @player.nil?
+      @organization.destroy unless @organization.nil?
+      @player_organization.destroy unless @player_organization.nil?
+      @dashboard_player.destroy unless @dashboard_player.nil?
+      @dashboard_organization.destroy unless @dashboard_organization.nil?
       
       ## This fails
       ## Attemping dynamic rollback of all vars minus the 3 we had before object
-      self.instance_variables.map do |vars|
-        if vars == :@user || vars == :@campaign || vars == :@dashboard
-          # puts "True -- #{vars}"
-        else
-          puts "False -- #{vars}"
-          vars.destroy
-        end
-      end
+      # self.instance_variables.map do |vars|
+      #   if vars == :@user || vars == :@campaign || vars == :@dashboard
+      #     # puts "True -- #{vars}"
+      #   else
+      #     puts "False -- #{vars}"
+      #     vars.destroy
+      #   end
+      # end
     end
 
     ### Mid level business logic methods
