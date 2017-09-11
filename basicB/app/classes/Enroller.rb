@@ -32,12 +32,13 @@ module Enroller
     
     def create_campaign_player
       total_rows = row_count_obj(Player.first)
-      @player = @campaign.players.create!(screenname: "Test#{(total_rows)}") 
+      puts "#{total_rows}"
+      @player = @campaign.players.create!(screenname: "#{defaultPlayerName} #{(total_rows + 1)}") 
     end
     
     def create_campaign_organization
       total_rows = row_count_obj(Country.first)
-      @organization = campaign.countries.create!(name: "Blah#{total_rows}")
+      @organization = campaign.countries.create!(name: "#{defaultOrganizationName}##{total_rows}")
     end
     
     def assign_organization_to_player
@@ -56,28 +57,29 @@ module Enroller
     # Not tested
 
     def defaultOrganizationName
-      @player_info = {name: "A mysterious group ... " }
+      "A mysterious group ... "
     end
     
     def defaultPlayerName
-      @player_info = { screenname: "A shadowy & mysterious figure ... " }
+      "A shadowy & mysterious figure ... "
     end
     
     def defaultCampaignName
-      @campaign_info = { name: "A mysterious mission in a far away place ..." }
+      "A mysterious mission in a far away place ..." 
     end
     
     def defaultDashName
-      @dash_info = { name: "A magical thing to see what the naked eye can not ... " }
+      "A magical thing to see what the naked eye can not ... " 
     end
   
   ### Low level stuff
   
+    # count of all rows in db of passed active record object
     def row_count_obj(ar_object)
       # ar_object.model_name.human.count
       # return ar_object.class.ancestors.include?(ActiveRecord::Base) ||
       # return ar_object.class.name.constantize.count || constantize(ar_object).count
-      ar_object.class.name.constantize.count
+      ar_object.class.name.constantize.count + 1
     end
   
     def Organization_count

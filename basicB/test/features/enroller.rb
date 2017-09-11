@@ -5,6 +5,10 @@ require 'Enroller'
 # -- Using the word enroller everywhere, means every line changes if enroller does
 #    ... probably why tests are using "it" alot
 # -- "must_change" isn't super specific, should probably assert it +/-'s 
+#
+# -- Probably need to test the row_count function retrieves a count
+#
+# -- Probably need to test that row_count & ID match if that's a thing...meh
 
 class EnrollerTest < ActiveSupport::TestCase
     # include Enroller::Enroller
