@@ -11,8 +11,8 @@ class Player < ApplicationRecord
   has_many :userplays
   has_one  :user, through: :userplays
   
-  has_many :Playercountries
-  has_many :countries, through: :Playercountries
+  has_many :playercountries
+  has_many :countries, through: :playercountries
 
   validates :screenname, presence: true
 end

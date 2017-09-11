@@ -9,9 +9,21 @@ module Enroller
     attr_accessor :player, :organization, :campaign
   
     def initialize(campaign_id, current_user_id)
-      @user = User.find(current_user_id)
-      @dashboard = @user.dashes.first
+      @user = User.find(current_user_id || User.create(screenname: "Default"))
+      @dashboard = @user.dashes.first || Dash.create(name: "Default")
       @campaign = Campaign.find(campaign_id)
+      @player = create_campaign_player
+      # @country = create_campaign_organization
+    end
+
+    ### Top level business logic methods
+    
+    def execute_enrollment
+      @player = create_campaign_player
+      @organization = create_campaign_organization
+      assign_campaign_organization_to_player(@organization, @player)
+      assign_dashboard_player
+      assign_dashboard_organization
     end
 
     ### Mid level business logic methods
@@ -19,31 +31,34 @@ module Enroller
     # ... then assign methods explicitly create entries on the join tables
     
     def create_campaign_player
-      @campaign.players.create!(screenname: "Test") 
+      total_rows = row_count_obj(Player.first)
+      @player = @campaign.players.create!(screenname: "Test#{(total_rows)}") 
     end
     
     def create_campaign_organization
-      @campaign.countries.create!(name: "Blah")
-      # works
-      # Campcount.create!(campaign_id: @campaign.id, country_id: (Country.count))
+      total_rows = row_count_obj(Country.first)
+      @organization = campaign.countries.create!(name: "Blah#{total_rows}")
     end
     
-    # for some reason playcount or countplay doesn't appear to exist in basicB
-    def assign_campaign_organization_to_player(organization, player)
-      Countplay.create!(count: organization, player: player)
+    def assign_organization_to_player
+      @player = Playercountry.create!(country_id: @organization, player_id: @player)
     end
-  
-    def assign_dashboard_player
-      Dashplayer.create!(player_id: @player, dash_id: @dashboard)
-    end
-    
+     
     def assign_dashboard_organization
       Dashcount.create!(country_id: @organization, dash_id: @dashboard)
     end
-    
+  
+    def assign_dashboard_player
+      Dashplayer.create!(player_id: @player.id, dash_id: @dashboard.id)
+      # Dashplayer.create!(player_id: Player.first.id, dash_id: Dash.first.id)
+    end
+
+    # Not tested
+
     def defaultOrganizationName
       @player_info = {name: "A mysterious group ... " }
     end
+    
     def defaultPlayerName
       @player_info = { screenname: "A shadowy & mysterious figure ... " }
     end
@@ -56,14 +71,17 @@ module Enroller
       @dash_info = { name: "A magical thing to see what the naked eye can not ... " }
     end
   
-    ### Top level business logic methods
-    
-    def execute_enrollment
-      @player = create_campaign_player
-      @organization = create_campaign_organization
-      assign_campaign_organization_to_player(@organization, @player)
-      assign_dashboard_player
-      assign_dashboard_organization
+  ### Low level stuff
+  
+    def row_count_obj(ar_object)
+      # ar_object.model_name.human.count
+      # return ar_object.class.ancestors.include?(ActiveRecord::Base) ||
+      # return ar_object.class.name.constantize.count || constantize(ar_object).count
+      ar_object.class.name.constantize.count
+    end
+  
+    def Organization_count
+      Country.count
     end
 
   end
