@@ -6,7 +6,8 @@ module Enroller
   class Enroller
     extend ActiveSupport::Concern
   
-    attr_accessor :player, :organization, :campaign
+    attr_accessor :player, :organization, :campaign, 
+      :player_organization, :dashboard_player, :dashboard_organization
   
     def initialize(campaign_id, current_user_id)
       @user = User.find(current_user_id || User.create(screenname: "Default"))
@@ -18,12 +19,29 @@ module Enroller
 
     ### Top level business logic methods
     
+    #  Does 
     def execute_enrollment
       @player = create_campaign_player
       @organization = create_campaign_organization
-      assign_organization_to_player
-      assign_dashboard_player
-      assign_dashboard_organization
+      #1 -- assign_organization_to_player
+      #2 -- ...
+      @player_organization = assign_organization_to_player
+      @dashboard_player = assign_dashboard_player
+      @dashboard_organization = assign_dashboard_organization
+    end
+    
+    def rollback
+      
+      ## This fails
+      ## Attemping dynamic rollback of all vars minus the 3 we had before object
+      self.instance_variables.map do |vars|
+        if vars == :@user || vars == :@campaign || vars == :@dashboard
+          # puts "True -- #{vars}"
+        else
+          puts "False -- #{vars}"
+          vars.destroy
+        end
+      end
     end
 
     ### Mid level business logic methods
@@ -33,16 +51,18 @@ module Enroller
     def create_campaign_player
       total_rows = row_count_obj(Player.first)
       puts "#{total_rows}"
-      @player = @campaign.players.create!(screenname: "#{defaultPlayerName} #{(total_rows + 1)}") 
+      self.player = @campaign.players.create!(
+        screenname: "#{defaultPlayerName} ##{(row_count_unique(total_rows))}") 
     end
     
     def create_campaign_organization
       total_rows = row_count_obj(Country.first)
-      @organization = campaign.countries.create!(name: "#{defaultOrganizationName}##{total_rows}")
+      self.organization = campaign.countries.create!(name: "#{defaultOrganizationName}##{row_count_unique(total_rows)}")
     end
     
     def assign_organization_to_player
-      @player = Playercountry.create!(country_id: @organization, player_id: @player)
+      #1 -- @player_organization = Playercountry.create!(country_id: @organization, player_id: @player)
+      Playercountry.create!(country_id: @organization, player_id: @player)
     end
      
     def assign_dashboard_organization
@@ -73,6 +93,12 @@ module Enroller
     end
   
   ### Low level stuff
+  
+    # issues with if initial object doesn't load due to validation
+    # ... the number saved in name might be in use
+    def row_count_unique(number)
+      rand(1000) * rand(1000) * rand(number)
+    end
   
     # count of all rows in db of passed active record object
     def row_count_obj(ar_object)
