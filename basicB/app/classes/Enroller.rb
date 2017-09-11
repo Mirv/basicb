@@ -6,12 +6,14 @@ module Enroller
   class Enroller
     extend ActiveSupport::Concern
   
-    attr_accessor :player, :organization, :campaign, 
+    attr_accessor :player, :organization, 
+      # Should I shove these into an array for easier metaprogramming?
+      :campaign, 
       :player_organization, :dashboard_player, :dashboard_organization
   
     def initialize(campaign_id, current_user_id)
-      @user = User.find(current_user_id || User.create(screenname: "Default"))
-      @dashboard = @user.dashes.first || Dash.create(name: "Default")
+      @user = user_find(current_user_id)
+      @dashboard = dash_find
       @campaign = Campaign.find(campaign_id)
       # @player = create_campaign_player
       # @country = create_campaign_organization
@@ -20,7 +22,7 @@ module Enroller
     ### Top level business logic methods
     
     #  Currently creates each db entry as called
-    def execute_enrollment
+    def setup_enrollment
       @player = create_campaign_player
       @organization = create_campaign_organization
       #1 -- assign_organization_to_player
@@ -30,24 +32,25 @@ module Enroller
       @dashboard_organization = assign_dashboard_organization
     end
     
-    def rollback
-      @player.destroy unless @player.nil?
-      @organization.destroy unless @organization.nil?
-      @player_organization.destroy unless @player_organization.nil?
-      @dashboard_player.destroy unless @dashboard_player.nil?
-      @dashboard_organization.destroy unless @dashboard_organization.nil?
+    # No need for rollback if we use new/build
+    # def rollback
+    #   @player.destroy unless @player.nil?
+    #   @organization.destroy unless @organization.nil?
+    #   @player_organization.destroy unless @player_organization.nil?
+    #   @dashboard_player.destroy unless @dashboard_player.nil?
+    #   @dashboard_organization.destroy unless @dashboard_organization.nil?
       
-      ## This fails
-      ## Attemping dynamic rollback of all vars minus the 3 we had before object
-      # self.instance_variables.map do |vars|
-      #   if vars == :@user || vars == :@campaign || vars == :@dashboard
-      #     # puts "True -- #{vars}"
-      #   else
-      #     puts "False -- #{vars}"
-      #     vars.destroy
-      #   end
-      # end
-    end
+    #   ## This fails
+    #   ## Attemping dynamic rollback of all vars minus the 3 we had before object
+    #   # self.instance_variables.map do |vars|
+    #   #   if vars == :@user || vars == :@campaign || vars == :@dashboard
+    #   #     # puts "True -- #{vars}"
+    #   #   else
+    #   #     puts "False -- #{vars}"
+    #   #     vars.destroy
+    #   #   end
+    #   # end
+    # end
 
     ### Mid level business logic methods
     # ... player & organization are created off relationship model implicitly
@@ -56,26 +59,26 @@ module Enroller
     def create_campaign_player
       total_rows = row_count_obj(Player.first)
       puts "#{total_rows}"
-      self.player = @campaign.players.create!(
+      self.player = @campaign.players.build(
         screenname: "#{defaultPlayerName} ##{(row_count_unique(total_rows))}") 
     end
     
     def create_campaign_organization
       total_rows = row_count_obj(Country.first)
-      self.organization = campaign.countries.create!(name: "#{defaultOrganizationName}##{row_count_unique(total_rows)}")
+      self.organization = campaign.countries.build(name: "#{defaultOrganizationName}##{row_count_unique(total_rows)}")
     end
     
     def assign_organization_to_player
       #1 -- @player_organization = Playercountry.create!(country_id: @organization, player_id: @player)
-      Playercountry.create!(country_id: @organization, player_id: @player)
+      Playercountry.new(country_id: @organization, player_id: @player)
     end
      
     def assign_dashboard_organization
-      Dashcount.create!(country_id: @organization, dash_id: @dashboard)
+      Dashcount.new(country_id: @organization, dash_id: @dashboard)
     end
   
     def assign_dashboard_player
-      Dashplayer.create!(player_id: @player.id, dash_id: @dashboard.id)
+      Dashplayer.new(player_id: @player.id, dash_id: @dashboard.id)
       # Dashplayer.create!(player_id: Player.first.id, dash_id: Dash.first.id)
     end
 
@@ -98,6 +101,14 @@ module Enroller
     end
   
   ### Low level stuff
+
+    def user_find(current_user_id)
+      User.find(current_user_id || User.create(screenname: "Default"))
+    end
+  
+    def dash_find
+      @user.dashes.first || Dash.create(name: "Default")
+    end
   
     # issues with if initial object doesn't load due to validation
     # ... the number saved in name might be in use
@@ -116,6 +127,7 @@ module Enroller
     def Organization_count
       Country.count
     end
+
 
   end
 end
