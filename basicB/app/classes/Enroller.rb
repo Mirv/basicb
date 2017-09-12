@@ -35,7 +35,7 @@ module Enroller
     end
     
     def run_enrollment
-      self.enrollment.each.save
+      self.enrollment.map {|x,y| y.save }
       # @player.save
       # @organization.save
       # @player_organization.save
@@ -43,12 +43,21 @@ module Enroller
       # @dashboard_organization.save
     end
     
-    def validate_enrollment
+    def invalid_enrollment?
       invalid_flag = false
-      self.enrollment.map {|x| x.nil? ? invalid_flag = true : ""}
-      return invalid_flag
+      
+      self.enrollment.map { |key, value | invalid_flag = true if (key.nil? || value.invalid?) }
+      
+      puts "Still in here bob! ... flag #{invalid_flag}"
+      
+      # f-- enrollment.each {|x| puts x; invalid_flag = true if (x.nil? || x.valid?)  }
+      # self.enrollment.map {|x| invalid_flag = true if  x.valid? }
+      # puts "This is it #{self.enrollment[:campaign].valid?}"
+      # return invalid_flag
     end
     
+    def validate_ar_hash(ar_obj)
+    end
 
     ### Mid level business logic methods
     # ... player & organization are created off relationship model implicitly
@@ -62,27 +71,34 @@ module Enroller
     end
     
     def create_campaign_organization
-      total_rows = row_count_obj(Country.first)
+      
        self.enrollment[:organization] = self.enrollment[:campaign].countries.build(
-        name: "#{defaultOrganizationName}##{row_count_unique(total_rows)}")
+        name: ComposeName(defaultOrganizationName, Country.first))
     end
     
     def assign_organization_to_player
-      #1 -- @player_organization = Playercountry.create!(country_id: @organization, player_id: @player)
-      Playercountry.new(country_id: self.enrollment[:organization].id, player_id: self.enrollment[:player].id)
+      Playercountry.new(country_id: self.enrollment[:organization].id, 
+        player_id: self.enrollment[:player].id)
     end
      
     def assign_dashboard_organization
-      Dashcount.new(country_id: self.enrollment[:organization], dash_id: self.enrollment[:dashboard].id)
+      Dashcount.new(country_id: self.enrollment[:organization], 
+        dash_id: self.enrollment[:dashboard].id)
     end
   
     def assign_dashboard_player
-      Dashplayer.new(player_id: self.enrollment[:player].id, dash_id: self.enrollment[:dashboard].id)
+      Dashplayer.new(player_id: self.enrollment[:player].id, 
+        dash_id: self.enrollment[:dashboard].id)
       # Dashplayer.create!(player_id: Player.first.id, dash_id: Dash.first.id)
     end
 
     # Not tested
 
+    def ComposeName(baseName, tableObject)
+      total_rows = row_count_obj(tableObject)
+      "#{defaultOrganizationName}##{row_count_unique(total_rows)}"
+    end
+    
     def defaultOrganizationName
       "A mysterious group ... "
     end
