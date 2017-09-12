@@ -6,51 +6,49 @@ module Enroller
   class Enroller
     extend ActiveSupport::Concern
   
-    attr_accessor :player, :organization, 
+    attr_accessor :player, :organization, :campaign, 
       # Should I shove these into an array for easier metaprogramming?
-      :campaign, 
-      :player_organization, :dashboard_player, :dashboard_organization
+      # :player_organization, :dashboard_player, :dashboard_organization
+      :enrollment
   
     def initialize(campaign_id, current_user_id)
+      # user isn't kept in hash with rest as once it finds dash, not necessary
       @user = user_find(current_user_id)
-      @dashboard = dash_find
-      @campaign = Campaign.find(campaign_id)
-      # @player = create_campaign_player
-      # @country = create_campaign_organization
+      
+      # Lookup all the pertaining information to setup
+      self.enrollment = Hash.new({})
+      self.enrollment.default
+      self.enrollment[:dashboard] = dash_find
+      self.enrollment[:campaign] = Campaign.find(campaign_id)
+
     end
 
     ### Top level business logic methods
     
-    #  Currently creates each db entry as called
+    #  Uses new/build methods to setup, instead of creating per call instantly
     def setup_enrollment
-      @player = create_campaign_player
-      @organization = create_campaign_organization
-      #1 -- assign_organization_to_player
-      #2 -- ...
-      @player_organization = assign_organization_to_player
-      @dashboard_player = assign_dashboard_player
-      @dashboard_organization = assign_dashboard_organization
+      self.enrollment[:player] = create_campaign_player
+      self.enrollment[:organization] = create_campaign_organization
+      self.enrollment[:player_organization] = assign_organization_to_player
+      self.enrollment[:dashboard_player] = assign_dashboard_player
+      self.enrollment[:dashboard_organization] = assign_dashboard_organization
     end
     
-    # No need for rollback if we use new/build
-    # def rollback
-    #   @player.destroy unless @player.nil?
-    #   @organization.destroy unless @organization.nil?
-    #   @player_organization.destroy unless @player_organization.nil?
-    #   @dashboard_player.destroy unless @dashboard_player.nil?
-    #   @dashboard_organization.destroy unless @dashboard_organization.nil?
-      
-    #   ## This fails
-    #   ## Attemping dynamic rollback of all vars minus the 3 we had before object
-    #   # self.instance_variables.map do |vars|
-    #   #   if vars == :@user || vars == :@campaign || vars == :@dashboard
-    #   #     # puts "True -- #{vars}"
-    #   #   else
-    #   #     puts "False -- #{vars}"
-    #   #     vars.destroy
-    #   #   end
-    #   # end
-    # end
+    def run_enrollment
+      self.enrollment.each.save
+      # @player.save
+      # @organization.save
+      # @player_organization.save
+      # @dashboard_player.save
+      # @dashboard_organization.save
+    end
+    
+    def validate_enrollment
+      invalid_flag = false
+      self.enrollment.map {|x| x.nil? ? invalid_flag = true : ""}
+      return invalid_flag
+    end
+    
 
     ### Mid level business logic methods
     # ... player & organization are created off relationship model implicitly
@@ -59,26 +57,27 @@ module Enroller
     def create_campaign_player
       total_rows = row_count_obj(Player.first)
       puts "#{total_rows}"
-      self.player = @campaign.players.build(
+      self.enrollment[:player] = self.enrollment[:campaign].players.build(
         screenname: "#{defaultPlayerName} ##{(row_count_unique(total_rows))}") 
     end
     
     def create_campaign_organization
       total_rows = row_count_obj(Country.first)
-      self.organization = campaign.countries.build(name: "#{defaultOrganizationName}##{row_count_unique(total_rows)}")
+       self.enrollment[:organization] = self.enrollment[:campaign].countries.build(
+        name: "#{defaultOrganizationName}##{row_count_unique(total_rows)}")
     end
     
     def assign_organization_to_player
       #1 -- @player_organization = Playercountry.create!(country_id: @organization, player_id: @player)
-      Playercountry.new(country_id: @organization, player_id: @player)
+      Playercountry.new(country_id: self.enrollment[:organization].id, player_id: self.enrollment[:player].id)
     end
      
     def assign_dashboard_organization
-      Dashcount.new(country_id: @organization, dash_id: @dashboard)
+      Dashcount.new(country_id: self.enrollment[:organization], dash_id: self.enrollment[:dashboard].id)
     end
   
     def assign_dashboard_player
-      Dashplayer.new(player_id: @player.id, dash_id: @dashboard.id)
+      Dashplayer.new(player_id: self.enrollment[:player].id, dash_id: self.enrollment[:dashboard].id)
       # Dashplayer.create!(player_id: Player.first.id, dash_id: Dash.first.id)
     end
 
@@ -127,7 +126,6 @@ module Enroller
     def Organization_count
       Country.count
     end
-
 
   end
 end
