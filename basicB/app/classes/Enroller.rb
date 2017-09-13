@@ -6,36 +6,37 @@ module Enroller
   class Enroller
     extend ActiveSupport::Concern
   
-    attr_accessor :player, :organization, :campaign, 
-      # Should I shove these into an array for easier metaprogramming?
-      # :player_organization, :dashboard_player, :dashboard_organization
-      :enrollment
+    attr_accessor :player, :organization, :campaign, :enrollment
+
   
     def initialize(campaign_id, current_user_id)
       # user isn't kept in hash with rest as once it finds dash, not necessary
       @user = user_find(current_user_id)
-      
+  
       # Lookup all the pertaining information to setup
-      self.enrollment = Hash.new({})
-      self.enrollment.default
-      self.enrollment[:dashboard] = dash_find
-      self.enrollment[:campaign] = Campaign.find(campaign_id)
+      @enrollment = Hash.new({})
+      @enrollment.default
+      @enrollment[:dashboard] = dash_find
+      @enrollment[:campaign] = Campaign.find(campaign_id)
+    end
 
+    def showme
+      puts enrollmentc
     end
 
     ### Top level business logic methods
     
     #  Uses new/build methods to setup, instead of creating per call instantly
     def setup_enrollment
-      self.enrollment[:player] = create_campaign_player
-      self.enrollment[:organization] = create_campaign_organization
-      self.enrollment[:player_organization] = assign_organization_to_player
-      self.enrollment[:dashboard_player] = assign_dashboard_player
-      self.enrollment[:dashboard_organization] = assign_dashboard_organization
+      @enrollment[:player] = create_campaign_player
+      @enrollment[:organization] = create_campaign_organization
+      @enrollment[:player_organization] = assign_organization_to_player
+      @enrollment[:dashboard_player] = assign_dashboard_player
+      @enrollment[:dashboard_organization] = assign_dashboard_organization
     end
     
     def run_enrollment
-      self.enrollment.map {|x,y| y.save }
+      @enrollment.map {|x,y| y.save }
       # @player.save
       # @organization.save
       # @player_organization.save
@@ -46,13 +47,13 @@ module Enroller
     def invalid_enrollment?
       invalid_flag = false
       
-      self.enrollment.map { |key, value | invalid_flag = true if (key.nil? || value.invalid?) }
+      @enrollment.map { |key, value | invalid_flag = true if (key.nil? || value.invalid?) }
       
       puts "Still in here bob! ... flag #{invalid_flag}"
       
       # f-- enrollment.each {|x| puts x; invalid_flag = true if (x.nil? || x.valid?)  }
-      # self.enrollment.map {|x| invalid_flag = true if  x.valid? }
-      # puts "This is it #{self.enrollment[:campaign].valid?}"
+      # @enrollment.map {|x| invalid_flag = true if  x.valid? }
+      # puts "This is it #{@enrollment[:campaign].valid?}"
       # return invalid_flag
     end
     
@@ -66,30 +67,32 @@ module Enroller
     def create_campaign_player
       total_rows = row_count_obj(Player.first)
       puts "#{total_rows}"
-      self.enrollment[:player] = self.enrollment[:campaign].players.build(
+      @enrollment[:player] = @enrollment[:campaign].players.build(
         screenname: "#{defaultPlayerName} ##{(row_count_unique(total_rows))}") 
     end
     
     def create_campaign_organization
       
-       self.enrollment[:organization] = self.enrollment[:campaign].countries.build(
+       @enrollment[:organization] = @enrollment[:campaign].countries.build(
         name: ComposeName(defaultOrganizationName, Country.first))
     end
     
     def assign_organization_to_player
-      Playercountry.new(country_id: self.enrollment[:organization].id, 
-        player_id: self.enrollment[:player].id)
+      Playercountry.new(
+        country_id: @enrollment[:organization].id, 
+        player_id: @enrollment[:player].id)
     end
      
     def assign_dashboard_organization
-      Dashcount.new(country_id: self.enrollment[:organization], 
-        dash_id: self.enrollment[:dashboard].id)
+      Dashcount.new(
+        country_id: @enrollment[:organization], 
+        dash_id: @enrollment[:dashboard].id)
     end
   
     def assign_dashboard_player
-      Dashplayer.new(player_id: self.enrollment[:player].id, 
-        dash_id: self.enrollment[:dashboard].id)
-      # Dashplayer.create!(player_id: Player.first.id, dash_id: Dash.first.id)
+      Dashplayer.new(
+        player_id: @enrollment[:player].id, 
+        dash_id: @enrollment[:dashboard].id)
     end
 
     # Not tested
@@ -133,9 +136,6 @@ module Enroller
   
     # count of all rows in db of passed active record object
     def row_count_obj(ar_object)
-      # ar_object.model_name.human.count
-      # return ar_object.class.ancestors.include?(ActiveRecord::Base) ||
-      # return ar_object.class.name.constantize.count || constantize(ar_object).count
       ar_object.class.name.constantize.count + 1
     end
   
