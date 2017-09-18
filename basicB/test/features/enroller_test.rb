@@ -1,17 +1,6 @@
 require 'test_helper'
 require 'Enroller'
 
-### Some process observations
-# -- Using the word enroller everywhere, means every line changes if enroller does
-#    ... probably why tests are using "it" alot
-# -- "must_change" isn't super specific, should probably assert it +/-'s 
-#
-# -- Probably need to test the row_count function retrieves a count
-#
-# -- Probably need to test that row_count & ID match if that's a thing...meh
-#
-# -- Instead of last could have tester read only hash to check against <Table>.find()
-
 class EnrollerTest < ActiveSupport::TestCase
     # include Enroller::Enroller
 
@@ -43,7 +32,6 @@ class EnrollerTest < ActiveSupport::TestCase
       @enroller.setup_in_campaign
       @enroller.assign_organization_to_player
       @enroller.run_enrollment
-      # @enroller.run_enrollment
     }.must_change "Playercountry.count"
   end
 
@@ -66,6 +54,8 @@ class EnrollerTest < ActiveSupport::TestCase
   test "all together now" do
     @enroller.enrolling
     @results = @enroller.result
+    
+    # duplicate from enroller.rb
     invalid_flag = false
     @results.map { |key, value| invalid_flag = true if (key.nil? || value.invalid?) }
     refute invalid_flag

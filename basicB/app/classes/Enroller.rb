@@ -1,6 +1,5 @@
 require 'active_support/concern'
 
-#  See bottom for domain logic insights
 module Enroller
   
   class Enroller
@@ -11,7 +10,6 @@ module Enroller
     # ... result exposes a hash for that purpose
     attr_reader :result
 
-  
     # Information existing pre object instanization
     @info
 
@@ -20,6 +18,7 @@ module Enroller
 
     def initialize(campaign_id, current_user_id)
       @result = Hash.new({})
+      #  nil default for testing
       @result.default
       
       # info hash is received info, enroll is generated - nil default for testing
@@ -38,13 +37,12 @@ module Enroller
       # run_enrollment
       setup_in_dashboard
       run_enrollment
-      # If invalid - roll back @enroll creations, else commit to db
+      # If invalid - roll back @enroll creations, else commit to db stand
       if(invalid_enrollment?(@enroll))
         remove_changes(@enroll)
       end
     end
     
-    #  Uses new/build methods to setup, instead of creating per call instantly
     def setup_in_campaign
       @result[:player] = create_campaign_player
       @result[:organization] = create_campaign_organization
@@ -57,7 +55,6 @@ module Enroller
     end
     
     def run_enrollment
-      # @enroll.map {|key,value| puts value.save unless (key.nil? || value.invalid?)  }
       @enroll.map {|key,value| value.save unless invalid(key, value)}
     end
 
@@ -158,22 +155,3 @@ module Enroller
 end
 
 
-
-##### Goals #####
-
-#1 - handle enrollment of users in campaigns
-#2 - concentrate making of all relationships
-
-#### Business logic ####
-
-#1a -- create player in campaign
-#1b -- create organization in campaign (assigned to player too)
-#2a -- assign player to dashboard of user controlling player
-#2b -- assign organization to dashboard of user controlling player
-
-#### Requirements ####
-
-### Relationships
-# user -> dashboard -> campaign -> player, organization
-# dashboard -> campaign , player, organization 
-# dashboard -> player -> organization
