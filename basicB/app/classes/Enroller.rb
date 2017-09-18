@@ -6,7 +6,6 @@ module Enroller
     extend ActiveSupport::Concern
   
     # testing hook - captures nil from AR assignment to db in one spot
-    # Phase 2 of class development will add checking unique values ...
     # ... result exposes a hash for that purpose
     attr_reader :result
 
