@@ -142,6 +142,8 @@ module Enroller
     end
   
     # count of all rows in db of passed active record object
+    # Maybe figure out how to use the ruby class to derive ...
+    # ... https://ruby-doc.org/core-2.1.0/Module.html#method-i-const_get
     def row_count_obj(ar_object)
       ar_object.class.name.constantize.count + 1
     end
