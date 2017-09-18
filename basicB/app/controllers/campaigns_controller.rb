@@ -1,4 +1,5 @@
-require 'DomainIdentities.rb'
+# require 'DomainIdentities.rb'
+require 'Enroller.rb'
 
 class CampaignsController < ApplicationController
   # include ApplicationHelper
@@ -13,8 +14,8 @@ class CampaignsController < ApplicationController
   def join(player_name = "A dark and mysterious figure ... ")
     # Eventually roll back the `Campaign.first` portion to let fail when error management is setup
     @campaign_id = params(:campaign_id) || Campaign.first
-    @enroller = Enroller::Enroller(@campaign_id, current_user)
-    @enroller.execute_enrollment
+    # @enroller = Enroller::Enroller.new(@campaign_id, current_user)
+    # @enroller.execute_enrollment
     # if @enroller.player
     #   @enroller
     

@@ -7,6 +7,7 @@ require "minitest/rails"
 require 'rails/test_help'
 require "minitest/rails/capybara"
 require 'DomainIdentities.rb'
+require 'Enroller.rb'
 require 'minitest/byebug' if ENV['DEBUG']
 
 # To add Capybara feature tests add `gem "minitest-rails-capybara"`
@@ -42,4 +43,5 @@ class Capybara::Rails::TestCase
   include Capybara::DSL
   include Devise::Test::IntegrationHelpers
   include DomainIdentities
+  include Enroller
 end

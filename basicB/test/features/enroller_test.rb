@@ -9,6 +9,8 @@ require 'Enroller'
 # -- Probably need to test the row_count function retrieves a count
 #
 # -- Probably need to test that row_count & ID match if that's a thing...meh
+#
+# -- Instead of last could have tester read only hash to check against <Table>.find()
 
 class EnrollerTest < ActiveSupport::TestCase
     # include Enroller::Enroller
@@ -27,7 +29,7 @@ class EnrollerTest < ActiveSupport::TestCase
   test "does enroller make player in campaign successfully" do
     expect {
       @enroller.create_campaign_player
-    }.must_change "Player.count"
+    }.must_change ("Player.count") 
   end
 
   test "does enroller make organization in campaign successfully" do
@@ -38,34 +40,34 @@ class EnrollerTest < ActiveSupport::TestCase
   
   test "does enroller assign organization to player successfully" do
     expect {
-      @enroller.create_campaign_player
-      @enroller.create_campaign_organization
+      @enroller.setup_in_campaign
       @enroller.assign_organization_to_player
+      @enroller.run_enrollment
+      # @enroller.run_enrollment
     }.must_change "Playercountry.count"
   end
 
   test "does enroller assign player to dashboard successfully" do
     expect {
-      @enroller.create_campaign_player
-      @enroller.assign_dashboard_player
+      @enroller.setup_in_campaign
+      @enroller.setup_in_dashboard
+      @enroller.run_enrollment
     }.must_change "Dashplayer.count" 
   end
   
   test "does enroller assign organization to dashboard successfully" do
     expect {
-      @enroller.create_campaign_player
-      @enroller.create_campaign_organization
-      @enroller.assign_organization_to_player
-      @enroller.assign_dashboard_organization
+      @enroller.setup_in_campaign
+      @enroller.assign_organization_to_player.save
+      @enroller.assign_dashboard_organization.save
     }.must_change "Dashcount.count" 
   end
-  
-  test "does execute_enrollment set values" do
-    @enroller.execute_enrollment
-    assert_not_nil @enroller.player
-    assert_not_nil @enroller.organization
-    assert_not_nil @enroller.campaign
+
+  test "all together now" do
+    @enroller.enrolling
+    @results = @enroller.result
+    invalid_flag = false
+    @results.map { |key, value| invalid_flag = true if (key.nil? || value.invalid?) }
+    refute invalid_flag
   end
-
-
 end
