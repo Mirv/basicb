@@ -7,13 +7,13 @@ class Country < ApplicationRecord
   has_many  :states
   has_many  :counties, through: :states
 
-  has_many  :playercountries
-  has_many  :players, through: :playercountries
+  has_many  :playercountries 
+  has_many  :players, through: :playercountries, dependent: :destroy
   
   has_many  :campcounts
   has_many  :campaign, through: :campcounts
   
-  has_many  :dashcounts
+  has_many  :dashcounts, dependent: :destroy
   has_many  :dashes, through: :dashcounts
   
   validates :name, presence: true 

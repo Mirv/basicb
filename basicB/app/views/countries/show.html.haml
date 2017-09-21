@@ -8,7 +8,7 @@
   = @country.description
 %p
   %b Player:
-  = @country.player
+  = @country.players.first
 
 = link_to 'Edit', edit_country_path(@country)
 \|

@@ -61,11 +61,12 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to player_url(@player)
   end
 
-  test "should destroy player" do
-    assert_difference('Player.count', -1) do
-      delete player_url(@player)
-    end
+# Should not allow destroying
+#   test "should destroy player" do
+#     assert_difference('Player.count', -1) do
+#       delete player_url(@player)
+#     end
 
-    assert_redirected_to players_url
-  end
+#     assert_redirected_to players_url
+#   end
 end

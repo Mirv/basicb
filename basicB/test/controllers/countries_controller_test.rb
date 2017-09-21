@@ -42,6 +42,7 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to country_url(@country)
   end
 
+  # Should not allow destroying
   test "should destroy country" do
     assert_difference('Country.count', -1) do
       delete country_url(@country)
