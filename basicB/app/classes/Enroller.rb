@@ -16,6 +16,9 @@ module Enroller
     @enroll
 
     def initialize(campaign_id, current_user_id)
+      
+      # Results of each query are held here, nil means something went wrong ...
+      # ... which allows us to destroy everything else to simulate rollback
       @result = Hash.new({})
       #  nil default for testing
       @result.default

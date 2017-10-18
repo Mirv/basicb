@@ -6,7 +6,7 @@ class CampaignsController < ApplicationController
   include DomainIdentities
   include Enroller
   
-  before_action :set_campaign, only: [:join, :edit, :update, :destroy]
+  before_action :setCampaign, only: [:join, :edit, :update, :destroy]
   # before_action :set_dash
   skip_before_action :authenticate_user!, only: [:index]
 
@@ -14,10 +14,9 @@ class CampaignsController < ApplicationController
   def join(player_name = "A dark and mysterious figure ... ")
     # Eventually roll back the `Campaign.first` portion to let fail when error management is setup
     @campaign_id = params(:campaign_id) || Campaign.first
-    @enroller = Enroller::Enroller.new(@campaign_id, current_user)
-    @enroller.execute_enrollment
-    # if @enroller.player
-    #   @enroller
+    # @enroller = Enroller::Enroller.new(@campaign_id, current_user)
+    # @enroller.execute_enrollment
+
     
     @default_player = player_name
     @player = Player.new(screenname: @default_player)

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class JoinCampaignTest < ActionDispatch::IntegrationTest
+class JoinCampaignTest < Minitest::Capybara::Spec
   # Capybara.add_selector(:link) do
   #   xpath { |num| ".//tbody/tr#[{num}]" }
   # end
@@ -10,7 +10,7 @@ class JoinCampaignTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
   def test_login
-    visit root_path
+    visit '/'
     assert page.has_content?("Login")
     click_link('Login')
     assert page.has_content?("Log in")
