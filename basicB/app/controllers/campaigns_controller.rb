@@ -18,13 +18,15 @@ class CampaignsController < ApplicationController
     @enroller = Enroller::Enroller.new(@campaign_id, current_user.id)
     @enroller.enrolling
 
-    if(@enroller.result)
-      flash[:success] = "Successfully joined - you just need to go edit your info now!"
-    else
-      flash[:error] = "There was a problem - please try again later ... "
+    respond_to do |format|
+      if @enroller.result
+        format.html { redirect_to campaigns_url, notice: "Successfully joined - you just need to go edit your info now!" }
+        format.json { render :show, status: :created, location: campaigns_url }
+      else
+        format.html { render :new }
+        format.json { render json: @country.errors, status: :unprocessable_entity }
+      end
     end
-
-    redirect_to campaigns_url
   end
   
   # GET /campaigns
