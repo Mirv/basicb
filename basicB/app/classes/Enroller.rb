@@ -42,6 +42,7 @@ module Enroller
       # If invalid - roll back @enroll creations, else commit to db stand
       if(invalid_enrollment?(@enroll))
         remove_changes(@enroll)
+        @enroll.result = nil
       end
     end
     
