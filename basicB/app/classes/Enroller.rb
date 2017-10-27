@@ -46,17 +46,18 @@ module Enroller
       if(invalid_enrollment?(@enroll))
         remove_changes(@enroll)
         @enroll.result = nil
-      else
-        enroll_transaction('Campaign_registration')
+      # else
+      #   enroll_transaction('Campaign_registration')
       end
       
     end
-    
-    def enroll_transaction(table)
-      @hash = Hash.new{[]}
-      @result.map{ |key, value| @hash.merge!(key: value) }
-      table.create!()
-    end
+
+    # not tested on several levels...first table.create!, then @hash in a create, much less transaction    
+    # def enroll_transaction(table)
+    #   @hash = Hash.new{[]}
+    #   @result.map{ |key, value| @hash.merge!(key: value) }
+    #   table.create!(@hash)
+    # end
       
     
     def setup_in_campaign
