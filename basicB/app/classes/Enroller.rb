@@ -8,6 +8,7 @@ module Enroller
     # testing hook - captures nil from AR assignment to db in one spot
     # ... result exposes a hash for that purpose
     attr_reader :result
+    attr_reader :test
 
     # Information existing pre object instanization
     @info
@@ -16,6 +17,11 @@ module Enroller
     @enroll
 
     def initialize(campaign_id, current_user_id)
+      @test = "Testing"
+      
+      
+      # Results of each query are held here, nil means something went wrong ...
+      # ... which allows us to destroy everything else to simulate rollback
       @result = Hash.new({})
       #  nil default for testing
       @result.default
@@ -39,8 +45,20 @@ module Enroller
       # If invalid - roll back @enroll creations, else commit to db stand
       if(invalid_enrollment?(@enroll))
         remove_changes(@enroll)
+        @enroll.result = nil
+      # else
+      #   enroll_transaction('Campaign_registration')
       end
+      
     end
+
+    # not tested on several levels...first table.create!, then @hash in a create, much less transaction    
+    # def enroll_transaction(table)
+    #   @hash = Hash.new{[]}
+    #   @result.map{ |key, value| @hash.merge!(key: value) }
+    #   table.create!(@hash)
+    # end
+      
     
     def setup_in_campaign
       @result[:player] = create_campaign_player

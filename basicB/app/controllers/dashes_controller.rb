@@ -1,7 +1,6 @@
 require 'DomainIdentities.rb'
 
 class DashesController < ApplicationController
-  # include DomainIdentities
 
   before_action :set_dash, only: [:show, :dashboard, :edit, :update, :destroy]
 
@@ -15,7 +14,7 @@ class DashesController < ApplicationController
     
     # @my_dash = setDash
     # Version 2
-    # @my_dash = setDash
+    # # @my_dash = setDash
 
     @dash_playing = @my_dash.players
     @dash_hosting = @my_dash.campaigns
@@ -72,10 +71,15 @@ class DashesController < ApplicationController
   # DELETE /dashes/1
   # DELETE /dashes/1.json
   def destroy
-    @dash.destroy
+    
     respond_to do |format|
-      format.html { redirect_to dashes_url, notice: 'Dash was successfully destroyed.' }
-      format.json { head :no_content }
+      if @dash.destroy!
+        format.html { redirect_to dashes_url, notice: "Dash was successfully destroyed."}
+        format.json { head :no_content }
+      else
+        format.html { redirect_to dashes_url, notice: 'Dash failed to be destroyed.' }
+        format.json { head :no_content } 
+      end
     end
   end
 
@@ -83,16 +87,16 @@ class DashesController < ApplicationController
     def cur_user
       # relies on devise
       cur_user = current_user
-      # attr_accessor
     end
+    
     def set_user
       @user = User.find(params[:id])
     end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_dash
-      # @dash = player.dash.first
-      # @dash = Dash.find(params[:id])
-      @dash = cur_user.dashes.first
+
+      @dash = current_user.dashes.first || Dash.create!()
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -100,10 +104,3 @@ class DashesController < ApplicationController
       params.require(:dash).permit(:id, :name, :dashcampaigns_id, :dashplayers_id) #pulled user_id for player_controller test
     end
 end
-    # def setUser
-    #   @user_ident = User.find(current_user.id)
-    # end
-
-    # def set_dash_via_cr(user)
-    #   @dash_user = Dash.find(user)
-    # end

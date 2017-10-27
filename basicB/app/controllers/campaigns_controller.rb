@@ -4,49 +4,15 @@ require 'Enroller.rb'
 class CampaignsController < ApplicationController
   # include ApplicationHelper
   include DomainIdentities
-  include Enroller
+  # include Enroller
   
-  before_action :set_campaign, only: [:join, :edit, :update, :destroy]
-  # before_action :set_dash
+  before_action :setCampaign, only: [:join, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index]
+  # before_action :set_dash
 
   # refinement in progress https://github.com/Mirv/basicb/issues/86
-  def join(player_name = "A dark and mysterious figure ... ")
-    # Eventually roll back the `Campaign.first` portion to let fail when error management is setup
-    @campaign_id = params(:campaign_id) || Campaign.first
-    @enroller = Enroller::Enroller.new(@campaign_id, current_user)
-    @enroller.execute_enrollment
-    # if @enroller.player
-    #   @enroller
-    
-    @default_player = player_name
-    @player = Player.new(screenname: @default_player)
+  def join
 
-    respond_to do |format|
-      if @player.save
-        
-        # Grab campaign & then assign player to campaign
-        @campaign = setCampaign
-        @player.campplays.create!(campaign_id: @campaign.id)
-        
-        # Grab dash & then assign player to the dash
-        @dash = setDash
-        @player.dashplayers.create(dash_id: @dash)
-        
-        # Get count to prevent dupes, create country (w/player id), map to campaign
-        # Too much logic - need a revision to handle count in an object elsewhere?
-        @count = Country.count
-        @country = @player.countries.create!(name: "A shadowy & mysterious land ... #{@count}")
-        @country.campcount.create!(campaign_id: @campaign.id)
-        
-        format.html { redirect_to @player, notice: 'Player was successfully created.' }
-        format.json { render :show, status: :created, location: @player }
-      else
-        format.html { render :new }
-        format.json { render json: @player.errors, status: :unprocessable_entity }
-      end
-    end
-    redirect_to new_player_path
   end
   
   # GET /campaigns
@@ -127,7 +93,7 @@ class CampaignsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   def setCampaign
     # @campaign = Campaign.find(params[:id])
-    @campaign = Campaign.first
+    @campaign = Campaign.find(params[:id])
   end
 
     # Never trust parameters from the scary internet, only allow the white list through.

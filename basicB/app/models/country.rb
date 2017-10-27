@@ -13,7 +13,7 @@ class Country < ApplicationRecord
   has_many  :campcounts
   has_many  :campaign, through: :campcounts
   
-  has_many  :dashcounts, dependent: :destroy
+  has_many  :dashcounts #, dependent: :destroy
   has_many  :dashes, through: :dashcounts
   
   validates :name, presence: true 

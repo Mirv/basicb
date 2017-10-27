@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b User:
+  = @campaign_registration.user
+%p
+  %b Dash:
+  = @campaign_registration.dash
+%p
+  %b Campaign:
+  = @campaign_registration.campaign
+%p
+  %b Player:
+  = @campaign_registration.player
+%p
+  %b Country:
+  = @campaign_registration.country
+
+= link_to 'Edit', edit_campaign_registration_path(@campaign_registration)
+\|
+= link_to 'Back', campaign_registrations_path
