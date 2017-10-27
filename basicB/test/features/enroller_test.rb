@@ -60,4 +60,5 @@ class EnrollerTest < ActiveSupport::TestCase
     @results.map { |key, value| invalid_flag = true if (key.nil? || value.invalid?) }
     refute invalid_flag
   end
+  
 end

@@ -1,13 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  campaign: one
   user: one
   dash: one
-  user: one
+  campaign: one
+  player: one
+  country: one
 
 two:
-  campaign: two
   user: two
   dash: two
-  user: two
+  campaign: two
+  player: two
+  country: two

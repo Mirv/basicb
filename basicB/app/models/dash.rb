@@ -10,14 +10,7 @@ class Dash < ApplicationRecord
   has_many :dashplayers
   has_many :players, through: :dashplayers
   
-  has_many :dashcounts, dependent: :destroy
+  has_many :dashcounts
   has_many :countries, through: :dashcounts
-  
-  def addCampaign
-    
-  end
-    
-  def addPlayer
-    
-  end
+
 end

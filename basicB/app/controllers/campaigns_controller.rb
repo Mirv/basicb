@@ -12,21 +12,7 @@ class CampaignsController < ApplicationController
 
   # refinement in progress https://github.com/Mirv/basicb/issues/86
   def join
-    # Eventually roll back the `Campaign.first` portion to let fail when error management is setup
-    @campaign_id = params[:id]
-    
-    @enroller = Enroller::Enroller.new(@campaign_id, current_user.id)
-    @enroller.enrolling
 
-    respond_to do |format|
-      if @enroller.result
-        format.html { redirect_to campaigns_url, notice: "Successfully joined - you just need to go edit your info now!" }
-        format.json { render :show, status: :created, location: campaigns_url }
-      else
-        format.html { render :new }
-        format.json { render json: @country.errors, status: :unprocessable_entity }
-      end
-    end
   end
   
   # GET /campaigns

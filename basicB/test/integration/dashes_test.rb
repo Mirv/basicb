@@ -8,23 +8,15 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
 
   
   setup do
-    @users = users(:one, :two)
+    # @users = users(:one, :two)
     @dash = dashes(:one)
     sign_in users(:validuser)
-    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
+    # @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
   end
   
   it "dashbard singular route test" do
-    sign_in users(:validuser)
-    user = create(:user)
-    # for some reason this existing is tied to the test passing even though we are using @dash from setup block in the get call  following
-    dash = create(:dash)
-    get '/dashboard', params: {id: user.id, dash: @dash}
-
-    # puts "\n#{@user}\n"
+    get '/dashboard'
     assert_response :success
-    
-    # Part 2 -- Need to test rails association
   end
 
   
@@ -77,9 +69,11 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   end
 
   test "should destroy dash" do
+    puts "#{Dash.count}"
     assert_difference('Dash.count', -1) do
       delete dash_url(@dash)
     end
     assert_redirected_to dashes_url
+    puts "Test -- #{@dash.errors}"
   end
 end

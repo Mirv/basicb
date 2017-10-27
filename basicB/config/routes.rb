@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  resources :campaign_registrations
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  resources :campaign_registries
   resources :countries
     devise_for :users #, controllers: { sessions: 'users/registrations' }
    

@@ -1,0 +1,10 @@
+= simple_form_for(@campaign_registration) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :campaign, :selected => @campaign_id
+    = f.association :player
+    = f.association :country
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,29 @@
+%h1 Listing campaign_registrations
+
+%table
+  %thead
+    %tr
+      %th User
+      %th Dash
+      %th Campaign
+      %th Player
+      %th Country
+      %th
+      %th
+      %th
+
+  %tbody
+    - @campaign_registrations.each do |campaign_registration|
+      %tr
+        %td= campaign_registration.user
+        %td= campaign_registration.dash
+        %td= campaign_registration.campaign
+        %td= campaign_registration.player
+        %td= campaign_registration.country
+        %td= link_to 'Show', campaign_registration
+        %td= link_to 'Edit', edit_campaign_registration_path(campaign_registration)
+        %td= link_to 'Destroy', campaign_registration, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Campaign registration', new_campaign_registration_path(campaign_id: "3")

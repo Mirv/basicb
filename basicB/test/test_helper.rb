@@ -2,13 +2,17 @@
 ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
+
 require "capybara/rails"
-require "minitest/rails"
-require 'rails/test_help'
 require "minitest/rails/capybara"
+# require 'capybara/minitest'
+require "minitest/rails"
+require 'minitest/byebug' if ENV['DEBUG']
+
+require 'rails/test_help'
+
 require 'DomainIdentities.rb'
 require 'Enroller.rb'
-require 'minitest/byebug' if ENV['DEBUG']
 require 'devise'
 
 
@@ -33,17 +37,19 @@ end
 class ActionDispatch::IntegrationTest
   ActiveRecord::Migration.check_pending!
   include Devise::Test::IntegrationHelpers
-  include FactoryGirl::Syntax::Methods
   include DomainIdentities
   include Capybara::DSL
-  include Capybara::Assertions
+  # include Capybara::Assertions
+  # include Capybara::Minitest::Assertions
+  include FactoryGirl::Syntax::Methods
 end
 
 class Capybara::Rails::TestCase
   ActiveRecord::Migration.check_pending!
   fixtures :all
-  include Capybara::DSL
   include Devise::Test::IntegrationHelpers
+  include Capybara::DSL
+  # include Capybara::Minitest::Assertions
   include DomainIdentities
   include Enroller
 end
