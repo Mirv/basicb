@@ -32,7 +32,7 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-  #  player_params = player_params.merge(screenname: a_name) unless player_params.key?("screenname")
+  #  player_params = player_params.merge(name: a_name) unless player_params.key?("name")
   # u.dashes.first.dashplayers.first.player
     @player = Player.new(player_params)
     # @player = Player.new(player_params)
@@ -93,6 +93,6 @@ class PlayersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def player_params
-      params.require(:player).permit(:id,:screenname, :country_id, :motto)
+      params.require(:player).permit(:id, :name, :country_id, :motto)
     end
 end

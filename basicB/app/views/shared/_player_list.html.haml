@@ -1,6 +1,6 @@
 - list.each do |player|
   .list-group-item.my-well.nested-player
-    = player.screenname
+    = player.name
     = player.motto
     = player.country_id
     = render partial: 'shared/interact_options', locals: { interact_item: player }

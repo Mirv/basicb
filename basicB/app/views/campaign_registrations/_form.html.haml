@@ -2,9 +2,11 @@
   = f.error_notification
 
   .form-inputs
-    = f.association :campaign, :selected => @campaign_id
-    = f.association :player
-    = f.association :country
+    = f.association :campaign, :selected => @campaign_id, disabled: true
+    = f.association :player, disabled: true, :selected => @campaign_registration[:player_id]
+    = f.association :country, disabled: true
+    = f.association :dash, :selected => @campaign_registration[:dash_id], disabled: true
+    = f.association :user, :selected => @campaign_registration[:user_id], disabled: true
 
   .form-actions
     = f.button :submit

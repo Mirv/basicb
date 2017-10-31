@@ -1,5 +1,6 @@
 class Player < ApplicationRecord
   
+
   # reverse of campaigns owning players
   has_many  :campplays
   has_one  :campaign, through: :campplays
@@ -14,5 +15,5 @@ class Player < ApplicationRecord
   has_many :playercountries
   has_many :countries, through: :playercountries
 
-  validates :screenname, presence: true
+  validates :name, presence: true
 end

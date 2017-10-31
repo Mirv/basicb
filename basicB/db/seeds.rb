@@ -36,7 +36,7 @@ campaign = campaignCreate userdashes
 puts "Campaign -- #{campaign["name"]}"
 
 newer_player = userdashes.players.create!(makePlayerInfo)
-puts "First player -- #{newer_player["screenname"]}"
+puts "First player -- #{newer_player["name"]}"
 
 #
 ## My base 2nd user & campaign, with 1st player & country
@@ -49,12 +49,12 @@ campaign = campaignCreate userdashes
 puts "Campaign -- #{campaign["name"]}"
 
 newer_player = another_user.players.create!(makePlayerInfo)
-puts "Second player -- #{newer_player["screenname"]}"
+puts "Second player -- #{newer_player["name"]}"
 
 # Make a player in the campaign
   # puts "Campaign: #{first_campaign["name"]}"
   # newer_player = default_user.players.create!(makePlayerInfo)
-  # puts "First player: #{newer_player["screenname"]}"
+  # puts "First player: #{newer_player["name"]}"
 
 
 #

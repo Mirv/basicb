@@ -37,10 +37,10 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
 #   end
   
   test "should create player" do
-    @player_test = Player.create(screenname: "test_screen_name")
+    @player_test = Player.create(name: "test_screen_name")
 
     assert_difference('Player.count') do
-      post players_url,  params: { player: { screenname: "Testee Name" } }  
+      post players_url,  params: { player: { name: "Testee Name" } }  
     end
     # assert_redirected_to player_url(Player.last)
     # puts "redirect completed or failed"
@@ -57,7 +57,7 @@ class PlayersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update player" do
-    patch player_url(@player), params: { player: { screenname:  @player.screenname } }
+    patch player_url(@player), params: { player: { name:  @player.name } }
     assert_redirected_to player_url(@player)
   end
 

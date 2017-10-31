@@ -7,16 +7,16 @@ DEFAULTS: &DEFAULTS
   # update_at: <%= 3.weeks.ago.to_s(:db) %>
 
 one:
-  screenname: MyString
+  name: MyString
   motto: MyString
   <<: *DEFAULTS
 
 two:
-  screenname: MyString
+  name: MyString
   motto: MyString
   <<: *DEFAULTS
 
 three:
-  screenname: MyString
+  name: MyString
   motto: MyString
   <<: *DEFAULTS

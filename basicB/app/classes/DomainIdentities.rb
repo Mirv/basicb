@@ -53,7 +53,7 @@ module DomainIdentities
 
     ### default names ###
     def defaultPlayerName
-      @player_info = { screenname: "A shadowy & mysterious figure ... " }
+      @player_info = { name: "A shadowy & mysterious figure ... " }
     end
     
     def defaultCampaignName
@@ -82,7 +82,7 @@ module DomainIdentities
     def assignDash!(player)
       # Player doesn't own the dash...dont use
       # player.dashplayers.create(dash_id: @dash.id)
-      @dash.players.create(player_id: player.id, screenname: player.screenname)
+      @dash.players.create(player_id: player.id, name: player.name)
     end
     
     def assignDash(player)

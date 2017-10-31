@@ -1,6 +1,8 @@
 class Campaign < ApplicationRecord
   belongs_to :users
   
+  has_many  :campaign_registrations
+  
   has_many  :campplays
   has_many  :players, through: :campplays
   

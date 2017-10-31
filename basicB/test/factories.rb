@@ -6,7 +6,7 @@ FactoryGirl.define do
   end
 
   factory :player do
-    screenname "#{Faker::Name.name}"
+    name "#{Faker::Name.name}"
   end
   
   factory :dash do

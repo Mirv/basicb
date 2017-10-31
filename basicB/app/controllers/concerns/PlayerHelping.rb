@@ -6,7 +6,7 @@ require 'active_support/concern'
 #     extend ActiveSupport::Concern
 
 #     def self.createPlayer(owner)
-#       @player = Player.create!(screenname: defaultPlayer).save
+#       @player = Player.create!(name: defaultPlayer).save
 #       owner.dashplayers.create(player_id: @player.id)
 #     end
 

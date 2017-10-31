@@ -14,7 +14,7 @@ class PHelpers
   include Registering
   
   def defaultPlayer
-    @player_info = { screenname: "A shadowy & mysterious figure ... " }
+    @player_info = { name: "A shadowy & mysterious figure ... " }
   end
   
   def assignDash(owner)

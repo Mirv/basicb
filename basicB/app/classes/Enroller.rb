@@ -9,6 +9,7 @@ module Enroller
     # ... result exposes a hash for that purpose
     attr_reader :result
     attr_reader :test
+    attr_reader :info
 
     # Information existing pre object instanization
     @info
@@ -33,7 +34,7 @@ module Enroller
 
       @info[:user] = user_find(current_user_id)
       @info[:dashboard] = dash_find
-      @info[:campaign] = Campaign.find(campaign_id)
+      @info[:campaign] = Campaign.find(campaign_id) || Campaign.first
     end
 
     ### Top level business logic methods
@@ -87,7 +88,7 @@ module Enroller
     
     def create_campaign_player(name = defaultPlayerName)
       name = ComposeName(name, Player.first)
-      @enroll[:player] = @info[:campaign].players.create(screenname: name)
+      @enroll[:player] = @info[:campaign].players.create(name: name)
     end
     
     def create_campaign_organization(name = defaultOrganizationName)
