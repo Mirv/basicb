@@ -83,7 +83,7 @@ class PlayersController < ApplicationController
     end
 
     def set_dash
-      @dash = User.find(current_user.id)
+      @dash = Dash.find(current_user.id)
     end
 
     
