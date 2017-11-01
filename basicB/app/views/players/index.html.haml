@@ -1,8 +1,10 @@
 - the_title = "Players"
 = provide(:title, the_title)
 
+= current_user.id
+= @dash.name
 
-%h1 Your players
+%h1 Your players 
 
 = link_to 'New Player', new_player_path,:class => "btn btn-md btn-default"
 
