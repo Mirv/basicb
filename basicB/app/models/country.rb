@@ -22,5 +22,4 @@ class Country < ApplicationRecord
   # ... key check at some point
 
   accepts_nested_attributes_for :states, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true
-  accepts_nested_attributes_for :counties, reject_if: proc { |attributes| attributes[:name].blank? }, allow_destroy: true
 end

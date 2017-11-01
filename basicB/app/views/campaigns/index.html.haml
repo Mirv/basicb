@@ -14,7 +14,8 @@
       %tr
         %td= campaign.name
         %td= campaign.description
-        %td= link_to "Join", join_helper(campaign), method: :post, :class => "btn btn-xs btn-default"
+        // %td= link_to "Join", join_helper(campaign), :class => "btn btn-xs btn-default"
+        %td= join_helper(campaign)
         %td= render partial: 'shared/interact_options', locals: { interact_item: campaign }
 
 %br

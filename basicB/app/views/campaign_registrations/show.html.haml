@@ -12,11 +12,17 @@
 %p
   %b Player:
   = @campaign_registration.player
-%p Playername:
-= @campaign_registration.player
+
+%p
+  %b Player name:
+  = @campaign_registration.player.name
 %p
   %b Country:
   = @campaign_registration.country
+
+%p
+  %b Country name:
+  = @campaign_registration.country.name
 
 = link_to 'Edit', edit_campaign_registration_path(@campaign_registration)
 \|

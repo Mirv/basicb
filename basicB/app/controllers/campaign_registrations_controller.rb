@@ -1,5 +1,5 @@
 class CampaignRegistrationsController < ApplicationController
-  # before_action :set_campaign_registration, only: [:show, :edit, :update, :destroy]
+  before_action :set_campaign_registration, only: [:show, :edit, :update, :destroy]
 
   # GET /campaign_registrations
   # GET /campaign_registrations.json
@@ -18,6 +18,7 @@ class CampaignRegistrationsController < ApplicationController
 
   # GET /campaign_registrations/1/edit
   def edit
+    # @player = Player.find(@campaign_registration.player.id)
   end
 
 
@@ -49,22 +50,18 @@ class CampaignRegistrationsController < ApplicationController
     # POST /campaign_registrations
   # POST /campaign_registrations.json
   def create
-    @campaign_registration = CampaignRegistration.new(campaign_registration_params)
+    @campaign_registration = CampaignRegistration.new
     # Execute the class to generate defaults & the relationships linking it all
-    
-    puts "\n\n Pre  YA!\n\n"
     
     @enroller = Enroller::Enroller.new(params[:campaign_id], current_user.id)
     @enroller.enrolling
     
-    puts "\n\nYA!\n\n"
-    # capture enroller's output for cofirmation use
+        # capture enroller's output for cofirmation use
     @campaign_registration[:user_id] = @enroller.info[:user]
     @campaign_registration[:dash_id] = @enroller.info[:dashboard]
     @campaign_registration[:campaign_id] = @enroller.info[:campaign]
     @campaign_registration[:player_id] = @enroller.result[:player].id
     @campaign_registration[:country_id] = @enroller.result[:organization].id
-  
 
     respond_to do |format|
       if @campaign_registration.save
@@ -85,7 +82,9 @@ class CampaignRegistrationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_registration_params
-      params.require(:campaign_registration).permit(:id,
-          :campaign_id, :user_id, :dash_id, :player_id, :country_id)
+      params.require(:campaign_registration).permit(
+        :campaign_id, :user_id, :dash_id, :player_id, :country_id,
+        player_attributes: [:name],
+        country_attributes: [:name])
     end
 end

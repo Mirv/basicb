@@ -6,6 +6,12 @@
             = f.input :description
             = link_to_remove_association f, class: 'btn btn-default btn-xs' do
                 .glyphicon.glyphicon-remove
+        %h4 Counties
+        .counties
+            = f.simple_fields_for :counties do |state|
+                = render 'county_fields', :f => state
+            .links.row
+                = link_to_add_association 'Add County', f, :counties,  render_options: { wrapper: 'inline_form' }, :class => "btn btn-default"    
         // - if :counties 
         //     %h4 Counties
         //     .counties
