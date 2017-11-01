@@ -2,52 +2,36 @@ require 'DomainIdentities.rb'
 require 'Enroller.rb'
 
 class CampaignsController < ApplicationController
-  # include ApplicationHelper
   include DomainIdentities
-  # include Enroller
-  
+
   before_action :setCampaign, only: [:join, :edit, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index]
-  # before_action :set_dash
 
-  # refinement in progress https://github.com/Mirv/basicb/issues/86
   def join
-
   end
   
-  # GET /campaigns
-  # GET /campaigns.json
   def index
     @campaigns = Campaign.paginate(page: params[:page])
   end
 
-  # GET /campaigns/1
-  # GET /campaigns/1.json
   def show
     @campaign = setCampaign
     @user = setUser
-    # @user = setUser(current_user)
     @dash = setDash
-    # byebug
 
     # Old listings
     @ccountries = @campaign.campcounts.paginate(page: params[:page], per_page: 5)
     @pplayers = @campaign.players.paginate(page: params[:page], per_page: 5)
   end
 
-  # GET /campaigns/new
-  #test
   def new
     @campaign = Campaign.new
   end
 
-  # GET /campaigns/1/edit
   def edit
     @campaign = setCampaign
   end
 
-  # POST /campaigns
-  # POST /campaigns.json
   def create
     @campaign = Campaign.new(campaign_params)
 
@@ -62,8 +46,6 @@ class CampaignsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /campaigns/1
-  # PATCH/PUT /campaigns/1.json
   def update
     @campaign = setCampaign
     respond_to do |format|
@@ -76,9 +58,7 @@ class CampaignsController < ApplicationController
       end
     end
   end
-
-  # DELETE /campaigns/1
-  # DELETE /campaigns/1.json
+  
   def destroy
     @campaign = setCampaign
 
@@ -90,13 +70,12 @@ class CampaignsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
   def setCampaign
     # @campaign = Campaign.find(params[:id])
     @campaign = Campaign.find(params[:id])
   end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_params
       params.require(:campaign).permit(:name, :description, :player_id)
     end
