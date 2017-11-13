@@ -4,7 +4,7 @@ require 'Enroller.rb'
 class CampaignsController < ApplicationController
   include DomainIdentities
 
-  before_action :setCampaign, only: [:join, :edit, :update, :destroy]
+  before_action :set_campaign, only: [:join, :edit, :show, :update, :destroy]
   skip_before_action :authenticate_user!, only: [:index]
 
   def join
@@ -15,7 +15,6 @@ class CampaignsController < ApplicationController
   end
 
   def show
-    @campaign = setCampaign
     @user = setUser
     @dash = setDash
 
@@ -25,11 +24,11 @@ class CampaignsController < ApplicationController
   end
 
   def new
-    @campaign = Campaign.new
+    @campaign = setDash
+    @campaign =  current_user.campaigns.build
   end
 
   def edit
-    @campaign = setCampaign
   end
 
   def create
@@ -47,7 +46,6 @@ class CampaignsController < ApplicationController
   end
 
   def update
-    @campaign = setCampaign
     respond_to do |format|
       if @campaign.update!(campaign_params)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully updated.' }
@@ -60,7 +58,6 @@ class CampaignsController < ApplicationController
   end
   
   def destroy
-    @campaign = setCampaign
 
     @campaign.destroy
     respond_to do |format|
@@ -71,7 +68,7 @@ class CampaignsController < ApplicationController
 
   private
 
-  def setCampaign
+  def set_campaign
     # @campaign = Campaign.find(params[:id])
     @campaign = Campaign.find(params[:id])
   end

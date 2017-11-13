@@ -84,7 +84,7 @@ class CampaignRegistrationsController < ApplicationController
     def campaign_registration_params
       params.require(:campaign_registration).permit(
         :campaign_id, :user_id, :dash_id, :player_id, :country_id,
-        player_attributes: [:name],
-        country_attributes: [:name])
+        player_attributes: [:id, :name],
+        country_attributes: [:id, :name])
     end
 end
