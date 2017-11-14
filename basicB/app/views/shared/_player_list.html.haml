@@ -1,6 +1,14 @@
-- list.each do |player|
-  .list-group-item.my-well.nested-player
-    = player.name
-    = player.motto
-    = player.country_id
-    = render partial: 'shared/interact_options', locals: { interact_item: player }
+.players
+  %h2 
+    Player List
+  - if @players.count > 0
+    - list.each do |player|
+      .list-group-item.my-well.nested-player
+        = player.name
+        = player.motto
+        = player.country_id
+        = render partial: 'shared/interact_options', locals: { interact_item: player }
+    = will_paginate @players
+  - else
+    %p
+      No players signed yet...

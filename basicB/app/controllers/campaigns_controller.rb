@@ -20,7 +20,7 @@ class CampaignsController < ApplicationController
 
     # Old listings
     @ccountries = @campaign.campcounts.paginate(page: params[:page], per_page: 5)
-    @pplayers = @campaign.players.paginate(page: params[:page], per_page: 5)
+    @players = @campaign.players.paginate(page: params[:page], per_page: 5)
   end
 
   def new

@@ -3,10 +3,18 @@
 %h2 My dash: #{@my_dash.name}
 
 %h3 Campaigns I run
+
+%br
 = link_to 'Make New Campaign', new_campaign_path, :class => "btn btn-default btn-xs" 
+
+%br
 = render partial: 'dash_campaigns'
 
-%h3 Characters I am playing
-= link_to 'Join New Game', campaigns_path, :class => "btn btn-default btn-xs" 
+%br
+= link_to 'Join New Game', campaigns_path, :class => "btn btn-default btn-xs"
+
+%br
+= render partial: 'shared/player_list', locals: { list: @players }
+
 // = render partial: 'dash_players'
 // = render partial: 'shared/player_list', locals: { list: @dash_playing }

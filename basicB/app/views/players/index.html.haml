@@ -10,7 +10,7 @@
   
     = render partial: 'shared/lister_all', locals: { the_list: @dash_players }
 
-    = will_paginate @players
+    = will_paginate @dash_players, :param_name => "my_page"
     
   - else
     .my-well

@@ -24,16 +24,7 @@
 
   %br
 
-.players
-  %h2 
-    Player List
-  - if @pplayers.count > 0
-    = render partial: 'shared/player_list', locals: { list: @pplayers }
-    = will_paginate @pplayers
-
-  - else
-    %p
-      No players signed yet...
+  = render partial: 'shared/player_list', locals: { list: @players }
 
 .countries
   %h2

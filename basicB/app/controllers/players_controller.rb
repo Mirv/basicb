@@ -8,11 +8,9 @@ class PlayersController < ApplicationController
   # GET /players.json
 
   def index
-    @players = Player.paginate(page: params[:page], per_page: 10)
-    # Show all players belonging to the dash of the user in question
-    # @dash = setDash
     @dash = set_dash
-    @dash_players = @dash.players #.all.paginate(page: params[:page], per_page: 5)
+    @dash_players = @dash.players.paginate(page: params[:my_page], per_page: 5)
+    @players = Player.paginate(page: params[:page], per_page: 10)
   end
 
   # GET /players/1

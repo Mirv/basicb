@@ -8,7 +8,7 @@ class DashesController < ApplicationController
     @user = set_user
     @my_dash = set_dash
     
-    @dash_playing = @my_dash.players
+    @players = @my_dash.players.paginate(page: params[:page], per_page: 5)
     @dash_hosting = @my_dash.campaigns
   end
     
