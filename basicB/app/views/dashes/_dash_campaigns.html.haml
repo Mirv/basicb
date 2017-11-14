@@ -1,5 +1,15 @@
 %ul
-- for hosted in @dash_hosting
-  %tr
-    %td= hosted.name
-    %td= hosted.description
+%table{:class => "table table-striped table-hover"}
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th
+  - @dash_hosting.each do |campaign|
+    %tr
+      %td= campaign.name
+      %td= campaign.description
+      // %td= link_to "Join", join_helper(campaign), :class => "btn btn-xs btn-default"
+      %td= render partial: 'shared/interact_options', locals: { interact_item: campaign }
+
+%br

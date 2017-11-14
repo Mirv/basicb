@@ -8,7 +8,7 @@
 .list-group
   - if @dash_players.count > 0
   
-    = render partial: 'shared/lister_all', locals: { the_list: @dash_players }
+    = render partial: 'shared/list_options/list_item_entry_all', locals: { the_list: @dash_players }
 
     = will_paginate @dash_players, :param_name => "my_page"
     
@@ -24,14 +24,12 @@
   
     = will_paginate @players
     
-    = render partial: 'shared/rower_all', locals: { the_list: @players }
-    // = render partial: 'shared/lister_all', locals: { the_list: @players }
+    // = render partial: 'shared/rower_all', locals: { the_list: @players }
+    = render partial: 'shared/list_options/horizontal_style_entry_all', locals: { the_list: @players }
     
     = will_paginate @players
     
   - else
-  
     %li No #{the_title} found.
 
 %br
-
