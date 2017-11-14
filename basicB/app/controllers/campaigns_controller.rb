@@ -19,23 +19,25 @@ class CampaignsController < ApplicationController
     @dash = setDash
 
     # Old listings
-    @ccountries = @campaign.campcounts.paginate(page: params[:page], per_page: 5)
-    @players = @campaign.players.paginate(page: params[:page], per_page: 5)
+    @ccountries = @campaign.campcounts.paginate(page: params[:countries_paginate], per_page: 5)
+    @players = @campaign.players.paginate(page: params[:players_paginate], per_page: 5)
   end
 
   def new
-    @campaign = setDash
-    @campaign =  current_user.campaigns.build
+    @dash = setDash
+    @campaign =  @dash.campaigns.build
   end
 
   def edit
   end
 
   def create
-    @campaign = Campaign.new(campaign_params)
-
+  @dash = setDash
+    # @campaign = @dash.campaigns.create!(campaign_params)  # works v1
+# User.second.dashes.first.campaigns.create(name: "blah2")
     respond_to do |format|
-      if @campaign.save
+      # if @campaign.save  # works v1
+      if @campaign = @dash.campaigns.create!(campaign_params)
         format.html { redirect_to @campaign, notice: 'Campaign was successfully created.' }
         format.json { render :show, status: :created, location: @campaign }
       else
@@ -67,7 +69,11 @@ class CampaignsController < ApplicationController
   end
 
   private
-
+    
+  def set_user
+    @user = User.find(current_user.id)
+  end
+  
   def set_campaign
     # @campaign = Campaign.find(params[:id])
     @campaign = Campaign.find(params[:id])
