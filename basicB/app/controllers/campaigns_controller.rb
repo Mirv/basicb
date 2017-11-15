@@ -11,7 +11,9 @@ class CampaignsController < ApplicationController
   end
   
   def index
-    @campaigns = Campaign.paginate(page: params[:page])
+    @campaigns = Campaign.all
+    @campaigns = @campaigns.paginate(page: params[:campaigns_page], per_page: 10)
+    puts "HEREHHERHERHEHREHR----------------------------------------------"
   end
 
   def show

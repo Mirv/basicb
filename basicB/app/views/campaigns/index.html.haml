@@ -1,6 +1,10 @@
 = provide(:title, "Campaigns")
 %h1 Listing campaigns
 
+
+
+%br
+
 %table{:class => "table table-striped table-hover"}
   %thead
     %tr
@@ -17,7 +21,7 @@
         // %td= link_to "Join", join_helper(campaign), :class => "btn btn-xs btn-default"
         %td= join_helper(campaign)
         %td= render partial: 'shared/interact_options', locals: { interact_item: campaign }
-
+    = will_paginate @campaigns, :param_name => "campaigns_page"
 %br
 
 = link_to 'New Campaign', new_campaign_path, :class => "btn btn-md btn-default"
