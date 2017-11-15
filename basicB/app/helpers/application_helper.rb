@@ -18,14 +18,15 @@ module ApplicationHelper
     end
   end
   
-  def listHorizontal(listing, spacer = ', ')
-    list_columns = listing.attribute_names
-    result = Array.new
+  def listHorizontal(listing, spacer = ', ', remove_this)
+    list_columns = listing.attribute_names - remove_this
+ 
+    result = String.new
     for x in list_columns
-       result << "#{x.capitalize}:  #{listing[x]}"
+       result << "#{x.capitalize}:  #{listing[x]}#{spacer}"
     end
-    result = result.join(spacer)
-    return result
+
+    return result.chomp(spacer)
   end
   
 end

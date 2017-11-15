@@ -1,6 +1,6 @@
 - the_list.each do |listing|
   .list-group-item.my-well.nested-player
-    = listHorizontal(listing)
+    = listHorizontal(listing, ['created_at', 'updated_at'])
     = render partial: 'shared/interact_options', locals: { interact_item: listing }
 
 // Raw dumb of all columns in a single line
