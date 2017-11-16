@@ -19,6 +19,7 @@ module ApplicationHelper
   end
   
   def listHorizontal(listing, spacer = ', ', remove_this)
+    # lists = remove_attributes(listing, remove_this)
     list_columns = listing.attribute_names - remove_this
  
     result = String.new
@@ -27,6 +28,10 @@ module ApplicationHelper
     end
 
     return result.chomp(spacer)
+  end
+  
+  def remove_attributes(lists, remove_this)
+    new_list = lists.attribute_names - remove_this
   end
   
 end
