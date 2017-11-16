@@ -29,9 +29,4 @@ module ApplicationHelper
 
     return result.chomp(spacer)
   end
-  
-  def remove_attributes(lists, remove_this)
-    new_list = lists.attribute_names - remove_this
-  end
-  
 end
