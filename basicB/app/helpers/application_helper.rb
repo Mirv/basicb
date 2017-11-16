@@ -19,14 +19,17 @@ module ApplicationHelper
   end
   
   def listHorizontal(listing, spacer = ', ', remove_this)
-    # lists = remove_attributes(listing, remove_this)
-    list_columns = listing.attribute_names - remove_this
- 
-    result = String.new
-    for x in list_columns
-       result << "#{x.capitalize}:  #{listing[x]}#{spacer}"
+    if listing.any?
+      list_columns = listing.attribute_names - remove_this
+      result = String.new
+      for x in list_columns
+         result << "#{x.capitalize}:  #{listing[x]}#{spacer}"
+      end
+      result = result.chomp(spacer)
+    else
+      result = "Empty!  Shall we fill it boss?"
     end
-
-    return result.chomp(spacer)
+    
+    return result
   end
 end
