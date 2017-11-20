@@ -8,7 +8,8 @@
 = link_to 'Make New Campaign', new_campaign_path, :class => "btn btn-default btn-xs" 
 
 %br
-= render partial: 'dash_campaigns'
+// = render partial: 'dash_campaigns'
+= render partial: 'shared/campaign_list', locals: { campaigns: @dash_hosting }
 
 %br
 = link_to 'Join New Game', campaigns_path, :class => "btn btn-default btn-xs"

@@ -1,0 +1,10 @@
+.campaigns
+  %h2
+    Campaign List
+  - if campaigns.count > 1
+    %td= render partial: 'shared/list_options/list_item_entry_all', locals: { the_list: campaigns }
+  - else
+    = "No active campaigns found."
+      
+
+  

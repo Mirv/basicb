@@ -1,5 +1,6 @@
 - the_list.each do |listing|
-  .list-group-item.my-well.nested-player
+  // .list-group-item.my-well.nested-player
+  .list-group-item
     = simple_format(displayList(listing, ['created_at', 'updated_at']))
 
     = render partial: 'shared/interact_options', locals: { interact_item: listing }
