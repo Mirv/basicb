@@ -9,17 +9,26 @@ module ApplicationHelper
     end
   end
   
-  def displayList the_list, the_noun
-    if (the_list.count > 1) then
+  def displayList(the_list, remove_this)
+    result = String.new
+
+    if !the_list.nil?
+      list_columns = the_list.attribute_names - remove_this
+       result << ""
+      for x in list_columns
+         result << "<li>#{x.capitalize}:  #{the_list[x]}</li>"
+      end
         # render partial: 'shared/list_options/list_item_entry', locals: { the_list: the_list }
-        will_paginate the_list
     else
-     return  "No #{the_noun.capitalize} found."
+    # return  "No #{the_noun.capitalize} found."
+     result = "Empty!  Shall we fill it boss?"
     end
+    return result.html_safe
+    
   end
   
   def listHorizontal(listing, spacer = ', ', remove_this)
-    if listing.any?
+    if !listing.nil?
       list_columns = listing.attribute_names - remove_this
       result = String.new
       for x in list_columns
@@ -32,4 +41,10 @@ module ApplicationHelper
     
     return result
   end
+  def build_list_colums_to_show(the_list, remove_this, html_tag_pref)
+        list_columns = the_list.attribute_names - remove_this
+      for x in list_columns
+         result << "#{x.capitalize}:  #{listing[x]}#{spacer}"
+      end
+    end
 end

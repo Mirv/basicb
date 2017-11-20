@@ -9,8 +9,8 @@ class PlayersController < ApplicationController
 
   def index
     @dash = set_dash
-    @dash_players = @dash.players.paginate(page: params[:my_page], per_page: 5)
-    @players = Player.paginate(page: params[:page], per_page: 10)
+    @dash_players = @dash.players.paginate(page: params[:my_player_page], per_page: 3)
+    @players = Player.paginate(page: params[:player_page], per_page: 3)
   end
 
   # GET /players/1

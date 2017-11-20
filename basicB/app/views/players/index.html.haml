@@ -7,10 +7,10 @@
 
 .list-group
   - if @dash_players.count > 0
-  
-    = render partial: 'shared/list_options/list_item_entry_all', locals: { the_list: @dash_players }
+    = will_paginate @dash_players, :param_name => "my_player_page"
+    = render partial: 'shared/player_list', locals: { the_list: @dash_players }
 
-    = will_paginate @dash_players, :param_name => "my_page"
+    
     
   - else
     .my-well
@@ -21,14 +21,9 @@
 %h1 Listing all players
 .list-group
   - if @players.count > 0
-  
-    = will_paginate @players
-    
-    // = render partial: 'shared/rower_all', locals: { the_list: @players }
-    = render partial: 'shared/list_options/horizontal_style_entry_all', locals: { the_list: @players }
-    
-    = will_paginate @players
-    
+    = will_paginate @players, :param_name => "player_page"
+    = render partial: 'shared/player_row', locals: { the_list: @players }
+
   - else
     %li No #{the_title} found.
 

@@ -12,7 +12,7 @@ class CampaignsController < ApplicationController
   
   def index
     @campaigns = Campaign.all
-    @campaigns = @campaigns.paginate(page: params[:campaigns_page], per_page: 10)
+    @campaigns = @campaigns.paginate(page: params[:campaigns_page], per_page: 5)
   end
 
   def show
