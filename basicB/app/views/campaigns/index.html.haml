@@ -2,14 +2,11 @@
 
 %br
 
-%table{:class => "table table-striped table-hover"}
-  %tbody
-    - if @campaigns.count > 0
-      .list-group
-        = will_paginate @campaigns, :param_name => "campaigns_page"
-        = render partial: 'shared/campaign_list.html.haml', locals: { campaigns: @campaigns }
-    - else
-      = "No active campaigns found."
+- if @campaigns.count > 0
+  = will_paginate @campaigns, :param_name => "campaigns_page"
+  = render partial: 'shared/campaign_list.html.haml', locals: { campaigns: @campaigns }
+- else
+  = "No active campaigns found."
 %br
 
 = link_to 'New Campaign', new_campaign_path, :class => "btn btn-md btn-default"
