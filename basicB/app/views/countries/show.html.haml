@@ -9,7 +9,12 @@
 %p
   %b Player:
   = @country.players.first
+  
+%br
 
+%h2 Neighbors
+
+= render partial: 'country_neighbors', locals: {neighbor: @country}
 = link_to 'Edit', edit_country_path(@country)
 \|
 = link_to 'Back', countries_path

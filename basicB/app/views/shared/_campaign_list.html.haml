@@ -1,7 +1,7 @@
 .campaigns
   %h2
     Campaign List
-  - if campaigns.count > 1
+  - if campaigns.count > 0
     .list-group
       = render partial: 'shared/list_options/list_item_entry_all', locals: { the_list: campaigns }
   - else

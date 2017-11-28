@@ -14,17 +14,13 @@ module ApplicationHelper
 
     if !the_list.nil?
       list_columns = the_list.attribute_names - remove_this
-       result << ""
       for x in list_columns
          result << "<li>#{x.capitalize}:  #{the_list[x]}</li>"
       end
-        # render partial: 'shared/list_options/list_item_entry', locals: { the_list: the_list }
     else
-    # return  "No #{the_noun.capitalize} found."
      result = "Empty!  Shall we fill it boss?"
     end
     return result.html_safe
-    
   end
   
   def listHorizontal(listing, spacer = ', ', remove_this)

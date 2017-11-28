@@ -6,9 +6,8 @@
 = link_to 'New Player', new_player_path,:class => "btn btn-md btn-default"
 
 - if @dash_players.count > 0
-    .list-group
-        = will_paginate @dash_players, :param_name => "my_player_page"
-        = render partial: 'shared/player_list', locals: { the_list: @dash_players }
+    = will_paginate @dash_players, :param_name => "my_player_page"
+    = render partial: 'shared/player_list', locals: { the_list: @dash_players }
 - else
     .my-well
         %li No #{the_title} found.
@@ -16,11 +15,11 @@
 %br
 
 %h1 Listing all players
-.list-group
-    - if @players.count > 0
-        = will_paginate @players, :param_name => "player_page"
-        = render partial: 'shared/player_row', locals: { the_list: @players }
-    - else
-        %li No #{the_title} found.
+
+- if @players.count > 0
+    = will_paginate @players, :param_name => "player_page"
+    = render partial: 'shared/player_row', locals: { the_list: @players }
+- else
+    %li No #{the_title} found.
 
 %br

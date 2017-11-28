@@ -1,6 +1,25 @@
 // #neighborsDisplay.collapse
 //    .list-group
 //       - @country.neighbors.each do |x|
-.list-group-item
-   = link_to neighbor.name, edit_country_url(neighbor.id)
+// .list-group-item
+//   = link_to neighbor.name, edit_country_url(neighbor.id)
    
+- if @country.neighbors.count > 0
+  %table{:class => "table table-striped table-hover"}
+    %thead
+      %tr
+        %td
+          Neighbor ID
+        %td
+          Neighbor Name
+    %tbody
+    - for neighbor in @country.neighbors
+      %tr
+        %td
+          = neighbor.id
+        %td
+          = neighbor.name
+        .btn-group-xs	
+          %td= link_to 'Show', neighbor, :class => "btn btn-default btn-xs" 
+          %td= link_to 'Edit', edit_country_path(neighbor), :class => "btn btn-default btn-xs" 
+          %td= link_to neighbor.name, edit_country_url(neighbor.id)
