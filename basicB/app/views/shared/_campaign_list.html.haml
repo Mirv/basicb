@@ -5,7 +5,8 @@
     .list-group
       = render partial: 'shared/list_options/list_item_entry_all', locals: { the_list: campaigns }
   - else
-    = "No active campaigns found."
+    .list-group
+      = "No active campaigns found."
     
 
   
