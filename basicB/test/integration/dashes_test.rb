@@ -11,7 +11,6 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
     # @users = users(:one, :two)
     @dash = dashes(:one)
     sign_in users(:validuser)
-    # @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
   end
   
   it "dashbard singular route test" do
@@ -21,15 +20,18 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
 
   
   test "relationship between dash and player" do
+    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
     assert @relation_dash_player.valid?  
   end
   
   test "relationship between dash and player - must have dash_id" do
+    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
     @relation_dash_player.dash_id = nil
     assert_not @relation_dash_player.valid?  
   end
   
   test "relationship between dash and player - must have player_id" do
+    @relation_dash_player = Dashplayer.create(dash_id: dashes(:one).id, player_id: dashes(:two).id)
     @relation_dash_player.player_id = nil
     assert_not @relation_dash_player.valid?  
   end
@@ -69,11 +71,15 @@ class DashesControllerTest <  ActionDispatch::IntegrationTest
   end
 
   test "should destroy dash" do
-    puts "#{Dash.count}"
-    assert_difference('Dash.count', -1) do
+    # @dash = Dash.create!(name: @dash.name)
+    puts "Dash ID: #{@dash.id} -- Dash Count: #{Dash.count}"
+    assert_difference('Dash.count', -1, "Should delete one of them! #{@dash.count}") do
+    # puts "Dash pre:  #{Dash.count}"
+      # delete :destory, id: @dash
       delete dash_url(@dash)
+    # puts "Dash post:  #{Dash.count}"
     end
     assert_redirected_to dashes_url
-    puts "Test -- #{@dash.errors}"
+    # puts "Test -- #{@dash.errors}"
   end
 end

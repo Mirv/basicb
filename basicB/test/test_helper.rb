@@ -35,6 +35,7 @@ class ActiveSupport::TestCase
 end
 
 class ActionDispatch::IntegrationTest
+  fixtures :all
   ActiveRecord::Migration.check_pending!
   include Devise::Test::IntegrationHelpers
   include DomainIdentities
