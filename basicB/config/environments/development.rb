@@ -56,11 +56,11 @@ Rails.application.configure do
     # def obie
     #   User.where(email: "obiefernandez@gmail.com").first
     # end
+
     
     def setupObj
       require 'DomainIdentities'
       config.console = DomainIdentities
-      
       a = DomainIdentities::GameDsl.new
     end
   end

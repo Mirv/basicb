@@ -13,6 +13,7 @@ module BasicB
     # -- all .rb files in that directory are automatically loaded.
     config.generators do |g|
       g.test_framework :minitest, spec: true
+      g.scaffold_stylesheet false
     end
   end
 end
