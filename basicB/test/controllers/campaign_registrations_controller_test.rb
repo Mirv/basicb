@@ -14,13 +14,13 @@ describe CampaignRegistrationsController do
   #   value(response).must_be :success?
   # end
 
-  it "creates campaign_registration" do
-    expect {
-      post campaign_registrations_url, params: { campaign_registration: { campaign_id: campaign_registration.campaign_id, country_id: campaign_registration.country_id, dash_id: campaign_registration.dash_id, player_id: campaign_registration.player_id, user_id: campaign_registration.user_id } }
-    }.must_change "CampaignRegistration.count"
+  # it "creates campaign_registration" do
+  #   expect {
+  #     post campaign_registrations_url, params: { campaign_registration: { campaign_id: campaign_registration.campaign_id, country_id: campaign_registration.country_id, dash_id: campaign_registration.dash_id, player_id: campaign_registration.player_id, user_id: campaign_registration.user_id } }
+  #   }.must_change "CampaignRegistration.count"
 
-    must_redirect_to campaign_registration_path(CampaignRegistration.last)
-  end
+  #   must_redirect_to campaign_registration_path(CampaignRegistration.last)
+  # end
 
   # it "shows campaign_registration" do
   #   get campaign_registration_url(campaign_registration)

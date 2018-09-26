@@ -52,14 +52,14 @@ class CountriesController < ApplicationController
     end
   end
 
-  # DELETE /countries/1
-  # DELETE /countries/1.json
+  # # DELETE /countries/1
+  # # DELETE /countries/1.json
   def destroy
-    @country.destroy
-    respond_to do |format|
-      format.html { redirect_to countries_url, notice: 'Country was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  #   @country.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to countries_url, notice: 'Country was successfully destroyed.' }
+  #     format.json { head :no_content }
+    # end
   end
 
 private

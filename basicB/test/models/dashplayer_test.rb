@@ -8,14 +8,14 @@ require "test_helper"
 
 class Dashplayers < ActiveSupport::TestCase
 
-  test "dashplayer not valid" do
-    dashplayer = Dashplayer.new()  
-    assert_not dashplayer.valid?
-  end
+  # test "dashplayer not valid" do
+  #   dashplayer = Dashplayer.new()  
+  #   assert_not dashplayer.valid?
+  # end
   
-  test "dashplayer valid" do
-    dashplayer = Dashplayer.new(dash_id: 1, player_id: 1 )  
-    assert dashplayer.valid?
-  end
+  # test "dashplayer valid" do
+  #   dashplayer = Dashplayer.new(dash_id: 1, player_id: 1 )  
+  #   assert dashplayer.valid?
+  # end
 end
 

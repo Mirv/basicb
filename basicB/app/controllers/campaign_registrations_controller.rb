@@ -21,8 +21,6 @@ class CampaignRegistrationsController < ApplicationController
     # @player = Player.find(@campaign_registration.player.id)
   end
 
-
-
   # PATCH/PUT /campaign_registrations/1
   # PATCH/PUT /campaign_registrations/1.json
   def update
@@ -56,10 +54,11 @@ class CampaignRegistrationsController < ApplicationController
     @enroller = Enroller::Enroller.new(params[:campaign_id], current_user.id)
     @enroller.enrolling
     
-        # capture enroller's output for cofirmation use
-    @campaign_registration[:user_id] = @enroller.info[:user]
-    @campaign_registration[:dash_id] = @enroller.info[:dashboard]
-    @campaign_registration[:campaign_id] = @enroller.info[:campaign]
+    # capture enroller's output for cofirmation use
+    # some of these look like they might be nested in the strong_params
+    @campaign_registration[:user_id] = @enroller.info[:user].id
+    @campaign_registration[:dash_id] = @enroller.info[:dashboard].id
+    @campaign_registration[:campaign_id] = @enroller.info[:campaign].id
     @campaign_registration[:player_id] = @enroller.result[:player].id
     @campaign_registration[:country_id] = @enroller.result[:organization].id
 
@@ -80,6 +79,7 @@ class CampaignRegistrationsController < ApplicationController
       @campaign_registration = CampaignRegistration.find(params[:id])
     end
 
+    # TODO - check if these should be nested or not against model - as enroller object in the create action doesn't nest
     # Never trust parameters from the scary internet, only allow the white list through.
     def campaign_registration_params
       params.require(:campaign_registration).permit(

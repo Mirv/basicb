@@ -4,7 +4,7 @@ module Enroller
   
   class Enroller
     extend ActiveSupport::Concern
-  
+    
     # testing hook - captures nil from AR assignment to db in one spot
     # ... result exposes a hash for that purpose
     attr_reader :result
@@ -19,7 +19,6 @@ module Enroller
 
     def initialize(campaign_id, current_user_id)
       @test = "Testing"
-      
       
       # Results of each query are held here, nil means something went wrong ...
       # ... which allows us to destroy everything else to simulate rollback
@@ -39,6 +38,7 @@ module Enroller
 
     ### Top level business logic methods
     def enrolling
+      # byebug
       setup_in_campaign
       # run_enrollment
       setup_in_dashboard

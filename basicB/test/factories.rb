@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :user do
     email "#{Faker::Cat.name}.person@test.com"
     password "aaaaaa"
@@ -19,7 +19,7 @@ FactoryGirl.define do
   end
 end
 
-# FactoryGirl.define do
+# FactoryBot.define do
 #   factory :relationship do
 #     guardian
 #     relationship_type RelationshipType.first

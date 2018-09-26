@@ -2,22 +2,49 @@
 
 %p
   %b User:
+  = @campaign_registration.user.name
+  |
+  = @campaign_registration.user.email
+  |
+  = @campaign_registration.user.id
+  |
   = @campaign_registration.user
 %p
   %b Dash:
+  = @campaign_registration.dash.name
+  |
+  = @campaign_registration.dash.id
+  |
   = @campaign_registration.dash
 %p
   %b Campaign:
-  = @campaign_registration.campaign
+  = @campaign_registration.campaign.name
+  |
+  = @campaign_registration.campaign.id
+  |
+  = "test"
+  = @campaign_registration.campaign_id
 %p
   %b Player:
-  = @campaign_registration.player
+  = @campaign_registration.player.name
+  |
+  = @campaign_registration.player.id
 
 %p
   %b Player name:
   = @campaign_registration.player.name
+  | 
+  = @campaign_registration.player.id
+  | 
+  = @campaign_registration.player
+  
+
 %p
   %b Country:
+  = @campaign_registration.country.name
+  | 
+  = @campaign_registration.country.id
+  | 
   = @campaign_registration.country
 
 %p

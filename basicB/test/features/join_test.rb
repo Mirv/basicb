@@ -1,21 +1,15 @@
-require "test_helper"
-require 'minitest/autorun'
+require 'test_helper'
+require 'minitest'
+require 'capybara'
 
-  # scenario "the test is sound" do
-  #   visit root_path
-  #   page.must_have_content "Hello World"
-  #   page.wont_have_content "Goodbye All!"
-  # end
+### Note:  Part of the api interface test works with features/enroller.rb for integration
 
-class JoinCampaignTest < Minitest::Capybara::Spec
-  
-  def joining_campaign_should_make_player
+class JoinCampaignTest < ActionDispatch::IntegrationTest
+  test "joining campaign should make player" do
     sign_in users(:validuser)  
-    visit '/'
-    
-    assert_content "Homepage"
-    page.must_have_content "Homepage"
-    # visit campaigns_path
-    # assert_response 200
+    visit campaign_url(Campaign.first)
+    assert_selector "h2", text: "Player List"
+    click_on "Join"
+    assert_selector '#notice', text: "Campaign registration was successfully created."
   end
 end

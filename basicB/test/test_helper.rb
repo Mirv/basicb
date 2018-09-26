@@ -28,7 +28,7 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
   # Add more helper methods to be used by all tests here...
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
   include Devise::Test::IntegrationHelpers
   include DomainIdentities
   include Rails.application.routes.url_helpers
@@ -42,7 +42,7 @@ class ActionDispatch::IntegrationTest
   include Capybara::DSL
   # include Capybara::Assertions
   # include Capybara::Minitest::Assertions
-  include FactoryGirl::Syntax::Methods
+  include FactoryBot::Syntax::Methods
 end
 
 class Capybara::Rails::TestCase

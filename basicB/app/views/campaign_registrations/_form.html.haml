@@ -6,11 +6,11 @@
     = f.association :player, disabled: true, :selected => @campaign_registration[:player_id]
     = f.simple_fields_for :player do |ff|
       = ff.input :name
-      = ff.input :id
+      = ff.input :id, disabled: true
     = f.association :country, disabled: true
     = f.simple_fields_for :country do |ff|
       = ff.input :name
-      = ff.input :id
+      = ff.input :id, disabled: true
     = f.association :dash, :selected => @campaign_registration[:dash_id], disabled: true
     = f.association :user, :selected => @campaign_registration[:user_id], disabled: true
 

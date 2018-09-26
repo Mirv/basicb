@@ -7,5 +7,6 @@ class CampaignRegistration < ApplicationRecord
   
   accepts_nested_attributes_for :player, :reject_if => :all_blank
   accepts_nested_attributes_for :country, :reject_if => :all_blank
+  accepts_nested_attributes_for :campaign, :reject_if => :all_blank
 
 end
