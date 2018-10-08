@@ -3,7 +3,7 @@ class Player < ApplicationRecord
 
   # reverse of campaigns owning players
   has_many  :campplays
-  has_one  :campaign, through: :campplays
+  has_many  :campaign, through: :campplays
   
   # reverse of dash via dashplayer owning players
   has_many  :dashplayers

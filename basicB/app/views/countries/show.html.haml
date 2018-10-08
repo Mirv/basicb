@@ -6,9 +6,13 @@
 %p
   %b Description:
   = @country.description
-%p
-  %b Player:
-  = @country.players.first
+- if @country.players 
+  - @country.players.each do |player|
+    %p
+      %b Player:
+      = player.name
+      |
+      = player.id
   
 %br
 
