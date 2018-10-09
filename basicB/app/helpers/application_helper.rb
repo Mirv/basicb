@@ -1,5 +1,3 @@
-require 'app/classes/dev_displays.rb'
-
 module ApplicationHelper
 
   def full_title(page_title = "")                     

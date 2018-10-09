@@ -2,7 +2,10 @@
   // .list-group-item.my-well.nested-player
   .list-group-item.my-well.nested-player
     = simple_format(displayList(listing, ['created_at', 'updated_at']))
-
+    - if listing.countries
+      - listing.countries.each do |country|
+        %li
+          = name_id country
     = render partial: 'shared/interact_options', locals: { interact_item: listing }
 
 // Working 11/17
