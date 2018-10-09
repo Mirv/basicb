@@ -1,3 +1,5 @@
+require 'app/classes/dev_displays.rb'
+
 module ApplicationHelper
 
   def full_title(page_title = "")                     
@@ -9,6 +11,22 @@ module ApplicationHelper
     end
   end
   
+  def name_id(target)
+    if target.name
+      "#{target.name} | #{target.id}"
+    else
+      "#{target.id}"
+    end
+  end
+  
+  def email_name(target)
+    if target.email
+      "#{target.email} | #{name_id(target)}"
+    else
+      name_id(target)
+    end
+  end
+
   def displayList(the_list, remove_this)
     result = String.new
 
