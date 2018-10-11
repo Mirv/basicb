@@ -1,11 +1,13 @@
 
 def campaignCreate(owner)
+  return unless owner
   # Make a campaign owned by a user
   name = "#{owner.name}'s campaign"
   description = "At start..."
   first_campaign = owner.campaigns.create!(
       name: name, 
       description: description)
+  puts "Campaign -- #{first_campaign["name"]}"
   return first_campaign
 end
 

@@ -29,14 +29,30 @@ end
 ## My base user & campaign, with 1st player & country
 #
 
-default_user = makeDefaultUser 1, "a@test.com"
-userdashes = userDash default_user
 
-campaign = campaignCreate userdashes
-puts "Campaign -- #{campaign["name"]}"
 
-newer_player = userdashes.players.create!(makePlayerInfo)
-puts "First player -- #{newer_player["name"]}"
+def make_default_setup(number_defaults = 2, first_half_email ="a")
+  front_email = first_half_email
+  (1..number_defaults).each do |x|
+    ApplicationRecord.transaction do
+      default_user = makeDefaultUser number_defaults, front_email
+      dash = make_dash_for_user default_user
+      puts "dash is #{dash}"
+      next unless dash
+      campaign = campaignCreate dash 
+      next unless campaign
+      # Note: raw creates here - export later?
+      newer_player = dash.players.create!(makePlayerInfo)
+      puts "First player -- #{newer_player["name"]}"
+    end
+    front_email.next
+  end
+end
+
+
+make_default_setup
+
+
 
 #
 ## My base 2nd user & campaign, with 1st player & country

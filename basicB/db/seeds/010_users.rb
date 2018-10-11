@@ -59,22 +59,52 @@ end
 #
 ## Pending - do we want this to be a sideeffect as that blocks reusability?
 #
-def makeDefaultUser(x, email)
-  # puts "entering makeDefaultUser"
-  if User.find_by( email: email )
-    puts "makeDefaultUser failed on ##{x}"
-  else
-    # puts "calling makeUserInfo"
-    new_user_make = makeUserInfo(x)
-    new_user_make["email"] = email
-    new_user_made = User.create!(new_user_make)
-    print "New user made -- #{new_user_made}"
-    return new_user_made
-  end
-  #
-  ## Stub here for a single campaign to generate
-  #
+## 
+#
+# def makeDefaultUser(number_defaults, first_half_email, email_domain = "test.com")
+#   # puts "entering makeDefaultUser"
+#   email = first_half_email + "@" + email_domain
+#   if User.find_by( email: email )
+#     puts "makeDefaultUser failed on ##{number_defaults} -- user already exists"
+#     puts "Email:  #{email}"
+#     return nil
+#   else
+#     # puts "calling makeUserInfo"
+#     new_user_make = makeUserInfo(number_defaults)
+#     new_user_make["email"] = email
+#     new_user_made = User.create!(new_user_make)
+#     print "New user made -- #{new_user_made}"
+#     return new_user_made
+#   end
+#   #
+#   ## Stub here for a single campaign to generate
+#   #
 
+# #  new_player_made = new_user_made.players.create!(makePlayerInfo)
+# end
+
+def makeDefaultUser(number_defaults, first_half_email, email_domain = "test.com")
+  # puts "entering makeDefaultUser"
+  email = first_half_email + "@" + email_domain
+  puts "MDU - email:  #{email}"
   
-#  new_player_made = new_user_made.players.create!(makePlayerInfo)
+  ### Note:  Extract this to check function & use it to replace later in process so new a, b default code doesn't fight old replacment
+  
+  if User.find_by( email: email )
+    until !User.find_by( email: email )
+      email = first_half_email.next + "@" + email_domain
+      puts "makeDefaultUser incrementing past ##{number_defaults} w/#{email}-- user already exists"
+      # puts "Email:  #{email}"
+      # return nil
+    end
+  end
+  puts "MDU - email - post check:  #{email}"
+  # puts "calling makeUserInfo"
+  new_user_make = makeUserInfo(number_defaults)
+  new_user_make["email"] = email
+  puts "Pre new user #{new_user_make[:email]}"
+  new_user_made = User.create!(new_user_make)
+  print "New user made -- #{new_user_made.name}"
+  return new_user_made
+  
 end

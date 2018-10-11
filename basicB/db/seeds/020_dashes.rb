@@ -1,4 +1,5 @@
-def userDash(a_user)
+def make_dash_for_user(a_user)
+  return unless a_user
   new_name = Faker::Cat.name ||=  "Mr Meowmix"
   new_name = "#{a_user.name}'s cat buddy ... #{new_name}"
   user_dash = a_user.dashes.create!(name: new_name)
