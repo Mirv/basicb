@@ -21,8 +21,6 @@ ActiveRecord::Schema.define(version: 20180116193652) do
     t.integer  "size"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "player_id"
-    t.index ["player_id"], name: "index_countries_on_player_id", using: :btree
   end
 
   create_table "Playercountries", force: :cascade do |t|
@@ -32,14 +30,6 @@ ActiveRecord::Schema.define(version: 20180116193652) do
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_playercountries_on_Country_id", using: :btree
     t.index ["player_id"], name: "index_playercountries_on_Player_id", using: :btree
-  end
-
-  create_table "aux_countries", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "countries_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["countries_id"], name: "index_aux_countries_on_countries_id", using: :btree
   end
 
   create_table "campaign_registrations", force: :cascade do |t|
@@ -93,7 +83,6 @@ ActiveRecord::Schema.define(version: 20180116193652) do
     t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "player_id"
   end
 
   create_table "dashcampaigns", force: :cascade do |t|
@@ -148,18 +137,11 @@ ActiveRecord::Schema.define(version: 20180116193652) do
     t.index ["player_id"], name: "index_playercountries_on_player_id", using: :btree
   end
 
-  create_table "playercounts", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "players", force: :cascade do |t|
     t.string   "name"
     t.string   "motto"
-    t.integer  "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["country_id"], name: "index_players_on_country_id", using: :btree
   end
 
   create_table "states", force: :cascade do |t|
