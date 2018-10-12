@@ -26,11 +26,9 @@ end
 
 
 #
-## My base users with present logins & campaign, player, country
+### My base users ("a@test.com")
+#  ... with present logins & campaign, player, country
 #
-
-
-
 def make_default_setup(number_defaults = 2, first_half_email ="a")
   front_email = first_half_email
   (1..number_defaults).each do |x|
@@ -55,9 +53,7 @@ def make_default_setup(number_defaults = 2, first_half_email ="a")
   end
 end
 
-def guard_clause_present(target, location)
-  puts "\n#{location} -- #{target.to_s}:  #{target}\n" unless target
-end
+
 
 
 make_default_setup
@@ -99,4 +95,6 @@ puts "Created #{Neighborhood.count} neighbors..."
 
 
 
-  
+def guard_clause_present(target, location)
+  puts "\n#{location} -- #{target.to_s}:  #{target}\n" unless target
+end
