@@ -7,6 +7,10 @@ Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
 #### Definitions ####
 #### Definitions ####
 
+def guard_clause_present(target, location)
+  puts "\n#{location} -- #{target.to_s}:  #{target}\n" unless target
+end
+
 def max_neighbors
   6
 end
@@ -87,7 +91,7 @@ puts "filling campaigns ... \n"
 fillCampaign 1
 # fillCampaign 2
 
-
+puts "Created #{Campaign.count} campaigns"
 puts "Created #{Player.count} players"
 puts "Create #{User.count} users..."
 puts "Created #{Country.count} countries..."
@@ -95,6 +99,3 @@ puts "Created #{Neighborhood.count} neighbors..."
 
 
 
-def guard_clause_present(target, location)
-  puts "\n#{location} -- #{target.to_s}:  #{target}\n" unless target
-end
