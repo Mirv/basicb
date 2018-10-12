@@ -26,7 +26,7 @@ end
 
 
 #
-## My base user & campaign, with 1st player & country
+## My base users with present logins & campaign, player, country
 #
 
 
@@ -36,17 +36,27 @@ def make_default_setup(number_defaults = 2, first_half_email ="a")
   (1..number_defaults).each do |x|
     ApplicationRecord.transaction do
       default_user = makeDefaultUser number_defaults, front_email
+      guard_clause_present default_user, "M-D-S"
+      next unless default_user 
+      
       dash = make_dash_for_user default_user
-      puts "dash is #{dash}"
+      guard_clause_present dash, "M-D-S"
       next unless dash
+      
       campaign = campaignCreate dash 
+      guard_clause_present campaign, "M-D-S"
       next unless campaign
+      
       # Note: raw creates here - export later?
       newer_player = dash.players.create!(makePlayerInfo)
-      puts "First player -- #{newer_player["name"]}"
+      guard_clause_present newer_player, "M-D-S"
     end
     front_email.next
   end
+end
+
+def guard_clause_present(target, location)
+  puts "\n#{location} -- #{target.to_s}:  #{target}\n" unless target
 end
 
 
@@ -57,15 +67,15 @@ make_default_setup
 #
 ## My base 2nd user & campaign, with 1st player & country
 #
+# puts "Entering #2"
+# another_user = makeDefaultUser 2, "b@test.com"
+# userdashes = userDash another_user
 
-another_user = makeDefaultUser 2, "b@test.com"
-userdashes = userDash another_user
+# campaign = campaignCreate userdashes
+# puts "Campaign -- #{campaign["name"]}"
 
-campaign = campaignCreate userdashes
-puts "Campaign -- #{campaign["name"]}"
-
-newer_player = another_user.players.create!(makePlayerInfo)
-puts "Second player -- #{newer_player["name"]}"
+# newer_player = another_user.players.create!(makePlayerInfo)
+# puts "Second player -- #{newer_player["name"]}"
 
 # Make a player in the campaign
   # puts "Campaign: #{first_campaign["name"]}"
@@ -79,7 +89,7 @@ puts "Second player -- #{newer_player["name"]}"
 puts "filling campaigns ... \n"
 
 fillCampaign 1
-fillCampaign 2
+# fillCampaign 2
 
 
 puts "Created #{Player.count} players"

@@ -16,7 +16,7 @@ def fillCampaign(campaign)
     begin
       cur_user_details = makeUserInfo(u) 
       new_user_made = User.create!(cur_user_details)
-      user_dash_made = userDash new_user_made
+      user_dash_made = make_dash_for_user new_user_made
       new_player_made = user_dash_made.players.create!(makePlayerInfo)
       neighbor = Campplay.create!(
           player_id: new_player_made["id"], campaign_id: campaign)
