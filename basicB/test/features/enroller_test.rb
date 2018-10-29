@@ -1,6 +1,10 @@
 require 'test_helper'
 require 'Enroller'
 
+##  Note - should setup all the tests to reflect like test 'all together now' 
+#     ... as it doesn't hit db, instead hits the model validation & nil checks
+#     ... as this is significantly faster
+
 class EnrollerTest < ActiveSupport::TestCase
     # include Enroller::Enroller
 
@@ -28,25 +32,25 @@ class EnrollerTest < ActiveSupport::TestCase
   end
   
   test "does enroller assign organization to player successfully" do
+    @enroller.setup_in_campaign
+    @enroller.assign_organization_to_player
     assert_difference "Playercountry.count" do
-      @enroller.setup_in_campaign
-      @enroller.assign_organization_to_player
       @enroller.run_enrollment
     end
   end
 
   test "does enroller assign player to dashboard successfully" do
+    @enroller.setup_in_campaign
+    @enroller.setup_in_dashboard
     assert_difference "Dashplayer.count" do 
-      @enroller.setup_in_campaign
-      @enroller.setup_in_dashboard
       @enroller.run_enrollment
     end
   end
   
   test "does enroller assign organization to dashboard successfully" do
-    assert_difference "Dashcount.count" do
       @enroller.setup_in_campaign
       @enroller.assign_organization_to_player.save
+    assert_difference "Dashcount.count" do
       @enroller.assign_dashboard_organization.save
     end
   end
