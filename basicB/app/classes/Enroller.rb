@@ -1,4 +1,4 @@
-require 'test_helper'
+# require 'test_helper'
 require 'Enroller'
 
 ##  Note - should setup all the tests to reflect like test 'all together now' 

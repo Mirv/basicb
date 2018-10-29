@@ -15,7 +15,7 @@ class EnrollerTest < ActiveSupport::TestCase
     @enroller = Enroller::Enroller.new(@campaign.id, @user.id)
   end
   
-  test "did enroller initialize" do
+  test "did enroller initialize??" do
     refute @enroller.nil?
   end
 
