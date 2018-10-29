@@ -12,43 +12,24 @@ end
 
 # --- spare users --- #
 
+#
+# get the info and apply any data shaping
+#
 def assembleUserInfo(u)
   hold = Hash.new
-  
-  # get the info and apply any data shaping
-  
   u = u * 1000
   random = rand(u)
-
   name = Faker::Cat.name ||= "Mr. Meowmix"
-  email = "The#{name}#{u}#{random}@test.com"
-  password = "ssssss"
-  password_confirmation = password
-  
-  # load to hash .... can this be done more efficiently & keep ease of reading?
+
   hold = hold.merge({
     "name" =>  name,
-    "email" =>  email,
-    "password" =>  password,
-    "password_confirmation" =>  password_confirmation
+    "email" =>  "The#{name}#{u}#{random}@test.com",
+    "password" =>  "ssssss",
+    "password_confirmation" =>  "ssssss"
   })
   return hold
 end
 
-# --- player names --- #
-
-#
-### generate info for a player owned by the user
-#
-def makePlayerInfo
-  hold = Hash.new
-  
-  name = Faker::Name.name
-  motto = Faker::StarWars.wookie_sentence 
-  
-  hold = hold.merge({"name" =>  name})
-  hold = hold.merge({"motto" =>  motto})
-end
 
 def makeDefaultUser(number_defaults = 1, first_half_email = "a", email_domain = "test.com")
   # puts "entering makeDefaultUser"

@@ -1,4 +1,3 @@
-
 # --- player names --- #
 
 #
@@ -6,10 +5,8 @@
 #
 def makePlayerInfo
   hold = Hash.new
-  
-  name = Faker::Name.name
-  motto = Faker::StarWars.wookie_sentence 
-  
-  hold = hold.merge({"name" =>  name})
-  hold = hold.merge({"motto" =>  motto})
+  hold = hold.merge({
+      "name" =>  Faker::Name.name, 
+      "motto" =>  Faker::StarWars.wookie_sentence
+  })
 end
