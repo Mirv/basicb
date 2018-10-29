@@ -38,7 +38,11 @@ group :development, :test do
   gem 'sqlite3' # Use sqlite3 as the database for Active Record
   gem 'haml'
   gem 'haml-rails'
- 
+  gem 'capybara'
+  
+  gem 'selenium-webdriver'
+  gem 'chromedriver-helper'
+  # gem 'webdriver'
   gem 'nokogiri' # required for minitest-have_tag
   gem "minitest", "5.10.1"
   # gem 'minitest-rails'

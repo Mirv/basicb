@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'application_system_test_case'
 
 
 ### Note:  Part of the api interface test works with features/enroller.rb for integration

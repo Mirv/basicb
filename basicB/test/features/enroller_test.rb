@@ -16,39 +16,39 @@ class EnrollerTest < ActiveSupport::TestCase
   end
 
   test "does enroller make player in campaign successfully" do
-    expect {
+    assert_difference 'Player.count' do
       @enroller.create_campaign_player
-    }.must_change ("Player.count") 
+    end
   end
 
   test "does enroller make organization in campaign successfully" do
-    expect {
+    assert_difference "Country.count" do
       @enroller.create_campaign_organization
-    }.must_change "Country.count"
+    end
   end
   
   test "does enroller assign organization to player successfully" do
-    expect {
+    assert_difference "Playercountry.count" do
       @enroller.setup_in_campaign
       @enroller.assign_organization_to_player
       @enroller.run_enrollment
-    }.must_change "Playercountry.count"
+    end
   end
 
   test "does enroller assign player to dashboard successfully" do
-    expect {
+    assert_difference "Dashplayer.count" do 
       @enroller.setup_in_campaign
       @enroller.setup_in_dashboard
       @enroller.run_enrollment
-    }.must_change "Dashplayer.count" 
+    end
   end
   
   test "does enroller assign organization to dashboard successfully" do
-    expect {
+    assert_difference "Dashcount.count" do
       @enroller.setup_in_campaign
       @enroller.assign_organization_to_player.save
       @enroller.assign_dashboard_organization.save
-    }.must_change "Dashcount.count" 
+    end
   end
 
   test "all together now" do

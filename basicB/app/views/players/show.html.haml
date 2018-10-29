@@ -8,7 +8,7 @@
   = @player.motto
 %p
   %b Country:
-  = @player.country_id
+  = @player.countries.first.id
 
 = link_to 'Edit', edit_player_path(@player)
 

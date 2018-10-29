@@ -2,7 +2,7 @@ require "test_helper"
 
 class Player_Test < ActiveSupport::TestCase
   test 'valid player' do
-    player = Player.new(name: 'aname', country_id: '1', motto: "I do stuff")
+    player = Player.new(name: 'aname', motto: "I do stuff")
     assert player.valid?
   end
 

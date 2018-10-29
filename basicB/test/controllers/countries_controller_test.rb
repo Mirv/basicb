@@ -20,8 +20,7 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
   #  MOdeled after - http://edgeguides.rubyonrails.org/testing.html - but oddly in some places, not all - Article_url instead is used, but in my code post looks like plural - need mentor help
   test "should create country" do
     assert_difference('Country.count') do
-      # post countries_url, params: { country: { description: @country.description, name: @country.name } } # removed from after country.name ... ', player_id: @country.player_id'
-      post countries_url, params: { country: { description: "NEW", name: "NEWNAME", player_id: "1" } } # removed from after country.name ... ', player_id: @country.player_id'
+      post countries_url, params: { country: { description: "NEW", name: "NEWNAME" } }
     end
 
     assert_redirected_to country_url(Country.last)
@@ -38,7 +37,7 @@ class CountriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update country" do
-    patch country_url(@country), params: { country: { description: @country.description, name: @country.name, player_id: @country.player_id } }
+    patch country_url(@country), params: { country: { description: @country.description, name: @country.name } }
     assert_redirected_to country_url(@country)
   end
 

@@ -21,14 +21,11 @@ require 'devise'
 # to the test group in the Gemfile and uncomment the following:
 # require "minitest/rails/capybara"
 
-# Uncomment for awesome colorful output
-# require "minitest/pride"
 
 class ActiveSupport::TestCase
    ActiveRecord::Migration.check_pending!
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
-  # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   include Devise::Test::IntegrationHelpers
   include DomainIdentities
@@ -40,45 +37,6 @@ class ActionDispatch::IntegrationTest
   ActiveRecord::Migration.check_pending!
   include Devise::Test::IntegrationHelpers
   include DomainIdentities
-  # include Capybara::DSL
-  # include Capybara::Assertions
-  # include Capybara::Minitest::Assertions
   include FactoryBot::Syntax::Methods
-end
-
-# class Capybara::Rails::TestCase
-#   ActiveRecord::Migration.check_pending!
-#   fixtures :all
-#   include Devise::Test::IntegrationHelpers
-#   include Capybara::DSL
-#   # include Capybara::Minitest::Assertions
-#   include DomainIdentities
-#   include Enroller
-# end
-
-# class SeedTestSet < ActiveSupport::TestCase
-#   ActiveRecord::Migration.check_pending!
-#   # Add more helper methods to be used by all tests here...
-#   include FactoryBot::Syntax::Methods
-#   # include DomainIdentities
-#   # include Rails.application.routes.url_helpers
-# end
-
-# class SeedTestSet #< ActiveSupport::TestCase
-#   # ActiveRecord::Migration.check_pending!
-#   # include FactoryBot::Syntax::Methods
-#   # include Rails.application.routes.url_helpers
-
-# end
-
-# class SeedTestSet < Rails::TestCase
-
-# end
-
-# class SeedTestSet < Rails::TestCase
-# end
-
-class SeedTestSet < ActionDispatch::IntegrationTest
-  # byebug
 end
 
