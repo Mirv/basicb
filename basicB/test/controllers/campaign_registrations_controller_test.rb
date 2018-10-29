@@ -1,7 +1,7 @@
-require "test_helper"
-require 'Enroller.rb'
+# require "test_helper"
+# require 'Enroller.rb'
 
-describe CampaignRegistrationsController do
+# describe CampaignRegistrationsController do
   # let(:campaign_registration) { campaign_registrations :one }
 
   # it "gets index" do
@@ -44,4 +44,4 @@ describe CampaignRegistrationsController do
 
   #   must_redirect_to campaign_registrations_path
   # end
-end
+# end

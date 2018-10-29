@@ -38,27 +38,24 @@ def make_default_setup(number_defaults = 2, first_half_email ="a")
   (1..number_defaults).each do |x|
     ApplicationRecord.transaction do
       default_user = makeDefaultUser number_defaults, front_email
-      guard_clause_present default_user, "M-D-S"
+      guard_clause_present default_user, "M-D-S: #{default_user.id}"
       next unless default_user 
       
       dash = make_dash_for_user default_user
-      guard_clause_present dash, "M-D-S"
+      guard_clause_present dash, "M-D-S: #{dash.id}"
       next unless dash
       
       campaign = campaignCreate dash 
-      guard_clause_present campaign, "M-D-S"
+      guard_clause_present campaign, "M-D-S: #{campaign.id}"
       next unless campaign
       
       # Note: raw creates here - export later?
       newer_player = dash.players.create!(makePlayerInfo)
-      guard_clause_present newer_player, "M-D-S"
+      guard_clause_present newer_player, "M-D-S: #{newer_player.id}"
     end
     front_email.next
   end
 end
-
-
-
 
 make_default_setup
 
@@ -91,11 +88,11 @@ puts "filling campaigns ... \n"
 fillCampaign 1
 # fillCampaign 2
 
-puts "Created #{Campaign.count} campaigns"
-puts "Created #{Player.count} players"
-puts "Create #{User.count} users..."
-puts "Created #{Country.count} countries..."
-puts "Created #{Neighborhood.count} neighbors..."
+puts "#{Campaign.count} campaigns"
+puts "#{Player.count} players"
+puts "#{User.count} users..."
+puts "#{Country.count} countries..."
+puts "#{Neighborhood.count} neighbors..."
 
 
 

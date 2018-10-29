@@ -1,6 +1,5 @@
 require 'test_helper'
-require 'minitest'
-require 'capybara'
+
 
 ### Note:  Part of the api interface test works with features/enroller.rb for integration
 

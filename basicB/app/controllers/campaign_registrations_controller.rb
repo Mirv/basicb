@@ -1,3 +1,6 @@
+load 'app/classes/Enroller.rb'
+# require 'app/classes/Enroller.rb'
+
 class CampaignRegistrationsController < ApplicationController
   before_action :set_campaign_registration, only: [:show, :edit, :update, :destroy]
 
@@ -49,9 +52,9 @@ class CampaignRegistrationsController < ApplicationController
   # POST /campaign_registrations.json
   def create
     @campaign_registration = CampaignRegistration.new
-    # Execute the class to generate defaults & the relationships linking it all
     
     @enroller = Enroller::Enroller.new(params[:campaign_id], current_user.id)
+    # Execute the class to generate defaults & the relationships linking it all
     @enroller.enrolling
     
     # capture enroller's output for cofirmation use
@@ -64,6 +67,7 @@ class CampaignRegistrationsController < ApplicationController
 
     respond_to do |format|
       if @campaign_registration.save
+        
         format.html { redirect_to @campaign_registration, notice: 'Campaign registration was successfully created.' }
         format.json { render :show, status: :created, location: @campaign_registration }
       else

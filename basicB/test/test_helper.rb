@@ -3,10 +3,11 @@ ENV["RAILS_ENV"] ||= "test"
 require File.expand_path("../../config/environment", __FILE__)
 require "rails/test_help"
 
-require "capybara/rails"
-require "minitest/rails/capybara"
+# require "minitest/rails"
+# require "capybara/rails"
+# require "minitest/rails/capybara"
 # require 'capybara/minitest'
-require "minitest/rails"
+# require "minitest/rails"
 require 'minitest/byebug' if ENV['DEBUG']
 
 require 'rails/test_help'
@@ -39,18 +40,45 @@ class ActionDispatch::IntegrationTest
   ActiveRecord::Migration.check_pending!
   include Devise::Test::IntegrationHelpers
   include DomainIdentities
-  include Capybara::DSL
+  # include Capybara::DSL
   # include Capybara::Assertions
   # include Capybara::Minitest::Assertions
   include FactoryBot::Syntax::Methods
 end
 
-class Capybara::Rails::TestCase
-  ActiveRecord::Migration.check_pending!
-  fixtures :all
-  include Devise::Test::IntegrationHelpers
-  include Capybara::DSL
-  # include Capybara::Minitest::Assertions
-  include DomainIdentities
-  include Enroller
+# class Capybara::Rails::TestCase
+#   ActiveRecord::Migration.check_pending!
+#   fixtures :all
+#   include Devise::Test::IntegrationHelpers
+#   include Capybara::DSL
+#   # include Capybara::Minitest::Assertions
+#   include DomainIdentities
+#   include Enroller
+# end
+
+# class SeedTestSet < ActiveSupport::TestCase
+#   ActiveRecord::Migration.check_pending!
+#   # Add more helper methods to be used by all tests here...
+#   include FactoryBot::Syntax::Methods
+#   # include DomainIdentities
+#   # include Rails.application.routes.url_helpers
+# end
+
+# class SeedTestSet #< ActiveSupport::TestCase
+#   # ActiveRecord::Migration.check_pending!
+#   # include FactoryBot::Syntax::Methods
+#   # include Rails.application.routes.url_helpers
+
+# end
+
+# class SeedTestSet < Rails::TestCase
+
+# end
+
+# class SeedTestSet < Rails::TestCase
+# end
+
+class SeedTestSet < ActionDispatch::IntegrationTest
+  # byebug
 end
+

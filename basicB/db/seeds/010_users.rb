@@ -10,15 +10,9 @@ def takeInfo(name, email, password, password_confirmation)
   return new_user_make
 end
 
-
-
 # --- spare users --- #
 
-#
-###  I feel like there's a better way to feed this into a hash after generating
-#
-
-def makeUserInfo(u)
+def assembleUserInfo(u)
   hold = Hash.new
   
   # get the info and apply any data shaping
@@ -32,10 +26,12 @@ def makeUserInfo(u)
   password_confirmation = password
   
   # load to hash .... can this be done more efficiently & keep ease of reading?
-  hold = hold.merge({"name" =>  name})
-  hold = hold.merge({"email" =>  email})
-  hold = hold.merge({"password" =>  password})
-  hold = hold.merge({"password_confirmation" =>  password_confirmation})
+  hold = hold.merge({
+    "name" =>  name,
+    "email" =>  email,
+    "password" =>  password,
+    "password_confirmation" =>  password_confirmation
+  })
   return hold
 end
 
@@ -54,35 +50,6 @@ def makePlayerInfo
   hold = hold.merge({"motto" =>  motto})
 end
 
-#
-### Generate a default test user, then a campaign
-#
-## Pending - do we want this to be a sideeffect as that blocks reusability?
-#
-## 
-#
-# def makeDefaultUser(number_defaults, first_half_email, email_domain = "test.com")
-#   # puts "entering makeDefaultUser"
-#   email = first_half_email + "@" + email_domain
-#   if User.find_by( email: email )
-#     puts "makeDefaultUser failed on ##{number_defaults} -- user already exists"
-#     puts "Email:  #{email}"
-#     return nil
-#   else
-#     # puts "calling makeUserInfo"
-#     new_user_make = makeUserInfo(number_defaults)
-#     new_user_make["email"] = email
-#     new_user_made = User.create!(new_user_make)
-#     print "New user made -- #{new_user_made}"
-#     return new_user_made
-#   end
-#   #
-#   ## Stub here for a single campaign to generate
-#   #
-
-# #  new_player_made = new_user_made.players.create!(makePlayerInfo)
-# end
-
 def makeDefaultUser(number_defaults = 1, first_half_email = "a", email_domain = "test.com")
   # puts "entering makeDefaultUser"
 
@@ -98,7 +65,7 @@ def makeDefaultUser(number_defaults = 1, first_half_email = "a", email_domain = 
   end
   
   # puts "calling makeUserInfo"
-  new_user_make = makeUserInfo(number_defaults)
+  new_user_make = assembleUserInfo(number_defaults)
   new_user_make["email"] = email
   puts "Pre new user #{new_user_make["email"]}"
   new_user_made = User.create!(new_user_make)

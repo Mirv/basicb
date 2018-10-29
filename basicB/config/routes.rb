@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :players
       resources :dashes
       resources :users
+      get 'dashboard', to: 'dashes#dashboard'
     end
   end
    

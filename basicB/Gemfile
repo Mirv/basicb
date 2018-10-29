@@ -28,19 +28,21 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'rails_admin'
 gem 'active_hash_relation', '~> 1.4.1'
 gem 'active_model_serializers' #, github: 'rails-api/active_model_serializers'
+gem 'simple_form'
+gem 'cocoon'
 
 group :development, :test do
   gem 'byebug'  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  # gem 'minitest-byebug'
   gem 'pry'
   gem 'pry-byebug'
   gem 'sqlite3' # Use sqlite3 as the database for Active Record
   gem 'haml'
   gem 'haml-rails'
-  gem 'simple_form'
-  gem 'cocoon'
+ 
   gem 'nokogiri' # required for minitest-have_tag
   gem "minitest", "5.10.1"
+  # gem 'minitest-rails'
+  gem 'minitest-reporters'
   gem 'minitest-color'
   gem 'guard', '~>2.14'
   gem 'guard-minitest'
@@ -52,8 +54,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'minitest-rails-capybara'
-  gem 'minitest-reporters'
+
 end
 
 group :production do

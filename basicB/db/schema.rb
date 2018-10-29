@@ -195,7 +195,6 @@ ActiveRecord::Schema.define(version: 20180116193652) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
-  add_foreign_key "aux_countries", "countries", column: "countries_id"
   add_foreign_key "campaign_registrations", "campaigns"
   add_foreign_key "campaign_registrations", "countries"
   add_foreign_key "campaign_registrations", "dashes"

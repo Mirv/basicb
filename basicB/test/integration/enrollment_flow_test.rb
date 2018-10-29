@@ -1,7 +1,7 @@
 require 'test_helper'
 
 # class EnrollmentFlowTest < ActionDispatch::IntegrationTest
-class EnrollmentFlowTest < Capybara::Rails::TestCase
+# class EnrollmentFlowTest < Capybara::Rails::TestCase
   # test "the truth" do
   #   default_user = "a@test.com"
   #   default_pass = "ssssss"
@@ -33,4 +33,4 @@ class EnrollmentFlowTest < Capybara::Rails::TestCase
 
 
   # end
-end
+# end

@@ -6,16 +6,12 @@
   %h1= @campaign.name
   %p= @campaign.description
   %ul
-  %li
-    = @result
-
-  - if !@dash.nil?
+  - if @dash.present?
     %li
       = @dash.name
     %li
-      = @dash.users.first.name
-    %li
-      = @user
+      = email_name @dash.users.first
+
 
 .hoster
   %h2= "#{@user.name} runs this..."
