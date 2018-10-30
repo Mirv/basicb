@@ -8,7 +8,7 @@ gem 'rails', '5.2'  # Bundle edge Rails instead: gem 'rails', github: 'rails/rai
 
 gem 'coffee-script'
 gem 'therubyracer'
-gem 'sassc'
+gem 'sassc-rails'
 
 gem 'less-rails', '~> 3.0.0'
 gem 'bootstrap-sass'

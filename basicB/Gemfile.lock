@@ -298,6 +298,12 @@ GEM
     sassc (2.0.0)
       ffi (~> 1.9.6)
       rake
+    sassc-rails (2.0.0)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
@@ -381,7 +387,7 @@ DEPENDENCIES
   rails (= 5.2)
   rails-controller-testing
   rails_admin
-  sassc
+  sassc-rails
   sdoc (~> 0.4.0)
   selenium-webdriver
   simple_form
