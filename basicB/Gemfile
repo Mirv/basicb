@@ -31,6 +31,10 @@ gem 'active_model_serializers' #, github: 'rails-api/active_model_serializers'
 gem 'simple_form'
 gem 'cocoon'
 
+gem 'faker'
+
+
+
 group :development, :test do
   gem 'byebug'  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'pry'
@@ -51,10 +55,9 @@ group :development, :test do
   gem 'guard', '~>2.14'
   gem 'guard-minitest'
   gem 'rails-controller-testing'
-  gem 'faker'
-  gem 'factory_bot'
   gem 'hihi'
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too
+  gem 'factory_bot'
 end
 
 group :test do

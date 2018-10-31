@@ -117,8 +117,12 @@ module Enroller
     # Not tested
 
     def ComposeName(baseName, tableObject)
-      total_rows = row_count_obj(tableObject)
-      "#{baseName}##{row_count_unique(total_rows)}"
+      if tableObject.present?
+        total_rows = row_count_obj(tableObject)
+        "#{baseName}##{row_count_unique(total_rows)}"
+      else
+        "#{baseName}##{row_count_unique}"
+      end
     end
     
     def defaultOrganizationName
@@ -156,7 +160,7 @@ module Enroller
   
     # issues with if initial object doesn't load due to validation
     # ... the number saved in name might be in use
-    def row_count_unique(number)
+    def row_count_unique(number = 100000)
       rand(1000) * rand(1000) * rand(number)
     end
   
