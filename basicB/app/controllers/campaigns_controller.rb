@@ -11,6 +11,7 @@ class CampaignsController < ApplicationController
   end
   
   def index
+    byebug 
     @campaigns = Campaign.all
     @campaigns = @campaigns.paginate(page: params[:campaigns_page], per_page: 5)
   end

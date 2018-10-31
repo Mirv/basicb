@@ -17,4 +17,4 @@ test:
 production:
   <<: *default
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
-  database: app_production
+  database: basic-borders_production
