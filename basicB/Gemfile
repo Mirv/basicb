@@ -58,6 +58,7 @@ group :development, :test do
   gem 'hihi'
  # gem 'minitest-have_tag' #html checking for mini test...include/require in spechelper too
   gem 'factory_bot'
+  gem 'loofah'
 end
 
 group :test do

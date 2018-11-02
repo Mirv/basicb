@@ -376,6 +376,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails (~> 3.0.0)
+  loofah
   minitest (= 5.10.1)
   minitest-color
   minitest-reporters
