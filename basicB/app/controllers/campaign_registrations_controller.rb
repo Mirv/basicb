@@ -55,7 +55,7 @@ class CampaignRegistrationsController < ApplicationController
     
     @enroller = Enroller::Enroller.new(params[:campaign_id], current_user.id)
     # Execute the class to generate defaults & the relationships linking it all
-    @enroller.enrolling
+    @enroller.enroll_player
     
     # capture enroller's output for cofirmation use
     # some of these look like they might be nested in the strong_params

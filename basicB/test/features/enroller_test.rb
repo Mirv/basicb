@@ -6,9 +6,7 @@ require 'Enroller'
 #     ... as this is significantly faster
 
 class EnrollerTest < ActiveSupport::TestCase
-    # include Enroller::Enroller
 
-# did it initialize - 3 vars set?
   def setup
     @user =  users(:one)
     @campaign = campaigns(:one)
@@ -56,7 +54,7 @@ class EnrollerTest < ActiveSupport::TestCase
   end
 
   test "all together now!" do
-    @enroller.enrolling
+    @enroller.enroll_player
     @results = @enroller.result
     
     # duplicate from enroller.rb

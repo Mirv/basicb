@@ -36,8 +36,8 @@ module Enroller
       @info[:campaign] = Campaign.find(campaign_id) || Campaign.first
     end
 
-    ### Top level business logic methods
-    def enrolling
+    ### Top level logic methods
+    def enroll_player
       # byebug
       setup_in_campaign
       # run_enrollment
@@ -53,14 +53,6 @@ module Enroller
       
     end
 
-    # not tested on several levels...first table.create!, then @hash in a create, much less transaction    
-    # def enroll_transaction(table)
-    #   @hash = Hash.new{[]}
-    #   @result.map{ |key, value| @hash.merge!(key: value) }
-    #   table.create!(@hash)
-    # end
-      
-    
     def setup_in_campaign
       @result[:player] = create_campaign_player
       @result[:organization] = create_campaign_organization
