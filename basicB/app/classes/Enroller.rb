@@ -8,7 +8,6 @@ module Enroller
     # testing hook - captures nil from AR assignment to db in one spot
     # ... result exposes a hash for that purpose
     attr_reader :result
-    attr_reader :test
     attr_reader :info
 
     # Information existing pre object instanization
@@ -17,40 +16,34 @@ module Enroller
     # Internal generated info
     @enroll
 
-    def initialize(campaign_id, current_user_id)
-      raise ArgumentError.new("You can't use #{campaign_id} for a campaign_id") unless campaign_id.present?
-      raise ArgumentError.new("You can't use #{current_user_id} for a user") unless current_user_id.present?
-      @test = "Testing"
-      
+    def initialize(campaign_id, user_id)
+      raise ArgumentError.new(bad_arg) unless campaign_id.present?
+      raise ArgumentError.new(bad_arg) unless user_id.present?
+
       # Results of each query are held here, nil means something went wrong ...
       # ... which allows us to destroy everything else to simulate rollback
       @result = Hash.new({})
-      #  nil default for testing
-      @result.default
+      @result.default # <-- nil default for testing
       
       # info hash is received info, enroll is generated - nil default for testing
       @info = Hash.new({})
       @enroll = Hash.new({})
       @enroll.default
 
-      @info[:user] = user_find(current_user_id)
+      @info[:user] = user_find(user_id)
       @info[:dashboard] = dash_find
       @info[:campaign] = Campaign.find(campaign_id) || Campaign.first
     end
 
     ### Top level logic methods
     def enroll_player
-      # byebug
       setup_in_campaign
-      # run_enrollment
       setup_in_dashboard
-      run_enrollment
-      # If invalid - roll back @enroll creations, else commit to db stand
       if(invalid_enrollment?(@enroll))
         remove_changes(@enroll)
         @enroll.result = nil
-      # else
-      #   enroll_transaction('Campaign_registration')
+      else
+        run_enrollment
       end
     end
 
@@ -114,12 +107,16 @@ module Enroller
       a_hash.map {|x,y| y.destroy }
     end
     
-    def user_find(current_user_id)
-      User.find(current_user_id || User.create(name: Names.user))
+    def user_find(user_id)
+      User.find(user_id || User.create(name: Names.user))
     end
   
     def dash_find
       @info[:user].dashes.first || Dash.create(name: Names.dash)
+    end
+    
+    def bad_arg(msg)
+      "nil argument initializing Enroller class"
     end
   end
   

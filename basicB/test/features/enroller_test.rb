@@ -62,4 +62,15 @@ class EnrollerTest < ActiveSupport::TestCase
     refute invalid_flag
   end
   
+  test "enroller raises error when campaign_id is invalid" do
+    assert_raises ArgumentError do
+      Enroller::Enroller.new(nil, 1)
+    end
+  end
+  
+  test "enroller raises error when current_user is invalid" do
+    assert_raises ArgumentError do
+      Enroller::Enroller.new(1, nil)
+    end
+  end
 end
