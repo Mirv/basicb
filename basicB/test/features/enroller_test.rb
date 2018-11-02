@@ -6,7 +6,6 @@ require 'Enroller'
 #     ... as this is significantly faster
 
 class EnrollerTest < ActiveSupport::TestCase
-
   def setup
     @user =  users(:one)
     @campaign = campaigns(:one)
@@ -46,8 +45,8 @@ class EnrollerTest < ActiveSupport::TestCase
   end
   
   test "does enroller assign organization to dashboard successfully?" do
-      @enroller.setup_in_campaign
-      @enroller.assign_organization_to_player.save
+    @enroller.setup_in_campaign
+    @enroller.assign_organization_to_player.save
     assert_difference "Dashcount.count" do
       @enroller.assign_dashboard_organization.save
     end
@@ -59,7 +58,7 @@ class EnrollerTest < ActiveSupport::TestCase
     
     # duplicate from enroller.rb
     invalid_flag = false
-    @results.map { |key, value| invalid_flag = true if (key.nil? || value.invalid?) }
+    @results.map { |key, value| invalid_flag = true if value.invalid? }
     refute invalid_flag
   end
   

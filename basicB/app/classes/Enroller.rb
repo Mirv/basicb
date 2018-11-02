@@ -18,6 +18,8 @@ module Enroller
     @enroll
 
     def initialize(campaign_id, current_user_id)
+      raise ArgumentError.new("You can't use #{campaign_id} for a campaign_id") unless campaign_id.present?
+      raise ArgumentError.new("You can't use #{current_user_id} for a user") unless current_user_id.present?
       @test = "Testing"
       
       # Results of each query are held here, nil means something went wrong ...
@@ -50,7 +52,6 @@ module Enroller
       # else
       #   enroll_transaction('Campaign_registration')
       end
-      
     end
 
     def setup_in_campaign
@@ -65,12 +66,12 @@ module Enroller
     end
     
     def run_enrollment
-      @enroll.map {|key,value| value.save unless invalid(key, value)}
+      @enroll.map {|key,value| value.save unless value.invalid?}
     end
 
     def invalid_enrollment?(a_hash)
       invalid_flag = false
-      a_hash.map { |key, value| invalid_flag = true if invalid(key, value) }
+      a_hash.map { |key, value| invalid_flag = true if value.invalid? }
       return invalid_flag
     end
 
@@ -78,13 +79,13 @@ module Enroller
     # ... player & organization are created off relationship model implicitly
     # ... then assign methods explicitly create entries on the join tables
     
-    def create_campaign_player(name = defaultPlayerName)
-      name = ComposeName(name, Player.first)
+    def create_campaign_player(name = Names.player)
+      name = Names.compose(name, Player.first)
       @enroll[:player] = @info[:campaign].players.create(name: name)
     end
     
-    def create_campaign_organization(name = defaultOrganizationName)
-      name = ComposeName(name, Country.first)
+    def create_campaign_organization(name = Names.organization)
+      name = Names.compose(name, Country.first)
        @enroll[:organization] = @info[:campaign].countries.create(name: name)
     end
     
@@ -108,65 +109,67 @@ module Enroller
     
     # Not tested
 
-    def ComposeName(baseName, tableObject)
-      if tableObject.present?
-        total_rows = row_count_obj(tableObject)
-        "#{baseName}##{row_count_unique(total_rows)}"
-      else
-        "#{baseName}##{row_count_unique}"
-      end
-    end
-    
-    def defaultOrganizationName
-      "A mysterious group ... "
-    end
-    
-    def defaultPlayerName
-      "A shadowy & mysterious figure ... "
-    end
-    
-    def defaultCampaignName
-      "A mysterious mission in a far away place ..." 
-    end
-    
-    def defaultDashName
-      "A mysterious mirror ... " 
-    end
-  
   ### Low level stuff
-    def invalid(key, value)
-      return (key.nil? || value.invalid?)
-    end
-  
     def remove_changes(a_hash)
       a_hash.map {|x,y| y.destroy }
     end
     
     def user_find(current_user_id)
-      User.find(current_user_id || User.create(name: "Default"))
+      User.find(current_user_id || User.create(name: Names.user))
     end
   
     def dash_find
-      @info[:user].dashes.first || Dash.create(name: "Default")
+      @info[:user].dashes.first || Dash.create(name: Names.dash)
     end
+  end
   
-    # issues with if initial object doesn't load due to validation
-    # ... the number saved in name might be in use
-    def row_count_unique(number = 100000)
-      rand(1000) * rand(1000) * rand(number)
+  ###
+  ### class Enroller::Names ###
+  ###
+  class Names
+    def self.compose(baseName, tableObject = nil)
+      # if tableObject is nil, test to see if its an activerecord will bomb
+      if tableObject.present?
+        "#{baseName}##{row_count_obj(tableObject)}"
+      else
+        "#{baseName}##{row_count_unique}"
+      end
+    end
+    
+    def self.row_count_unique(number = 1000)
+      a_num = 1000
+      number = a_num unless (number > a_num) # if number is neg or lower its a bad seed
+      a_num * a_num * number 
     end
   
     # count of all rows in db of passed active record object
-    # Maybe figure out how to use the ruby class to derive ...
-    # ... https://ruby-doc.org/core-2.1.0/Module.html#method-i-const_get
-    def row_count_obj(ar_object)
-      ar_object.class.name.constantize.count + 1
-    end
-  
-    def Organization_count
-      Country.count
+    def self.row_count_obj(ar_object)
+      if ar_object.class.ancestors.include?(ActiveRecord::Base)
+        ar_object.class.name.constantize.count + 1
+      else
+        1
+      end
     end
     
+    def self.organization
+      "A mysterious group ... "
+    end
+    
+    def self.player
+      "A shadowy & mysterious figure ... "
+    end
+    
+    def self.campaign
+      "A mysterious mission in a far away place ..." 
+    end
+    
+    def self.dash
+      "A mysterious mirror ... " 
+    end
+    
+    def self.user
+      "An entity so dark it does not know itself ... " 
+    end
   end
 end
 
