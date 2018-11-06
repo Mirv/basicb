@@ -16,6 +16,7 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
+    # byebug
     @countries = @player.countries
   end
 

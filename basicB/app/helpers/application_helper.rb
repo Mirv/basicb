@@ -10,7 +10,7 @@ module ApplicationHelper
   end
   
   def name_id(target)
-    if target.name
+    if target.present?
       "#{target.name} | #{target.id}"
     else
       "#{target.id}"

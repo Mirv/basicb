@@ -8,7 +8,10 @@
   = @player.motto
 %p
   %b Country:
-  = name_id @countries.first
-
+  - if @countries.count > 0
+    - @countries.each do |x|
+      = name_id x
+  - else
+    "Nothing found ..."
+    
 = link_to 'Edit', edit_player_path(@player)
-
