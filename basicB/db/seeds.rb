@@ -7,6 +7,13 @@ Dir[File.join(Rails.root, 'db', 'seeds', '*.rb')].sort.each { |seed| load seed }
 #### Definitions ####
 #### Definitions ####
 
+counters = Hash.new
+counters['campaigns'] = Campaign.count
+counters['players'] = Player.count
+counters['users'] = User.count
+counters['countries'] = Country.count
+counters['neighborhoods'] = Neighborhood.count
+
 def guard_clause_present(target, location)
   puts "\n#{location} -- #{target.to_s}:  #{target}\n" unless target
 end
@@ -27,7 +34,6 @@ end
 #### Adding instances to database ####
 #### Adding instances to database ####
 #### Adding instances to database ####
-
 
 #
 ### My base users ("a@test.com")
@@ -57,27 +63,6 @@ def make_default_setup(number_defaults = 2, first_half_email ="a")
   end
 end
 
-make_default_setup
-
-
-
-#
-## My base 2nd user & campaign, with 1st player & country
-#
-# puts "Entering #2"
-# another_user = makeDefaultUser 2, "b@test.com"
-# userdashes = userDash another_user
-
-# campaign = campaignCreate userdashes
-# puts "Campaign -- #{campaign["name"]}"
-
-# newer_player = another_user.players.create!(makePlayerInfo)
-# puts "Second player -- #{newer_player["name"]}"
-
-# Make a player in the campaign
-  # puts "Campaign: #{first_campaign["name"]}"
-  # newer_player = default_user.players.create!(makePlayerInfo)
-  # puts "First player: #{newer_player["name"]}"
 
 
 #
@@ -86,8 +71,17 @@ make_default_setup
 puts "filling campaigns ... \n"
 
 fillCampaign 1
-# fillCampaign 2
+make_default_setup
 
+#
+### Summarizing 
+#
+puts "Pre-seeding counts ..."
+counters.each do |x,y|
+  puts "#{counters[x]} -- #{counters[y]}"
+end
+
+puts "Post seeding counts ..."
 puts "#{Campaign.count} campaigns"
 puts "#{Player.count} players"
 puts "#{User.count} users..."

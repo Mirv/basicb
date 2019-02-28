@@ -1,11 +1,11 @@
 # --- default user --- #
 
-def takeInfo(name, email, password, password_confirmation)
+def takeInfo(name, email, password)
   new_user_make = User.new do |u|
         u.name = name
         u.email = email
         u.password = password
-        u.password_confirmation = password_confirmation
+        u.password_confirmation = password
   end
   return new_user_make
 end

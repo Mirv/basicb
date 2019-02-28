@@ -16,7 +16,6 @@ class PlayersController < ApplicationController
   # GET /players/1
   # GET /players/1.json
   def show
-    # byebug
     @countries = @player.countries
   end
 
@@ -32,10 +31,7 @@ class PlayersController < ApplicationController
   # POST /players
   # POST /players.json
   def create
-  #  player_params = player_params.merge(name: a_name) unless player_params.key?("name")
-  # u.dashes.first.dashplayers.first.player
     @player = Player.new(player_params)
-    # @player = Player.new(player_params)
 
     respond_to do |format|
       if @player.save
@@ -86,7 +82,6 @@ class PlayersController < ApplicationController
       @dash = Dash.find(current_user.id)
     end
 
-    
     def set_user
       @user = User.find(current_user.id)
     end

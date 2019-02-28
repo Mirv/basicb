@@ -12,7 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require rails-ujs
 //= require cocoon
 //= require turbolinks
 //= require countries.js
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
