@@ -20,8 +20,12 @@
 !/log/.keep
 /tmp
 
+# Ignore js assets
+public/assets/*
+
 # secrets file
 /app/config/secrets.yml
-
+.env
+        
 /app/views/countries/checkthis
 .byebug_history
