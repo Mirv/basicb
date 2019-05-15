@@ -1,0 +1,6 @@
+version: 1
+update_configs:
+  # custom dependency file to allow build process on sessionizer for vag/ansible
+  - package_manager: "ruby:bundler"
+    directory: "/basicB"
+    update_schedule: "live"
