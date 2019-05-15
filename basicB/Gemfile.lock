@@ -92,7 +92,7 @@ GEM
       execjs
     coffee-script-source (1.12.2)
     commonjs (0.2.7)
-    concurrent-ruby (1.1.0)
+    concurrent-ruby (1.1.5)
     crass (1.0.4)
     debug_inspector (0.0.3)
     devise (4.5.0)
@@ -221,7 +221,7 @@ GEM
       pry (~> 0.10)
     public_suffix (3.0.3)
     puma (3.12.0)
-    rack (2.0.5)
+    rack (2.0.7)
     rack-pjax (1.0.0)
       nokogiri (~> 1.5)
       rack (>= 1.1)
