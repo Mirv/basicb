@@ -152,7 +152,6 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (6.0.1)
       railties (>= 3.2.16)
-    json (1.8.6)
     jsonapi-renderer (0.2.0)
     kaminari (1.1.1)
       activesupport (>= 4.1.0)
@@ -268,7 +267,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
-    rdoc (4.3.0)
+    rdoc (6.1.1)
     ref (2.0.0)
     regexp_parser (1.2.0)
     remotipart (1.4.2)
@@ -300,9 +299,8 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    sdoc (0.4.2)
-      json (~> 1.7, >= 1.7.7)
-      rdoc (~> 4.0)
+    sdoc (1.0.0)
+      rdoc (>= 5.0)
     selenium-webdriver (3.142.2)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
@@ -385,7 +383,7 @@ DEPENDENCIES
   rails-controller-testing
   rails_admin
   sassc-rails
-  sdoc (~> 0.4.0)
+  sdoc (~> 1.0.0)
   selenium-webdriver
   simple_form
   sqlite3
